@@ -19,4 +19,29 @@ class MainWindow(QtGui.QMainWindow):
                 self.setGeometry(0, 0, screen.width(), screen.height())
             else:
                 self.setGeometry(s.x, s.y, s.width, s.height)
-    
+                
+        # Set Statusbar message (included in MainWindow)
+        self.status("Ready")
+        
+        # Actions
+        exitAction = QtGui.QAction(QtGui.QIcon('img/system-shutdown.png'), '&Exit', self)
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.setStatusTip('Exit Application')
+        exitAction.triggered.connect(QtGui.qApp.quit)
+        
+        # Toolbar
+        self.toolbar = self.addToolBar('File')
+        self.toolbar.addAction(exitAction)
+        
+        # Menu bar
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&File')
+        fileMenu.addAction(exitAction)
+        helpMenu = menubar.addMenu('&Help')
+        
+        
+        
+        #fileMenu.addAction(exitAction)
+                
+    def status(self, message):
+        self.statusBar().showMessage(message)
