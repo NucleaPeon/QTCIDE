@@ -29,15 +29,24 @@ class MainWindow(QtGui.QMainWindow):
         exitAction.setStatusTip('Exit Application')
         exitAction.triggered.connect(QtGui.qApp.quit)
         
+        preferenceWin = QtGui.QAction(QtGui.QIcon('img/preferences-system.png'), '&Preferences', self)
+        preferenceWin.setShortcut('Ctrl+P')
+        preferenceWin.setStatusTip("Application Preferences")
+        #preferenceWin.triggered.connect()
+        
         # Toolbar
         self.toolbar = self.addToolBar('File')
         self.toolbar.addAction(exitAction)
+        self.toolbar_project = self.addToolBar('Project')
+        self.toolbar_project.addAction(preferenceWin)
         
         # Menu bar
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(exitAction)
         helpMenu = menubar.addMenu('&Help')
+        prefMenu = menubar.addMenu('&Project')
+        prefMenu.addAction(preferenceWin)
         
         
         
