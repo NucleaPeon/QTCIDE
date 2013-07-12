@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtGui
+from settings import Settings as s
 
 class Window(QtGui.QWidget):
     
@@ -20,4 +21,9 @@ class Window(QtGui.QWidget):
         
         self.setWindowTitle('C / C++ Integrated Development Environment')
         # X, Y, Width, Height
-        self.setGeometry(200, 200, 800, 500)
+        if s.custom_dimensions:
+            if s.fullscreen:
+                screen = QtGui.QDesktopWidget().screenGeometry()
+                self.setGeometry(0, 0, screen.width(), screen.height())
+            else:
+                self.setGeometry(s.x, s.y, s.width, s.height)

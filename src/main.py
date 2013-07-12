@@ -40,6 +40,8 @@ def main():
     prnt("[Checking if PyQT4 is installed] \t: %s" % pyqt4_is_installed(),
          indent=1, prefix="DEP - ")
 
+    # Add to path
+    sys.path.append(os.path.join(os.getcwd(), 'base'))
 
     ### Launch UI ###
     from PyQt4 import QtGui
