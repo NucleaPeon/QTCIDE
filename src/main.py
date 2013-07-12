@@ -41,17 +41,21 @@ def main():
          indent=1, prefix="DEP - ")
 
     # Add to path
+    # Until software can be properly installed onto the OS and paths become
+    # predictable, assume running from top level directory
     sys.path.append(os.path.join(os.getcwd(), 'base'))
 
     ### Launch UI ###
     from PyQt4 import QtGui
     from mainwindow import MainWindow
     app = QtGui.QApplication(sys.argv)
+    app.aboutToQuit.connect(shutdown) 
     mw = MainWindow()
     mw.show()
-    app.exec_()  
+    sys.exit(app.exec_())
     
-    
+def shutdown():
+    print("Shutdown")
 
 
 ###

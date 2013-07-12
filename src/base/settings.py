@@ -27,7 +27,7 @@ class Settings():
     ## custom_dimensions:
     ## - True: Use x, y, width and height to set up window
     ## - False: Allow OS to determine dimensions
-    custom_dimensions = False
+    custom_dimensions = True
     ## fullscreen:
     ## - True: Ignore x, y, width and height to use maximum screen real estate
     ##         Does not apply if custom_dimensions is set to False.
