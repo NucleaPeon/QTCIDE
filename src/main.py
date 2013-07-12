@@ -21,6 +21,7 @@
 
 import os, sys
 from cliprinter import prnt
+import argparse
 
 def pyqt4_is_installed():
     
@@ -62,4 +63,8 @@ def shutdown():
 ### Start parsing arguments from the command line here:
 ###
 if __name__ == "__main__":
+    # Argument Parsing
+    parser = argparse.ArgumentParser(description='QT-Based C/C++ Development IDE')
+    args = parser.parse_args(sys.argv[1:])
+    
     main()
