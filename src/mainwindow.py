@@ -9,7 +9,8 @@ class MainWindow(QtGui.QMainWindow):
     
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setCentralWidget(Window())
+        self.window = Window(parent=self)
+        self.setCentralWidget()
         self.setWindowTitle('C / C++ Integrated Development Environment')
         #self.setWindowIcon(QtGui.QIcon('src/web.png'))
         # X, Y, Width, Height
@@ -24,10 +25,15 @@ class MainWindow(QtGui.QMainWindow):
         self.status("Ready")
         
         # Actions
+        
         exitAction = QtGui.QAction(QtGui.QIcon('img/system-shutdown.png'), '&Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit Application')
         exitAction.triggered.connect(QtGui.qApp.quit)
+        
+        newProject = QtGui.QAction(QtGui.QIcon('img/document-new.png'), '&New Project', self)
+        newProject.setShortcut('Ctrl+N')
+        newProject.setStatusTip('New Project')
         
         preferenceWin = QtGui.QAction(QtGui.QIcon('img/preferences-system.png'), '&Preferences', self)
         preferenceWin.setShortcut('Ctrl+P')
@@ -36,6 +42,7 @@ class MainWindow(QtGui.QMainWindow):
         
         # Toolbar
         self.toolbar = self.addToolBar('File')
+        self.toolbar.addAction(newProject)
         self.toolbar.addAction(exitAction)
         self.toolbar_project = self.addToolBar('Project')
         self.toolbar_project.addAction(preferenceWin)
@@ -43,9 +50,11 @@ class MainWindow(QtGui.QMainWindow):
         # Menu bar
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
+        fileMenu.addAction(newProject)
         fileMenu.addAction(exitAction)
-        helpMenu = menubar.addMenu('&Help')
         prefMenu = menubar.addMenu('&Project')
+        helpMenu = menubar.addMenu('&Help')
+        
         prefMenu.addAction(preferenceWin)
         
         
