@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-from base.window import Window
+import os
+from src.base.window import Window
 from PyQt4 import QtGui, QtCore
-from base.settings import Settings as s
+from src.base.settings import Settings as s
+from src.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 class MainWindow(QtGui.QMainWindow):
     
@@ -14,11 +15,12 @@ class MainWindow(QtGui.QMainWindow):
                                                          "C and C++ Development Environment", 
                                                          None, QtGui.QApplication.UnicodeUTF8))
         self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
-        self.centralwidget = QtGui.QWidget(self)
+        self.centralwidget = Window()
         self.centralwidget.hide()
         self.setCentralWidget(self.centralwidget) 
         
-        #self.setWindowIcon(QtGui.QIcon('src/web.png'))
+        print(os.path.dirname(__name__))
+        self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
         # X, Y, Width, Height
         #if s.custom_dimensions:
             #if s.fullscreen:
@@ -40,16 +42,19 @@ class MainWindow(QtGui.QMainWindow):
         
         # Actions
         
-        exitAction = QtGui.QAction(QtGui.QIcon('img/system-shutdown.png'), '&Exit', self)
+        exitAction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                            'system-shutdown.png')), '&Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit Application')
         exitAction.triggered.connect(QtGui.qApp.quit)
         
-        newProject = QtGui.QAction(QtGui.QIcon('img/document-new.png'), '&New Project', self)
+        newProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                            'document-new.png')), '&New Project', self)
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
         
-        preferenceWin = QtGui.QAction(QtGui.QIcon('img/preferences-system.png'), '&Preferences', self)
+        preferenceWin = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                               'preferences-system.png')), '&Preferences', self)
         preferenceWin.setShortcut('Ctrl+P')
         preferenceWin.setStatusTip("Application Preferences")
         #preferenceWin.triggered.connect()

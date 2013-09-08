@@ -19,8 +19,7 @@
     and calls the main method.
 """
 import os, sys
-sys.path.append("../lib")
-from cliprinter import prnt
+import lib.cliprinter as clip
 import argparse
 
 def pyqt4_is_installed():
@@ -37,8 +36,8 @@ def pyqt4_is_installed():
 def main():
     '''
     '''
-    prnt("Initializing C/C++ IDE")
-    prnt("[Checking if PyQT4 is installed] \t: %s" % pyqt4_is_installed(),
+    clip.prnt("Initializing C/C++ IDE")
+    clip.prnt("[Checking if PyQT4 is installed] \t: {}".format(pyqt4_is_installed()),
          indent=1, prefix="DEP - ")
 
     # Add to path
@@ -48,7 +47,7 @@ def main():
 
     ### Launch UI ###
     from PyQt4 import QtGui
-    from mainwindow import MainWindow
+    from src.mainwindow import MainWindow
     app = QtGui.QApplication(sys.argv)
     app.aboutToQuit.connect(shutdown) 
     mw = MainWindow()
