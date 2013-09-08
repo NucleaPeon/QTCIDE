@@ -18,8 +18,8 @@
     CLI Argument Parsing is done from the /bin/ folder, which in turn imports
     and calls the main method.
 """
-
 import os, sys
+sys.path.append("../lib")
 from cliprinter import prnt
 import argparse
 

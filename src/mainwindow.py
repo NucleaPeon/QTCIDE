@@ -9,18 +9,32 @@ class MainWindow(QtGui.QMainWindow):
     
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.window = Window()
-        self.setCentralWidget(self)
-        self.setWindowTitle('C / C++ Integrated Development Environment')
+        self.resize(800, 600)
+        self.setWindowTitle(QtGui.QApplication.translate("C and C++ Development Environment", 
+                                                         "C and C++ Development Environment", 
+                                                         None, QtGui.QApplication.UnicodeUTF8))
+        self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
+        self.centralwidget = QtGui.QWidget(self)
+        self.centralwidget.hide()
+        self.setCentralWidget(self.centralwidget) 
+        
         #self.setWindowIcon(QtGui.QIcon('src/web.png'))
         # X, Y, Width, Height
-        if s.custom_dimensions:
-            if s.fullscreen:
-                screen = QtGui.QDesktopWidget().screenGeometry()
-                self.setGeometry(0, 0, screen.width(), screen.height())
-            else:
-                self.setGeometry(s.x, s.y, s.width, s.height)
-                
+        #if s.custom_dimensions:
+            #if s.fullscreen:
+                #screen = QtGui.QDesktopWidget().screenGeometry()
+                #self.setGeometry(0, 0, screen.width(), screen.height())
+            #else:
+                #self.setGeometry(s.x, s.y, s.width, s.height)
+        
+        
+        self.dock1Widget = QtGui.QDockWidget(self)
+        self.dock1Widget.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dock1Widget.setWindowTitle(QtGui.QApplication.translate("self", "dock1", None, QtGui.QApplication.UnicodeUTF8))
+        self.dock1WidgetContents = QtGui.QWidget()
+        self.dock1Widget.setWidget(self.dock1WidgetContents)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dock1Widget)
+        
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
         
