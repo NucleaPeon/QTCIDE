@@ -9,8 +9,8 @@ class MainWindow(QtGui.QMainWindow):
     
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.window = Window(parent=self)
-        self.setCentralWidget()
+        self.window = Window()
+        self.setCentralWidget(self)
         self.setWindowTitle('C / C++ Integrated Development Environment')
         #self.setWindowIcon(QtGui.QIcon('src/web.png'))
         # X, Y, Width, Height

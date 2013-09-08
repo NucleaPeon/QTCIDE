@@ -30,7 +30,7 @@ def pyqt4_is_installed():
     except Exception as E:
         
         sys.stderr.write("PyQT4 is not installed or could not be found")
-        sys.stderr.write(unicode(E))
+        sys.stderr.write(str(E))
         return False
     return True
 

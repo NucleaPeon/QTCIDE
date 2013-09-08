@@ -13,5 +13,4 @@ class Window(QtGui.QWidget):
     def __init__(self, **kwargs):
         super(Window, self).__init__()
         layout = QtGui.QGridLayout()
-        layout.addWidget(pane.Pane(**kwargs), 0, 0)
         self.setLayout(layout)

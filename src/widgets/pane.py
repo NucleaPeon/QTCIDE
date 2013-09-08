@@ -3,13 +3,13 @@
 from PyQt4 import QtGui, QtCore, Qt
 import mainwindow
 
-class Pane(QtGui.QDockWidget):
+class Pane(QtGui.QWidget):
     '''
     '''
     
     def __init__(self, **kwargs):
-        super().__init__('Empty Pane', parent=kwargs.get('parent', None),
-                         flags=) #FIXME
+        super().__init__( None,
+                         QtGui.QDockWidget.DockWidgetClosable())
         # print(QtGui.QDockWidget.DockWidgetClosable)
 
         print("Done")
