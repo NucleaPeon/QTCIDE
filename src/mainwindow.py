@@ -50,12 +50,19 @@ class MainWindow(QtGui.QMainWindow):
         self.dockCompilerContents = QtGui.QWidget() #FIXME: This can go into its own module?
         self.dockCompiler.setWidget(self.dockCompilerContents)
         
-        self.dock = QtGui.QDockWidget(self)
-        self.dock.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
-        self.dock.setWindowTitle(QtGui.QApplication.translate(
-            "self", "", None, QtGui.QApplication.UnicodeUTF8))
-        self.dockContents = QtGui.QWidget() #FIXME: This can go into its own module?
-        self.dock.setWidget(self.dockContents)
+        self.dockTest = QtGui.QDockWidget(self)
+        self.dockTest.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dockTest.setWindowTitle(QtGui.QApplication.translate(
+            "self", "Testing Suite", None, QtGui.QApplication.UnicodeUTF8))
+        self.dockTestContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        self.dockTest.setWidget(self.dockTestContents)
+        
+        #self.dock = QtGui.QDockWidget(self)
+        #self.dock.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        #self.dock.setWindowTitle(QtGui.QApplication.translate(
+            #"self", "", None, QtGui.QApplication.UnicodeUTF8))
+        #self.dockContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        #self.dock.setWidget(self.dockContents)
         
         
         '''
@@ -69,7 +76,7 @@ class MainWindow(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockProject)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockBuild)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockCompiler)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dock)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockTest)
         
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
