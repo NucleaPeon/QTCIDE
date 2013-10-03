@@ -34,10 +34,10 @@ class Settings():
     ## - False: Abide by custom dimension settings.
     fullscreen = False
     
-    x = 200
-    y = 200
-    width = 1000
-    height = 600
+    x = 100
+    y = 100
+    width = 1400
+    height = 800
     
     def __new__(self, *args, **kwargs):
         if not self._instance:
