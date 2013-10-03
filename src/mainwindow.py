@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import os
-from src.base.window import Window
+import src.base.window as window
 from PyQt4 import QtGui, QtCore
+import src.docks.project as project
 import src.base.settings as s
 from src.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
@@ -15,7 +16,7 @@ class MainWindow(QtGui.QMainWindow):
                                                          "C and C++ Development Environment", 
                                                          None, QtGui.QApplication.UnicodeUTF8))
         self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
-        self.centralwidget = Window()
+        self.centralwidget = window.Window()
         self.centralwidget.hide()
         self.setCentralWidget(self.centralwidget) 
         
@@ -33,7 +34,7 @@ class MainWindow(QtGui.QMainWindow):
         self.dockProject.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.dockProject.setWindowTitle(QtGui.QApplication.translate(
             "self", "Projects", None, QtGui.QApplication.UnicodeUTF8))
-        self.dockProjectContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        self.dockProjectContents = project.ProjectDock()
         self.dockProject.setWidget(self.dockProjectContents)
         
         self.dockBuild = QtGui.QDockWidget(self)
@@ -49,6 +50,15 @@ class MainWindow(QtGui.QMainWindow):
             "self", "Compiler", None, QtGui.QApplication.UnicodeUTF8))
         self.dockCompilerContents = QtGui.QWidget() #FIXME: This can go into its own module?
         self.dockCompiler.setWidget(self.dockCompilerContents)
+        
+        self.dock = QtGui.QDockWidget(self)
+        self.dock.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dock.setWindowTitle(QtGui.QApplication.translate(
+            "self", "", None, QtGui.QApplication.UnicodeUTF8))
+        self.dockContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        self.dock.setWidget(self.dockContents)
+        
+        
         '''
         Qt::LeftDockWidgetArea  0x1
         Qt::RightDockWidgetArea 0x2
@@ -60,6 +70,7 @@ class MainWindow(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockProject)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockBuild)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockCompiler)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dock)
         
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
