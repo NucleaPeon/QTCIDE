@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtGui, QtCore, Qt
-#import widgets.pane as pane
 
 class Window(QtGui.QWidget):
     '''
