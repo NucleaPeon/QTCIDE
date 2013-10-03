@@ -13,4 +13,5 @@ amount of development and due to general style of the files.
 In order to improve speed of development and general program 
 deployment, this system will have drag and drop functionality 
 as well as built in third party library management, 
-build system and documentation functionality.
+build system integration, consistent styling options and 
+automatic documentation generation.
