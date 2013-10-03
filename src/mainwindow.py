@@ -17,7 +17,6 @@ class MainWindow(QtGui.QMainWindow):
                                                          None, QtGui.QApplication.UnicodeUTF8))
         self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
         self.centralwidget = window.Window()
-        self.centralwidget.hide()
         self.setCentralWidget(self.centralwidget) 
         
         self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
@@ -106,6 +105,9 @@ class MainWindow(QtGui.QMainWindow):
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(newProject)
         fileMenu.addAction(exitAction)
+        viewMenu = menubar.addMenu('&View')
+        viewMenu.addMenu('&Docks')
+        #viewMenu.addAction()
         prefMenu = menubar.addMenu('&Project')
         helpMenu = menubar.addMenu('&Help')
         

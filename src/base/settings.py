@@ -39,6 +39,8 @@ class Settings():
     width = 1400
     height = 800
     
+    dock_min_width = 300
+    
     def __new__(self, *args, **kwargs):
         if not self._instance:
             self._instance = super(Settings, self).__new__(
