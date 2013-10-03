@@ -42,6 +42,13 @@ class MainWindow(QtGui.QMainWindow):
             "self", "Build Options", None, QtGui.QApplication.UnicodeUTF8))
         self.dockBuildContents = QtGui.QWidget() #FIXME: This can go into its own module?
         self.dockBuild.setWidget(self.dockBuildContents)
+        
+        self.dockCompiler = QtGui.QDockWidget(self)
+        self.dockCompiler.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dockCompiler.setWindowTitle(QtGui.QApplication.translate(
+            "self", "Compiler", None, QtGui.QApplication.UnicodeUTF8))
+        self.dockCompilerContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        self.dockCompiler.setWidget(self.dockCompilerContents)
         '''
         Qt::LeftDockWidgetArea  0x1
         Qt::RightDockWidgetArea 0x2
@@ -52,6 +59,7 @@ class MainWindow(QtGui.QMainWindow):
         '''
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockProject)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockBuild)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockCompiler)
         
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
