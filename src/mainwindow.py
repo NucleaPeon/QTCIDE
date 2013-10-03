@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 import os
 from src.base.window import Window
 from PyQt4 import QtGui, QtCore
-from src.base.settings import Settings as s
+import src.base.settings as s
 from src.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 class MainWindow(QtGui.QMainWindow):
     
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.resize(800, 600)
+        self.settings = s.Settings()
+        self.resize(self.settings.width, self.settings.height)
         self.setWindowTitle(QtGui.QApplication.translate("C and C++ Development Environment", 
                                                          "C and C++ Development Environment", 
                                                          None, QtGui.QApplication.UnicodeUTF8))
@@ -19,7 +19,6 @@ class MainWindow(QtGui.QMainWindow):
         self.centralwidget.hide()
         self.setCentralWidget(self.centralwidget) 
         
-        print(os.path.dirname(__name__))
         self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
         # X, Y, Width, Height
         #if s.custom_dimensions:
@@ -30,12 +29,21 @@ class MainWindow(QtGui.QMainWindow):
                 #self.setGeometry(s.x, s.y, s.width, s.height)
         
         
-        self.dock1Widget = QtGui.QDockWidget(self)
-        self.dock1Widget.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
-        self.dock1Widget.setWindowTitle(QtGui.QApplication.translate("self", "dock1", None, QtGui.QApplication.UnicodeUTF8))
-        self.dock1WidgetContents = QtGui.QWidget()
-        self.dock1Widget.setWidget(self.dock1WidgetContents)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dock1Widget)
+        self.dockProject = QtGui.QDockWidget(self)
+        self.dockProject.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dockProject.setWindowTitle(QtGui.QApplication.translate(
+            "self", "Projects", None, QtGui.QApplication.UnicodeUTF8))
+        self.dockProjectContents = QtGui.QWidget()
+        self.dockProject.setWidget(self.dockProjectContents)
+        '''
+        Qt::LeftDockWidgetArea  0x1
+        Qt::RightDockWidgetArea 0x2
+        Qt::TopDockWidgetArea   0x4
+        Qt::BottomDockWidgetArea        0x8
+        Qt::AllDockWidgetAreas  DockWidgetArea_Mask
+        Qt::NoDockWidgetArea    0
+        '''
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(4), self.dockProject)
         
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
