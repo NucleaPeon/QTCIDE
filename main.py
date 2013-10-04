@@ -74,7 +74,7 @@ def load_all_dbus_modules():
             mod = importlib.import_module(_file.rstrip('.py'))
             if hasattr(mod, 'Dbus'):
                 print("Module has Dbus object")
-                mods.append(mod.Dbus)
+                mods.append(mod.Dbus())
     return tuple(mods)
 
 def main():
@@ -99,7 +99,7 @@ def main():
     
     app = QtGui.QApplication(sys.argv)
     # Add Dbus Services after QApplication initialization
-    a = Dbuss()
+    a = load_all_dbus_modules()
     app.aboutToQuit.connect(shutdown) 
     mw = MainWindow()
     mw.show()
