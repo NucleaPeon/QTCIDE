@@ -1,9 +1,7 @@
 import dbus
 import dbus.service
-from dbus.mainloop.qt import DBusQtMainLoop
-
-INTERFACE = 'org.qtcide'
-
+from src.dbus import INTERFACE
+import src.mainwindow as mwin
 
 class Dbus(dbus.service.Object):
 
@@ -14,4 +12,4 @@ class Dbus(dbus.service.Object):
     @dbus.service.method('qtcide.Projects',
                         in_signature = 's', out_signature = 's')
     def NewProject(self, name):
-        return name
+        return str(mwin)

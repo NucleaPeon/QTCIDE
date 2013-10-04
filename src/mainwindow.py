@@ -126,3 +126,5 @@ class MainWindow(QtGui.QMainWindow):
                 
     def status(self, message):
         self.statusBar().showMessage(message)
+        
+    

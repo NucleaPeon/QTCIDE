@@ -12,3 +12,7 @@ class ProjectDock(QtGui.QWidget):
         self.settings = settings.Settings()
         self.setMinimumWidth(self.settings.dock_min_width)
         self.adjustSize()
+        
+    @staticmethod
+    def testProjectDbus():
+        return "Test Complete"
