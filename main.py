@@ -92,7 +92,7 @@ def main():
     from PyQt4 import QtGui
     from src.mainwindow import MainWindow
     #pid = os.fork()
-    DBusQtMainLoop(set_as_default = True)
+    DBusQtMainLoop(set_as_default=True)
     #if pid > 0:
         ## Exit first parent.
         #sys.exit(0)

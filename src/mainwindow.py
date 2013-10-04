@@ -94,6 +94,10 @@ class MainWindow(QtGui.QMainWindow):
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
         
+        helpAbout = QtGui.QAction('&About', self)
+        helpAbout.setShortcut('Ctrl+A')
+        helpAbout.setStatusTip("About the Program")
+        
         preferenceWin = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
                                                                'preferences-system.png')), '&Preferences', self)
         preferenceWin.setShortcut('Ctrl+P')
@@ -117,6 +121,7 @@ class MainWindow(QtGui.QMainWindow):
         #viewMenu.addAction()
         prefMenu = menubar.addMenu('&Project')
         helpMenu = menubar.addMenu('&Help')
+        helpMenu.addAction(helpAbout)
         
         prefMenu.addAction(preferenceWin)
         
