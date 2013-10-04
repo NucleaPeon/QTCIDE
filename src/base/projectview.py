@@ -8,7 +8,7 @@ class QtcideProjectView(QtGui.QTreeView):
         self.model_projfiles = QtGui.QStandardItemModel()
         self.root_item = self.model_projfiles.invisibleRootItem()
         self.setModel(self.model_projfiles)
-        self.model_projfiles.setHorizontalHeaderItem(0, QtGui.QStandardItem("Projects"))
+        self.model_projfiles.setHorizontalHeaderItem(0, QtGui.QStandardItem(""))
         
-        self.model_projfiles.appendRow(QtGui.QStandardItem("Hello World"))
-        
+    def newProject(self, name):
+        self.model_projfiles.appendRow(QtGui.QStandardItem(name))
