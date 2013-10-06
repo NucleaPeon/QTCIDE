@@ -6,7 +6,17 @@ import src.docks.project as project
 import src.base.settings as s
 from src.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
+
+
 class MainWindow(QtGui.QMainWindow):
+    
+    _instance = None # Single instance of initialized class
+    
+    def __new__(self,  *args, **kwargs):
+        if not self._instance:
+            self._instance = super(MainWindow, self).__new__(
+                self, *args, **kwargs)
+        return self._instance
     
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -124,11 +134,11 @@ class MainWindow(QtGui.QMainWindow):
         helpMenu.addAction(helpAbout)
         
         prefMenu.addAction(preferenceWin)
-        
-        
-        
         #fileMenu.addAction(exitAction)
-                
+    
+    def addNewProject(self, name):
+        return name
+            
     def status(self, message):
         self.statusBar().showMessage(message)
         

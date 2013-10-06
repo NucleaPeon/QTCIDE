@@ -12,4 +12,4 @@ class Dbus(dbus.service.Object):
     @dbus.service.method('qtcide.Projects',
                         in_signature = 's', out_signature = 's')
     def NewProject(self, name):
-        return str(mwin)
+        return mwin.MainWindow().addNewProject(name)
