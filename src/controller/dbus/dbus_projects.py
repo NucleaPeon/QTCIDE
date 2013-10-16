@@ -1,7 +1,14 @@
 import dbus
 import dbus.service
 from controller.dbus import INTERFACE
-import view.mainwindow as mwin
+import model.project
+import yaml
+
+'''
+:Dependencies:
+
+'''
+
 
 class Dbus(dbus.service.Object):
 
@@ -12,7 +19,9 @@ class Dbus(dbus.service.Object):
     @dbus.service.method('qtcide.Projects',
                         in_signature = 's', out_signature = 's')
     def NewProject(self, name):
-        return mwin.MainWindow().addNewProject(name)
+        proj = model.project.createNewProject(name)
+        
+        return proj.name
     
     @dbus.service.method('qtcide.Projects',
                         in_signature = '', out_signature = '')
