@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import os
-import src.base.window as window
+import view.base.window as window
 from PyQt4 import QtGui, QtCore
-import src.docks.project as project
-import src.base.settings as s
-from src.img import SYS_IMG_FOLDER, SYS_APP_ICON
-
+import view.docks.project as project
+import controller.settings as s
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 
 class MainWindow(QtGui.QMainWindow):

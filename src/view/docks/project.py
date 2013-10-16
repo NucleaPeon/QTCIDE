@@ -1,6 +1,6 @@
 from PyQt4 import QtGui, QtCore
-import src.base.settings as settings
-import src.base.projectview as pview
+import controller.settings as settings
+import view.base.projectview as pview
 
 class ProjectDock(QtGui.QWidget):
 

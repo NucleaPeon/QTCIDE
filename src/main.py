@@ -20,7 +20,6 @@
 """
 import os
 import sys
-import lib.cliprinter as clip
 import argparse
 import importlib
 import dbus
@@ -31,7 +30,7 @@ from dbus.mainloop.qt import DBusQtMainLoop
 INTERFACE = 'org.qtcide'
 
 
-class Dbuss(dbus.service.Object):
+class Dbus(dbus.service.Object):
     
         
     def __init__(self):
@@ -67,7 +66,7 @@ def load_all_dbus_modules():
         - tuple: dbus python modules
     '''
     mods = []
-    from src.dbus import SYS_DBUS_FOLDER
+    from controller.dbus import SYS_DBUS_FOLDER
     sys.path.append(SYS_DBUS_FOLDER)
     for _file in os.listdir(SYS_DBUS_FOLDER):
         if _file.endswith(".py") and not _file.startswith("_"):
@@ -79,17 +78,15 @@ def load_all_dbus_modules():
 def main():
     '''
     '''
-    clip.prnt("Initializing C/C++ IDE")
-    clip.prnt("[Checking if PyQT4 is installed] \t: {}".format(pyqt4_is_installed()),
-         indent=1, prefix="DEP - ")
     # Add to path
     # Until software can be properly installed onto the OS and paths become
     # predictable, assume running from top level directory
-    sys.path.append(os.path.join(os.getcwd(), 'base'))
+    sys.path.append(os.path.join(os.getcwd(),
+                              os.path.dirname(__file__)))
 
     ### Launch UI ###
     from PyQt4 import QtGui
-    from src.mainwindow import MainWindow
+    from view.mainwindow import MainWindow
     #pid = os.fork()
     DBusQtMainLoop(set_as_default=True)
     #if pid > 0:
@@ -104,9 +101,7 @@ def main():
     mw.show()
     
     import signal
-
     signal.signal(signal.SIGINT, signal.SIG_DFL)
-    clip.prnt("Hooking into SIGINT and SIG_DFL signals")
     
     sys.exit(app.exec_())
     

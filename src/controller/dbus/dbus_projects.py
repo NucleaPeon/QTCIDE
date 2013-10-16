@@ -1,7 +1,7 @@
 import dbus
 import dbus.service
-from src.dbus import INTERFACE
-import src.mainwindow as mwin
+from controller.dbus import INTERFACE
+import view.mainwindow as mwin
 
 class Dbus(dbus.service.Object):
 
