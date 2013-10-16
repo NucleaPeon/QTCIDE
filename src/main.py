@@ -73,7 +73,6 @@ def load_all_dbus_modules():
         if _file.endswith(".py") and not _file.startswith("_"):
             mod = importlib.import_module(_file.rstrip('.py'))
             if hasattr(mod, 'Dbus'):
-                print("Module has Dbus object")
                 mods.append(mod.Dbus())
     return tuple(mods)
 
@@ -103,6 +102,12 @@ def main():
     app.aboutToQuit.connect(shutdown) 
     mw = MainWindow()
     mw.show()
+    
+    import signal
+
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    clip.prnt("Hooking into SIGINT and SIG_DFL signals")
+    
     sys.exit(app.exec_())
     
 

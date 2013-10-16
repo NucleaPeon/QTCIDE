@@ -137,7 +137,10 @@ class MainWindow(QtGui.QMainWindow):
         #fileMenu.addAction(exitAction)
     
     def addNewProject(self, name):
-        return name
+        return self.dockProjectContents.newProject(name)
+    
+    def initTestData(self):
+        pass
             
     def status(self, message):
         self.statusBar().showMessage(message)
