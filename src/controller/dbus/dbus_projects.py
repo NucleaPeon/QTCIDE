@@ -17,13 +17,9 @@ class Dbus(dbus.service.Object):
         dbus.service.Object.__init__(self, busName, '/org/qtcide')
 
     @dbus.service.method('qtcide.Projects',
-                        in_signature = 's', out_signature = 's')
+                        in_signature = 's', out_signature = '')
     def NewProject(self, name):
         proj = model.project.createNewProject(name)
+        import view.mainwindow as mwin
         
-        return proj.name
-    
-    @dbus.service.method('qtcide.Projects',
-                        in_signature = '', out_signature = '')
-    def InitTestProjectData(self):
-        return mwin.MainWindow().initTestData()
+        mwin.MainWindow().createNewProject(proj)

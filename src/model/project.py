@@ -20,7 +20,6 @@ class Project:
         '''
         self.name = name
         self.path = kwargs.get('path', None)
-        self.model = QtGui.QStandardItemModel()
         
     def __str__(self):
         try:

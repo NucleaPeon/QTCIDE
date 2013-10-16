@@ -1,5 +1,6 @@
 from PyQt4 import QtGui, QtCore
 import controller.settings as settings
+import model.project
 
 class ProjectDock(QtGui.QWidget):
 
@@ -8,8 +9,9 @@ class ProjectDock(QtGui.QWidget):
         :Parameters:
             - args: list of model.project.Project() objects
         '''
-        super().__init__()
-        self.projects = args
+        super().__init__()        
+        self.projects = []
+        self.projects.extend(args)
         # Initialize Graphical Components
         self.project_tree_widget = QtGui.QTreeView()
         # Initialize Model Components
@@ -19,7 +21,7 @@ class ProjectDock(QtGui.QWidget):
         self.project_model.setHorizontalHeaderItem(0, QtGui.QStandardItem("Project Name"))
         # Get all projects initialized in the Project Dock object
         for proj in self.projects:
-            self.project_tree_widget.appendRow(QtGui.QStandardItem(proj))
+            self.project_model.appendRow(QtGui.QStandardItem(proj.name))
         layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.setLayout(layout)
         self.settings = settings.Settings()
@@ -27,3 +29,18 @@ class ProjectDock(QtGui.QWidget):
         self.adjustSize()
         # Initialize Project View (TreeView) and add it to this dock widget
         layout.addWidget(self.project_tree_widget)
+        
+    
+    def createNewProject(self, name):
+        '''
+        :Description:
+            Create a new project in the TreeModel
+            
+        :Parameters:
+            - project_model; model.project.Project(): 
+              
+        '''
+        # Add to stored array of projects
+        self.projects.append(model.project.Project(name))
+        # Now add to project tree widget
+        self.project_model.appendRow(QtGui.QStandardItem(name))

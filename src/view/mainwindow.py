@@ -3,6 +3,7 @@ import os
 import view.base.window as window
 from PyQt4 import QtGui, QtCore
 import view.docks.project as project
+import model.project 
 import controller.settings as s
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
@@ -15,6 +16,8 @@ class MainWindow(QtGui.QMainWindow):
         if not self._instance:
             self._instance = super(MainWindow, self).__new__(
                 self, *args, **kwargs)
+            # initialize triggers here
+            self.newProjectTrigger = QtCore.pyqtSignal()
         return self._instance
     
     def __init__(self):
@@ -102,6 +105,7 @@ class MainWindow(QtGui.QMainWindow):
                                                             'document-new.png')), '&New Project', self)
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
+        newProject.triggered.connect(self.createNewProject)
         
         helpAbout = QtGui.QAction('&About', self)
         helpAbout.setShortcut('Ctrl+A')
@@ -134,14 +138,18 @@ class MainWindow(QtGui.QMainWindow):
         
         prefMenu.addAction(preferenceWin)
         #fileMenu.addAction(exitAction)
-    
-    def addNewProject(self, name):
-        return self.dockProjectContents.newProject(name)
-    
-    def initTestData(self):
-        pass
-            
+        self.createNewProject("Hello World")
+        
     def status(self, message):
         self.statusBar().showMessage(message)
+        
+        
+    @QtCore.pyqtSlot(str)
+    def createNewProject(self, project_name):
+        '''
+        :Description:
+            Dbus calls this method to modify dock instance
+        '''
+        self.dockProjectContents.createNewProject(project_name)
         
     

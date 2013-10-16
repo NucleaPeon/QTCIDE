@@ -37,10 +37,6 @@ class Dbus(dbus.service.Object):
         busName = dbus.service.BusName(INTERFACE, bus = dbus.SessionBus())
         dbus.service.Object.__init__(self, busName, '/org/qtcide')
 
-    @dbus.service.method(INTERFACE,
-                        in_signature = '', out_signature = 's')
-    def HelloWorld(self):
-        return "Hello World"
 
 def pyqt4_is_installed():
     
