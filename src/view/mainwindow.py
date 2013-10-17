@@ -140,6 +140,10 @@ class MainWindow(QtGui.QMainWindow):
         #fileMenu.addAction(exitAction)
         self.createNewProject("Hello World")
         
+        
+        import view.modal.QtPopupTextInput as qtinput
+        qtinput.getTextPopup(self, "Input something", callback=self.createNewProject)
+        
     def status(self, message):
         self.statusBar().showMessage(message)
         
