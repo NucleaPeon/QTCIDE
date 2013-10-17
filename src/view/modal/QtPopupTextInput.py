@@ -18,7 +18,7 @@
 import sys
 from PyQt4 import QtGui
 
-def getTextPopup(parent, question, callback=None):
+def getTextPopup(parent, title, question, callback=None):
     '''
     :Description:
         A popup that requests the user input text. Has an OK and Cancel
@@ -29,12 +29,13 @@ def getTextPopup(parent, question, callback=None):
         - parent; QWidget: Because this method isn't in a class that is
           a widget, it requires a Widget to display itself (in a qt exec loop)
           so the calling QWidget should put "self" for that attribute.
+        - title; string: Title of popup window
         - question; string: What to ask the user
         - callback; callable object, method: On OK, send result to this 
           method
     '''
-    text, ok = QtGui.QInputDialog.getText(parent, 'Input Dialog', 
-        'Enter your name:')
+    text, ok = QtGui.QInputDialog.getText(parent, title, 
+        question)
         
     if ok:
         callback("{}".format(text))

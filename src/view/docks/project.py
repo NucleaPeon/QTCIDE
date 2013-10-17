@@ -44,3 +44,6 @@ class ProjectDock(QtGui.QWidget):
         self.projects.append(model.project.Project(name))
         # Now add to project tree widget
         self.project_model.appendRow(QtGui.QStandardItem(name))
+        
+    def listAllProjects(self):
+        return ', '.join(str(x) for x in self.projects)

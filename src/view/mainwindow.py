@@ -6,7 +6,7 @@ import view.docks.project as project
 import model.project 
 import controller.settings as s
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-
+import view.modal.QtPopupTextInput as qtinput
 
 class MainWindow(QtGui.QMainWindow):
     
@@ -105,6 +105,7 @@ class MainWindow(QtGui.QMainWindow):
                                                             'document-new.png')), '&New Project', self)
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
+        
         newProject.triggered.connect(self.createNewProject)
         
         helpAbout = QtGui.QAction('&About', self)
@@ -138,11 +139,7 @@ class MainWindow(QtGui.QMainWindow):
         
         prefMenu.addAction(preferenceWin)
         #fileMenu.addAction(exitAction)
-        self.createNewProject("Hello World")
-        
-        
-        import view.modal.QtPopupTextInput as qtinput
-        qtinput.getTextPopup(self, "Input something", callback=self.createNewProject)
+
         
     def status(self, message):
         self.statusBar().showMessage(message)
@@ -154,6 +151,8 @@ class MainWindow(QtGui.QMainWindow):
         :Description:
             Dbus calls this method to modify dock instance
         '''
-        self.dockProjectContents.createNewProject(project_name)
+        qtinput.getTextPopup(self, "QTCIDE", "Project Name:", 
+                             callback=self.dockProjectContents.createNewProject)
+        print(self.dockProjectContents.listAllProjects())
         
     
