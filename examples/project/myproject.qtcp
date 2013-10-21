@@ -1,0 +1,33 @@
+<!-- XML Declaration Here -->
+<schema version="1" />
+<metaproject name="My System">
+    <description value="Test system based on my project" />
+
+    <project name="My Project" depends="Libraries" build="My Project Build">
+        <Files rootpath="/home/celestia/Github/QTCIDE/examples/project/">
+            <File name="example_file.cpp" />
+            <File name="example_file.h" />
+        </Files>
+        
+        <TestSuite name="My Project Tests">
+            <Location path="variable" value="rootpath">
+                <Test name="MyTestA.qtct" type="unittest">
+                </Test>
+            </Location>
+            <Location path="absolute" value="/opt/source/somefile.c">
+                
+            </Location>
+        </TestSuite>
+        
+    </project>
+    
+    <project name="Libraries" build="My Library Build">
+    </project>
+    
+    <!-- This is for representation in the ide, not for makefiles -->
+    <build name="My Project Build">
+        <compiler config="gcc.config" name="gcc" version="4.7" >
+            <include file="example_file.cpp" />
+        </compiler>
+    </build>
+</metaproject>
