@@ -1,6 +1,9 @@
 from PyQt4 import QtGui, QtCore
 import controller.settings as settings
 import model.project
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
+import os
+import sys
 
 class ProjectDock(QtGui.QWidget):
 
@@ -14,6 +17,9 @@ class ProjectDock(QtGui.QWidget):
         self.projects.extend(args)
         # Initialize Graphical Components
         self.project_tree_widget = QtGui.QTreeView()
+        self.project_tree_widget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.connect(self.project_tree_widget, 
+            QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), self.displayProjectMenu)
         # Initialize Model Components
         #     self.project_model contains a list of Project model's models
         self.project_model = QtGui.QStandardItemModel() 
@@ -31,6 +37,20 @@ class ProjectDock(QtGui.QWidget):
         # Initialize Project View (TreeView) and add it to this dock widget
         layout.addWidget(self.project_tree_widget)
         
+    @QtCore.pyqtSlot(QtCore.QPoint)
+    def displayProjectMenu(self, point):
+        # Get element under point
+        index = self.project_tree_widget.indexAt(point)
+        if not index.isValid():
+            return 
+        
+        menu = QtGui.QMenu(self)
+        closeProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                              'document-close.png')), 
+                                                 '&Close Project', self)
+        closeProject.triggered.connect(self.closeSelectedProjects)
+        menu.addAction(closeProject)
+        menu.popup(QtGui.QCursor.pos())
     
     def createNewProject(self, name):
         '''
@@ -42,6 +62,8 @@ class ProjectDock(QtGui.QWidget):
               
         '''
         # Add to stored array of projects
+        if not name:
+            return
         self.projects.append(model.project.Project(name))
         # Now add to project tree widget
         self.project_model.appendRow(QtGui.QStandardItem(name))
