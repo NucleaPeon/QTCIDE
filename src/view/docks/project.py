@@ -56,7 +56,8 @@ class ProjectDock(QtGui.QWidget):
         '''
         itemsToRemove = self.project_tree_widget.selectedIndexes()
         for item in itemsToRemove:
-            self.project_model.removeRow(item.row(), item.parent())
+            self.project_model.removeRow(item.row(), 
+                                         self.project_tree_widget.rootIndex())
         
     def listAllProjects(self):
         return ', '.join(str(x) for x in self.projects)
