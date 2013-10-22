@@ -18,6 +18,7 @@ class MainWindow(QtGui.QMainWindow):
                 self, *args, **kwargs)
             # initialize triggers here
             self.newProjectTrigger = QtCore.pyqtSignal()
+            self.closeProjectTrigger = QtCore.pyqtSignal()
         return self._instance
     
     def __init__(self):
@@ -105,8 +106,14 @@ class MainWindow(QtGui.QMainWindow):
                                                             'document-new.png')), '&New Project', self)
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
-        
         newProject.triggered.connect(self.createNewProject)
+        closeProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                              'document-close.png')), 
+                                                 '&Close Project', self)
+        closeProject.setStatusTip("Close Project")
+        closeProject.triggered.connect(self.removeProject)
+        
+        
         
         helpAbout = QtGui.QAction('&About', self)
         helpAbout.setShortcut('Ctrl+A')
@@ -121,6 +128,7 @@ class MainWindow(QtGui.QMainWindow):
         # Toolbar
         self.toolbar = self.addToolBar('File')
         self.toolbar.addAction(newProject)
+        self.toolbar.addAction(closeProject)
         self.toolbar.addAction(exitAction)
         self.toolbar_project = self.addToolBar('Project')
         self.toolbar_project.addAction(preferenceWin)
@@ -129,6 +137,7 @@ class MainWindow(QtGui.QMainWindow):
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(newProject)
+        fileMenu.addAction(closeProject)
         fileMenu.addAction(exitAction)
         viewMenu = menubar.addMenu('&View')
         viewMenu.addMenu('&Docks')
@@ -149,10 +158,17 @@ class MainWindow(QtGui.QMainWindow):
     def createNewProject(self, project_name):
         '''
         :Description:
-            Dbus calls this method to modify dock instance
+           Slot to create a Project representation in the TreeView
         '''
         qtinput.getTextPopup(self, "QTCIDE", "Project Name:", 
                              callback=self.dockProjectContents.createNewProject)
-        print(self.dockProjectContents.listAllProjects())
+        
+    @QtCore.pyqtSlot()
+    def removeProject(self):
+        '''
+        :Description:
+            Slot to remove an existing project in the TreeView
+        '''
+        return self.dockProjectContents.closeSelectedProjects()
         
     

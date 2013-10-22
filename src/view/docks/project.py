@@ -18,6 +18,7 @@ class ProjectDock(QtGui.QWidget):
         #     self.project_model contains a list of Project model's models
         self.project_model = QtGui.QStandardItemModel() 
         self.project_tree_widget.setModel(self.project_model)
+        # TODO: Translation of Strings
         self.project_model.setHorizontalHeaderItem(0, QtGui.QStandardItem("Project Name"))
         # Get all projects initialized in the Project Dock object
         for proj in self.projects:
@@ -44,6 +45,18 @@ class ProjectDock(QtGui.QWidget):
         self.projects.append(model.project.Project(name))
         # Now add to project tree widget
         self.project_model.appendRow(QtGui.QStandardItem(name))
+        
+    def closeSelectedProjects(self):
+        '''
+        :Description:
+            Removes a project from the TreeModel, does not delete
+            
+        :Parameters:
+            - project_model; string: name of Project
+        '''
+        itemsToRemove = self.project_tree_widget.selectedIndexes()
+        for item in itemsToRemove:
+            self.project_model.removeRow(item.row(), item.parent())
         
     def listAllProjects(self):
         return ', '.join(str(x) for x in self.projects)
