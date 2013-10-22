@@ -50,9 +50,6 @@ class ProjectDock(QtGui.QWidget):
         '''
         :Description:
             Removes a project from the TreeModel, does not delete
-            
-        :Parameters:
-            - project_model; string: name of Project
         '''
         itemsToRemove = self.project_tree_widget.selectedIndexes()
         for item in itemsToRemove:
