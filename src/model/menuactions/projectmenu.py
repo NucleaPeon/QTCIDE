@@ -9,14 +9,31 @@
     For example, the callback can be called via a button, checkbox,
     an __init__ method, or other forms of code manipulation
     
+    Callback is based on the name attribute. 
+    
+    :See:
+        - controller.project; module: for more details
+    
 '''
+
+import importlib
 
 class ProjectMenu():
     
-    def __init__(self, name, callback, *args, **kwargs):
+    def __init__(self, name, *args, **kwargs):
+        '''
+        :Parameters:
+            - kwargs; dict:
+                - 'visible'; bool: If False, do not show item
+        '''
         self.name = name
-        self.callback = callback
+        self.callback = None
+        self.display = bool(kwargs.get('visible', True))
         
     def __str__(self):
-        return "{} {}, [{}] {{}}".format(name, callback, len(args),
-                                         len(kwargs.keys()))
+        return self.name.replace('_', ' ').title()
+        
+    def report(self):
+        return "{} -> {} ({}), [{}] {{}}".format(name, callback, 
+                                                 self.display, len(args),
+                                                 len(kwargs.keys()))

@@ -5,6 +5,7 @@ from PyQt4 import QtGui, QtCore
 import view.docks.project as project
 import model.project 
 import controller.settings as s
+import controller.project as projcontrol
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.modal.QtPopupTextInput as qtinput
 
@@ -41,6 +42,13 @@ class MainWindow(QtGui.QMainWindow):
             #else:
                 #self.setGeometry(s.x, s.y, s.width, s.height)
         
+        # This gets a list of desirable abstracted menu actions
+        self.project_menu = projcontrol.menu()
+        # Initialize callbacks to objects so we can use them
+        for mitem in self.project_menu:
+            mitem.callback = getattr(self, mitem.name, MainWindow.__menuItem(mitem.name))
+        projcontrol.set_menu(self.project_menu)
+        print(self.project_menu)
         
         self.dockProject = QtGui.QDockWidget(self)
         self.dockProject.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
@@ -102,6 +110,8 @@ class MainWindow(QtGui.QMainWindow):
         exitAction.setStatusTip('Exit Application')
         exitAction.triggered.connect(QtGui.qApp.quit)
         
+        
+        #MainWindow.menuItem(
         newProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
                                                             'document-new.png')), '&New Project', self)
         newProject.setShortcut('Ctrl+N')
@@ -148,6 +158,12 @@ class MainWindow(QtGui.QMainWindow):
         
         prefMenu.addAction(preferenceWin)
         #fileMenu.addAction(exitAction)
+
+    @staticmethod
+    def __menuItem(cls, menuobj, *args, **kwargs):
+        '''
+        '''
+        print(menuobj)
 
         
     def status(self, message):
