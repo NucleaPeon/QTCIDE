@@ -1,7 +1,6 @@
 '''
 ProjectController - Handles menu action registrations for Project Menus
 '''
-import model.menuactions.projectmenu as projmenu
 
 
 '''

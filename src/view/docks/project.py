@@ -13,14 +13,14 @@ class ProjectDock(QtGui.QWidget):
         :Parameters:
             - args: list of model.project.Project() objects
         '''
-        super().__init__()        
+        super().__init__()
         self.projects = []
         self.projects.extend(args)
         # Initialize Graphical Components
         self.project_tree_widget = QtGui.QTreeView()
         self.project_tree_widget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.connect(self.project_tree_widget, 
-            QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), print) # self.displayProjectMenu)
+            QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), self.displayProjectMenu)
         # Initialize Model Components
         #     self.project_model contains a list of Project model's models
         self.project_model = QtGui.QStandardItemModel() 
@@ -38,15 +38,45 @@ class ProjectDock(QtGui.QWidget):
         # Initialize Project View (TreeView) and add it to this dock widget
         layout.addWidget(self.project_tree_widget)
         
-    #@QtCore.pyqtSlot(QtCore.QPoint)
-    #def displayProjectMenu(self, point):
-        ## Get element under point
-        #index = self.project_tree_widget.indexAt(point)
-        #if not index.isValid():
-            #return 
+    @QtCore.pyqtSlot(QtCore.QPoint)
+    def displayProjectMenu(self, point):
+        # Get element under point
+        index = self.project_tree_widget.indexAt(point)
+        if not index.isValid():
+            return 
         
-        #menu = QtGui.QMenu(self)
-        #closeProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
-                                                              #'document-close.png')), 
-                                                 #'&Close Project', self)
+        menu = QtGui.QMenu(self)
+        closeProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                              'document-close.png')), 
+                                                 '&Close Project', self)
+        menu.addAction(closeProject)
+        closeProject.triggered.connect(self.closeSelectedProjects)
+        menu.popup(QtGui.QCursor.pos())
         
+    @QtCore.pyqtSlot(str)
+    def createNewProject(self, name):
+        '''
+        :Description:
+            Create a new project in the TreeModel
+            
+        :Parameters:
+            - project_model; model.project.Project(): 
+              
+        '''
+        # Add to stored array of projects
+        if not name:
+            return
+        self.projects.append(model.project.Project(name))
+        # Now add to project tree widget
+        self.project_model.appendRow(QtGui.QStandardItem(name))
+    
+    @QtCore.pyqtSlot()
+    def closeSelectedProjects(self):
+        '''
+        :Description:
+            Removes a project from the TreeModel, does not delete
+        '''
+        itemsToRemove = self.project_tree_widget.selectedIndexes()
+        for item in itemsToRemove:
+            self.project_model.removeRow(item.row(), 
+                                         self.project_tree_widget.rootIndex())

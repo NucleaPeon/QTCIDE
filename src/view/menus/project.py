@@ -21,6 +21,8 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.docks.project as project
 import os
 
+ICONS = {}
+
 class ProjectMenu():
     
     _instance = None
@@ -42,7 +44,6 @@ class ProjectMenu():
         self.menu.addAction(self.closeProject)
         
         
-        
     def menu(self):
         self.menu.popup(QtGui.QCursor.pos())
         
@@ -56,21 +57,7 @@ class ProjectMenu():
             self.project_model.removeRow(item.row(), 
                                          self.project_tree_widget.rootIndex())
             
-    def createNewProject(self, name):
-        '''
-        :Description:
-            Create a new project in the TreeModel
-            
-        :Parameters:
-            - project_model; model.project.Project(): 
-              
-        '''
-        # Add to stored array of projects
-        if not name:
-            return
-        self.projects.append(model.project.Project(name))
-        # Now add to project tree widget
-        self.project_model.appendRow(QtGui.QStandardItem(name))
+    
         
 
         
