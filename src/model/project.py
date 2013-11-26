@@ -20,6 +20,7 @@ class Project:
         '''
         self.name = name
         self.path = kwargs.get('path', None)
+        self.icon = kwargs.get('icon')
         
     def __str__(self):
         try:
@@ -27,13 +28,3 @@ class Project:
             return yaml.dump(self)
         except:
             return self.name
-        
-def createNewProject(name):
-    '''
-    :Description:
-        A factory class that returns an instantiated project model
-        
-    :Parameters:
-        - name; string: Name of the project
-    '''
-    return Project(name)

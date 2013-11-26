@@ -34,41 +34,12 @@ ProjectController - Handles menu action registrations for Project Menus
     (which is essentially a singleton pattern) is more appropriate for
     controllers.
 '''
-MENU_ACTIONS = {'new_project', 'open_project', 'close_project'}
 
-
-MENU = None
-
-def menu(*args, **kwargs):
-    '''
-    :Description:
-        Returns the cached instance of the menu based on kwarg
-        parameters and specifications
-        
-    :Parameters:
-        - args; list: <unused>
-        - kwargs; dict: 
-        
-    :Returns:
-        - menu; list: Initialized ProjectMenu() list, callbacks are
-          all set to None; they must be changed by the UI
-    '''
-    global MENU
-    if MENU is None:
-        MENU = []
-        for mact in MENU_ACTIONS:
-            MENU.append(projmenu.ProjectMenu(mact))
-            
-    return MENU
-
-def set_menu(menu):
-    '''
-    :Description:
-        Sets the menu for project menu items
-        
-    :Parameters:
-        - menu; list: List of ProjectMenu() objects, expected to have callbacks
-          so menu items function.
-    '''
-    global MENU
-    MENU = menu
+import model.project as projmodel
+PROJECTS = {}
+    
+def initialize_project(name, *args, **kwargs):
+    print(kwargs)
+    PROJECTS[name] = projmodel.Project(name, *args, **kwargs)
+    
+    return PROJECTS[name]

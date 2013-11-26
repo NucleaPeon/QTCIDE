@@ -6,6 +6,8 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
 import sys
 
+
+
 class ProjectDock(QtGui.QWidget):
 
     def __init__(self, *args, **kwargs):
@@ -14,13 +16,14 @@ class ProjectDock(QtGui.QWidget):
             - args: list of model.project.Project() objects
         '''
         super().__init__()
-        self.projects = []
-        self.projects.extend(args)
+        # Cache the projecticon for fast generation of this icon
+        self.ProjectIcon = QtGui.QIcon('res/folder-development.png')
         # Initialize Graphical Components
         self.project_tree_widget = QtGui.QTreeView()
         self.project_tree_widget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.connect(self.project_tree_widget, 
-            QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), self.displayProjectMenu)
+            QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
+            self.displayProjectMenu)
         # Initialize Model Components
         #     self.project_model contains a list of Project model's models
         self.project_model = QtGui.QStandardItemModel() 
@@ -28,7 +31,7 @@ class ProjectDock(QtGui.QWidget):
         # TODO: Translation of Strings
         self.project_model.setHorizontalHeaderItem(0, QtGui.QStandardItem("Project Name"))
         # Get all projects initialized in the Project Dock object
-        for proj in self.projects:
+        for proj in projcontrol.PROJECTS.keys():
             self.project_model.appendRow(QtGui.QStandardItem(proj.name))
         layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.setLayout(layout)
@@ -66,10 +69,13 @@ class ProjectDock(QtGui.QWidget):
         # Add to stored array of projects
         if not name:
             return
-        self.projects.append(model.project.Project(name))
+        
         # Now add to project tree widget
-        self.project_model.appendRow(QtGui.QStandardItem(name))
-    
+        proj = projcontrol.initialize_project(name, 
+                                              icon=QtGui.QIcon(self.ProjectIcon))
+        self.project_model.appendRow(QtGui.QStandardItem(proj.icon, 
+                                                         proj.name))
+        
     @QtCore.pyqtSlot()
     def closeSelectedProjects(self):
         '''

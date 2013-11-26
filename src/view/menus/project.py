@@ -57,10 +57,6 @@ class ProjectMenu():
             self.project_model.removeRow(item.row(), 
                                          self.project_tree_widget.rootIndex())
             
-    
-        
-
-        
     def listAllProjects(self):
         return ', '.join(str(x) for x in self.projects)
     
