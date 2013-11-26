@@ -3,6 +3,7 @@ import os
 import view.base.window as window
 from PyQt4 import QtGui, QtCore
 import view.docks.project as project
+import view.docks.terminal as terminal
 import model.project 
 import controller.settings as s
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
@@ -69,6 +70,13 @@ class MainWindow(QtGui.QMainWindow):
         self.dockTestContents = QtGui.QWidget() #FIXME: This can go into its own module?
         self.dockTest.setWidget(self.dockTestContents)
         
+        self.dockTerminal = QtGui.QDockWidget(self)
+        self.dockTerminal.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
+        self.dockTerminal.setWindowTitle(QtGui.QApplication.translate(
+            "self", "Terminal", None, QtGui.QApplication.UnicodeUTF8))
+        self.dockTerminalContents = terminal.TerminalDock(width=self.width())
+        self.dockTerminal.setWidget(self.dockTerminalContents)
+        
         #self.dock = QtGui.QDockWidget(self)
         #self.dock.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         #self.dock.setWindowTitle(QtGui.QApplication.translate(
@@ -89,6 +97,7 @@ class MainWindow(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockBuild)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockCompiler)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockTest)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.dockTerminal)
         
         # Set Statusbar message (included in MainWindow)
         self.status("Ready")
@@ -148,12 +157,6 @@ class MainWindow(QtGui.QMainWindow):
         
         prefMenu.addAction(preferenceWin)
         #fileMenu.addAction(exitAction)
-
-   
-    
-        
-    def new_project(self, *args, **kwargs):
-        print("new_project callback")
         
     def status(self, message):
         self.statusBar().showMessage(message)

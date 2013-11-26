@@ -15,7 +15,7 @@ class ProjectDock(QtGui.QWidget):
         :Parameters:
             - args: list of model.project.Project() objects
         '''
-        super().__init__()
+        super(ProjectDock, self).__init__()
         # Cache the projecticon for fast generation of this icon
         self.ProjectIcon = QtGui.QIcon('res/folder-development.png')
         # Initialize Graphical Components

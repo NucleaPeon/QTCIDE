@@ -22,6 +22,14 @@ class Project:
         self.path = kwargs.get('path', None)
         self.icon = kwargs.get('icon')
         
+    def save(self):
+        '''
+        :Description:
+            Method to persist the Project and all dependent data to disk
+            TODO: Implement
+        '''
+        return
+        
     def __str__(self):
         try:
             import yaml

@@ -39,7 +39,20 @@ import model.project as projmodel
 PROJECTS = {}
     
 def initialize_project(name, *args, **kwargs):
+    '''
+    :Description:
+        Invokes all neccessary startup sequences required for a default
+        template empty project to be created and available to the user
+        through backend configuration. Frontend configuration should be
+        done on project creation request (through menu or button) and
+        set up applicable ui components -- it will not be done here.
+        Note: Set up frontend after backend setup is complete
+        
+        There should be no disk usage to get the project started until
+        a user requests a save.
+    '''
     print(kwargs)
     PROJECTS[name] = projmodel.Project(name, *args, **kwargs)
+    
     
     return PROJECTS[name]
