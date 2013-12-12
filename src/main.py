@@ -44,18 +44,17 @@ def main():
 
     ### Launch UI ###
     from PyQt4 import QtGui
-    from view.mainwindow import MainWindow
+    #from view.mainwindow import MainWindow
+    import controller.window
     app = QtGui.QApplication(sys.argv)
     app.aboutToQuit.connect(shutdown) 
-    mw = MainWindow()
-    mw.show()
-    
+    #mw = MainWindow()
+    #mw.show()
+    controller.window.Window.init()
     import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     sys.exit(app.exec_())
-    
-
     
 def shutdown():
     print("Shutdown")
