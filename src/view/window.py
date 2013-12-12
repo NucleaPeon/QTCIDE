@@ -20,6 +20,9 @@ class Window(QtGui.QMainWindow):
     
     def __init__(self):
         super(Window, self).__init__()
+        self.newProjectTrigger = QtCore.pyqtSignal()
+        self.closeProjectTrigger = QtCore.pyqtSignal()
+        
         # Setup window content - layout
         widget = QtGui.QWidget()
         layout = QtGui.QGridLayout()
