@@ -7,6 +7,7 @@ import view.docks.terminal as terminal
 import model.project 
 import controller.settings as s
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
+
 import view.modal.QtPopupTextInput as qtinput
 
 class MainWindow(QtGui.QMainWindow):

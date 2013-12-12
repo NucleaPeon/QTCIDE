@@ -22,6 +22,7 @@ import os
 import sys
 import argparse
 import importlib
+import view.mainwindow as mainwindow
 
 def pyqt4_is_installed():
     
@@ -48,9 +49,10 @@ def main():
     import controller.window
     app = QtGui.QApplication(sys.argv)
     app.aboutToQuit.connect(shutdown) 
-    #mw = MainWindow()
+    #mw = mainwindow.MainWindow()
     #mw.show()
-    controller.window.Window.init()
+    win = controller.window.Window.init()
+    win.show()
     import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
