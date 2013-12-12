@@ -105,31 +105,41 @@ class MainWindow(QtGui.QMainWindow):
         # Actions
         
         exitAction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
-                                                            'system-shutdown.png')), '&Exit', self)
+                                                            'system-shutdown.png')), 
+                                                '&Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit Application')
         exitAction.triggered.connect(QtGui.qApp.quit)
         
         # Add Project Controller Menus
         newProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
-                                                            'document-new.png')), '&New Project', self)
+                                                            'document-new.png')), 
+                                                '&New Project', self)
         newProject.setShortcut('Ctrl+N')
         newProject.setStatusTip('New Project')
         newProject.triggered.connect(self.createNewProject)
+        
+        saveProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
+                                                             'media-floppy.png')), 
+                                                '&Save Project', self)
+        saveProject.setShortcut('Ctrl-S')
+        saveProject.setStatusTip('Save Project')
+        saveProject.triggered.connect(self.saveProject)
+        
         closeProject = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
                                                               'document-close.png')), 
                                                  '&Close Project', self)
+        closeProject.setShortcut('Ctrl-C')
         closeProject.setStatusTip("Close Project")
         closeProject.triggered.connect(self.removeProject)
-        
-        
         
         helpAbout = QtGui.QAction('&About', self)
         helpAbout.setShortcut('Ctrl+A')
         helpAbout.setStatusTip("About the Program")
         
         preferenceWin = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER,
-                                                               'preferences-system.png')), '&Preferences', self)
+                                                               'preferences-system.png')), 
+                                                    '&Preferences', self)
         preferenceWin.setShortcut('Ctrl+P')
         preferenceWin.setStatusTip("Application Preferences")
         #preferenceWin.triggered.connect()
@@ -137,6 +147,7 @@ class MainWindow(QtGui.QMainWindow):
         # Toolbar
         self.toolbar = self.addToolBar('File')
         self.toolbar.addAction(newProject)
+        self.toolbar.addAction(saveProject)
         self.toolbar.addAction(closeProject)
         self.toolbar.addAction(exitAction)
         self.toolbar_project = self.addToolBar('Project')
@@ -146,6 +157,7 @@ class MainWindow(QtGui.QMainWindow):
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(newProject)
+        fileMenu.addAction(saveProject)
         fileMenu.addAction(closeProject)
         fileMenu.addAction(exitAction)
         viewMenu = menubar.addMenu('&View')
@@ -170,6 +182,14 @@ class MainWindow(QtGui.QMainWindow):
         '''
         qtinput.getTextPopup(self, "QTCIDE", "Project Name:", 
                              callback=self.dockProjectContents.createNewProject)
+        
+    @QtCore.pyqtSlot(str)
+    def saveProject(self, project_name):
+        # First check if any project is selected
+        try:
+            self.dockProjectContents.project_tree_widget.saveProject("asdf")
+        except:
+            pass
         
     @QtCore.pyqtSlot()
     def removeProject(self):

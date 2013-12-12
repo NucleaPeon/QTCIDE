@@ -51,8 +51,5 @@ def initialize_project(name, *args, **kwargs):
         There should be no disk usage to get the project started until
         a user requests a save.
     '''
-    print(kwargs)
     PROJECTS[name] = projmodel.Project(name, *args, **kwargs)
-    
-    
     return PROJECTS[name]

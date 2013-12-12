@@ -21,14 +21,7 @@ class Project:
         self.name = name
         self.path = kwargs.get('path', None)
         self.icon = kwargs.get('icon')
-        
-    def save(self):
-        '''
-        :Description:
-            Method to persist the Project and all dependent data to disk
-            TODO: Implement
-        '''
-        return
+        self.modified = False
         
     def __str__(self):
         try:

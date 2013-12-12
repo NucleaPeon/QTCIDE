@@ -17,7 +17,7 @@ class ProjectDock(QtGui.QWidget):
         '''
         super(ProjectDock, self).__init__()
         # Cache the projecticon for fast generation of this icon
-        self.ProjectIcon = QtGui.QIcon('res/folder-development.png')
+        self.ProjectIcon = QtGui.QIcon(os.path.join('res', 'folder-development.png'))
         # Initialize Graphical Components
         self.project_tree_widget = QtGui.QTreeView()
         self.project_tree_widget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -75,6 +75,10 @@ class ProjectDock(QtGui.QWidget):
                                               icon=QtGui.QIcon(self.ProjectIcon))
         self.project_model.appendRow(QtGui.QStandardItem(proj.icon, 
                                                          proj.name))
+        
+    @QtCore.pyqtSlot(str)
+    def saveProject(self, name):
+        print("saveProject")
         
     @QtCore.pyqtSlot()
     def closeSelectedProjects(self):

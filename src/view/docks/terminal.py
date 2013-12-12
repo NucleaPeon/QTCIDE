@@ -2,6 +2,11 @@
 '''
 from PyQt4 import QtGui, QtCore
 
+'''
+:Description:
+    Terminal that takes inputs and presents information
+    regarding IDE-specifics 
+'''
 class TerminalDock(QtGui.QWidget):
 
     __version__ = "v 0.10"
