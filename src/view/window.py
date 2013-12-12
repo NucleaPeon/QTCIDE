@@ -11,4 +11,4 @@ should use QDialogs.
 class Window(QtGui.QMainWindow):
     
     def __init__(self):
-        pass
+        super(Window, self).__init__()

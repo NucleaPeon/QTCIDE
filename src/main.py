@@ -46,6 +46,7 @@ def main():
     from PyQt4 import QtGui
     #from view.mainwindow import MainWindow
     import controller.window
+    import view.window
     app = QtGui.QApplication(sys.argv)
     app.aboutToQuit.connect(shutdown) 
     #mw = MainWindow()

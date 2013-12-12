@@ -33,7 +33,7 @@ def model(modname):
     mod = importlib.import_module("model.{}".format(name))
     try:
         cls = getattr(mod, name.title())
-        return cls()
+        return cls
     except:
         return None
     
