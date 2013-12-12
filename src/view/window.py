@@ -1,6 +1,12 @@
 from PyQt4 import QtGui, QtCore
 import model as m
+import view.dock.project
+import view.dock.build
+import view.dock.compiler
+import view.dock.testing
+import view.dock.terminal
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
+
 
 '''
 Window View
@@ -14,7 +20,6 @@ class Window(QtGui.QMainWindow):
     
     def __init__(self):
         super(Window, self).__init__()
-        print("View Window")
         # Setup window content - layout
         widget = QtGui.QWidget()
         layout = QtGui.QGridLayout()
@@ -29,7 +34,17 @@ class Window(QtGui.QMainWindow):
         self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
         self.resize(model.width, model.height)
         self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
-        self.status("Ready")
+        self.project_dock = view.dock.project.Project()
+        self.build_dock = view.dock.build.Build()
+        self.terminal_dock = view.dock.terminal.Terminal()
+        self.testing_dock = view.dock.testing.Testing()
+        self.compiler_dock = view.dock.compiler.Compiler()
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.project_dock)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.build_dock)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.compiler_dock)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.testing_dock)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.terminal_dock)
+        
         
     def status(self, message):
         self.statusBar().showMessage(message)
