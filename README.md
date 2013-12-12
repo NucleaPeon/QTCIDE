@@ -15,3 +15,11 @@ deployment, this system will have drag and drop functionality
 as well as built in third party library management, 
 build system integration, consistent styling options and 
 automatic documentation generation.
+
+Installation
+------------
+
+Dependencies:
+	* python3-dbus
+	* python3-dbus.mainloop.qt
+	* python3-pyqt4
