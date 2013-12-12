@@ -22,21 +22,9 @@ import os
 import sys
 import argparse
 import importlib
-import dbus
-import dbus.service
-from dbus.mainloop.qt import DBusQtMainLoop
 
 # GLOBAL DBUS INTERFACE FOR QTCIDE
 INTERFACE = 'org.qtcide'
-
-
-class Dbus(dbus.service.Object):
-    
-        
-    def __init__(self):
-        busName = dbus.service.BusName(INTERFACE, bus = dbus.SessionBus())
-        dbus.service.Object.__init__(self, busName, '/org/qtcide')
-
 
 def pyqt4_is_installed():
     
@@ -47,29 +35,6 @@ def pyqt4_is_installed():
         sys.stderr.write(str(E))
         return False
     return True
-
-def load_all_dbus_modules():
-    '''
-    :Description:
-        Imports dbus methods into QTCIDE found in the src/dbus/ directory
-        
-        NOTE: Certain module names like "test.py" will fail because there
-        may be a test/ directory on the operating system.
-        Ex: /usr/lib64/python3.2/test/ on my system contains many python
-            files for testing (unittest)
-        
-    :Returns:
-        - tuple: dbus python modules
-    '''
-    mods = []
-    from controller.dbus import SYS_DBUS_FOLDER
-    sys.path.append(SYS_DBUS_FOLDER)
-    for _file in os.listdir(SYS_DBUS_FOLDER):
-        if _file.endswith(".py") and not _file.startswith("_"):
-            mod = importlib.import_module(_file.rstrip('.py'))
-            if hasattr(mod, 'Dbus'):
-                mods.append(mod.Dbus())
-    return tuple(mods)
 
 def main():
     '''
@@ -83,15 +48,7 @@ def main():
     ### Launch UI ###
     from PyQt4 import QtGui
     from view.mainwindow import MainWindow
-    #pid = os.fork()
-    DBusQtMainLoop(set_as_default=True)
-    #if pid > 0:
-        ## Exit first parent.
-        #sys.exit(0)
-    
     app = QtGui.QApplication(sys.argv)
-    # Add Dbus Services after QApplication initialization
-    a = load_all_dbus_modules()
     app.aboutToQuit.connect(shutdown) 
     mw = MainWindow()
     mw.show()
