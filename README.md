@@ -20,7 +20,12 @@ Installation
 ------------
 
 Dependencies:
-	* python3-dbus
-	* python3-dbus.mainloop.qt
-	* python3-pyqt4
-	* python3-yaml
+
+	*   python3-dbus
+
+	*   python3-dbus.mainloop.qt
+
+	*   python3-pyqt4
+
+	*   python3-yaml
+
