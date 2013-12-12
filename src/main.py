@@ -23,9 +23,6 @@ import sys
 import argparse
 import importlib
 
-# GLOBAL DBUS INTERFACE FOR QTCIDE
-INTERFACE = 'org.qtcide'
-
 def pyqt4_is_installed():
     
     try:
