@@ -6,17 +6,17 @@ import os
 Class that represents the QAction object with icon and
 no parent in a singleton class
 """
-class ExitAction():
+class NewProjectAction():
     
     _instance = None
     def __new__(cls):
         if not cls._instance:
             # Initialize graphical elements, NOT callbacks as that is done
             # by the calling program through kwargs
-            cls._instance = super(ExitAction, cls).__new__(cls)
-            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-shutdown.png')),
-                                        '&Exit', None)
-            cls.qaction.setShortcut('Ctrl-Q')
-            cls.qaction.setStatusTip('Exit Application')
-            cls.qaction.triggered.connect(QtGui.qApp.quit)
+            cls._instance = super(NewProjectAction, cls).__new__(cls)
+            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-new.png')),
+                                        '&New Project', None)
+            cls.qaction.setShortcut('Ctrl-N')
+            cls.qaction.setStatusTip('New Project')
+            cls.qaction.triggered.connect(print)
         return cls._instance
