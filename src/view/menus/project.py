@@ -32,7 +32,6 @@ class ProjectMenu():
             # by the calling program through kwargs
             cls._instance = super(ProjectMenu, cls).__new__(*args, **kwargs)
             cls.menu = QtGui.QMenu()
-            cls.action_close = 
         return cls._instance
        
     def __init__(self, *args, **kwargs):
