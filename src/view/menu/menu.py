@@ -18,6 +18,12 @@ class MenuBar:
         # File Menu
         self.filemenu = self.menubar.addMenu('&File')
         self.filemenu.addAction(self.exit_action)
+        # View Menu
+        self.viewMenu = self.menubar.addMenu('&View')
+        # Project Menu
+        self.projMenu = self.menubar.addMenu('&Project')
+        # Help Menu
+        self.helpMenu = self.menubar.addMenu('&Help')
         
         # Toolbar
         self.toolbar = self.mwin.addToolBar('File')
