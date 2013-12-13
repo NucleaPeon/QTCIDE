@@ -13,7 +13,12 @@ class MenuBar:
     '''
     def __init__(self, mainwindow):
         self.mwin = mainwindow
-        self.toolbar = self.mwin.addToolBar('File')
-        # Cannot extend QWidget, so must access variable 
+        self.menubar = self.mwin.menuBar()
         self.exit_action = view.actions.exit.ExitAction().qaction
+        # File Menu
+        self.filemenu = self.menubar.addMenu('&File')
+        self.filemenu.addAction(self.exit_action)
+        
+        # Toolbar
+        self.toolbar = self.mwin.addToolBar('File')
         self.toolbar.addAction(self.exit_action)
