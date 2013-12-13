@@ -5,6 +5,7 @@ import view.dock.build
 import view.dock.compiler
 import view.dock.testing
 import view.dock.terminal
+import view.menu.menu as menu
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 
@@ -47,7 +48,7 @@ class Window(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.compiler_dock)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.testing_dock)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.terminal_dock)
-        
+        self.menubar = menu.MenuBar(self)
         
     def status(self, message):
         self.statusBar().showMessage(message)

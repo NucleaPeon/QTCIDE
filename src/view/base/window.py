@@ -13,3 +13,4 @@ class Window(QtGui.QWidget):
         super(QtGui.QWidget, self).__init__()
         layout = QtGui.QGridLayout()
         self.setLayout(layout)
+        
