@@ -39,5 +39,8 @@ class MenuBar:
         self.helpMenu = self.menubar.addMenu('&Help')
         
         # Toolbar
-        self.toolbar = self.mwin.addToolBar('File')
-        self.toolbar.addAction(self.exit_action)
+        self.filetb = self.mwin.addToolBar('File')
+        self.filetb.addAction(self.exit_action)
+        self.projtb = self.mwin.addToolBar('Project')
+        self.projtb.addAction(self.projNewAction)
+        self.projtb.addAction(self.projCloseAction)
