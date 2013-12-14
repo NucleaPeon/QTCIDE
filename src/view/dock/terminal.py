@@ -40,3 +40,5 @@ class Terminal(QtGui.QDockWidget):
         if e.key() == QtCore.Qt.Key_Enter or e.key() == QtCore.Qt.Key_Return:
             self.textedit.append(": {}".format(self.commandarea.text()))
             self.commandarea.clear()
+        elif e.key() == QtCore.Qt.Key_Escape:
+            self.commandarea.clear() # Easy way to clear the edit field
