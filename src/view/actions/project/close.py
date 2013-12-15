@@ -24,4 +24,4 @@ class CloseProjectAction():
 
     @QtCore.pyqtSlot(bool)
     def closeProject(triggered):
-        print("Close Proejct")
+        pass # FIXME

@@ -37,4 +37,8 @@ class Project:
         proj = QtGui.QStandardItem(project_name)    
         self.projects.appendRow(proj)
         self.projectcache[project_name] = proj
+        # Select the project in the treeview is none is previously selected
+        if self.projects.rowCount() == 1:
+            qmindex = self.projects.index(0, 0)
+            self.projecttree.setCurrentIndex(qmindex)
         return proj
