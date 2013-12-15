@@ -43,6 +43,7 @@ class Project:
             qmindex = self.projects.index(0, 0)
             self.projecttree.setCurrentIndex(qmindex)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         return proj
     
     def closeProject(self):
@@ -52,4 +53,9 @@ class Project:
             del self.projectcache[text]
         self.projects.removeRow(selected)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+        
+    def saveProject(self):
+        # talk to controller
+        print("asdf")
             

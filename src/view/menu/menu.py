@@ -1,6 +1,7 @@
 import view.actions.exit
 import view.actions.project.new
 import view.actions.project.close
+import view.actions.project.save
 
 class MenuBar:
     
@@ -21,6 +22,7 @@ class MenuBar:
         self.exit_action = view.actions.exit.ExitAction().qaction
         self.projNewAction = view.actions.project.new.NewProjectAction().qaction
         self.projCloseAction = view.actions.project.close.CloseProjectAction().qaction
+        self.projSaveAction = view.actions.project.save.SaveProjectAction().qaction
         
         # File Menu
         self.filemenu = self.menubar.addMenu('&File')
@@ -44,3 +46,4 @@ class MenuBar:
         self.projtb = self.mwin.addToolBar('Project')
         self.projtb.addAction(self.projNewAction)
         self.projtb.addAction(self.projCloseAction)
+        self.projtb.addAction(self.projSaveAction)
