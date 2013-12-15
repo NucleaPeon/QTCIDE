@@ -32,5 +32,4 @@ class NewProjectAction():
     def promptNewProject(self):
         qtinput.getTextPopup(None, "QTCIDE", "Project Name:",
                              callback=model.project.Project().addNewProject)
-        model.project.Project().projects.sort(0)
         

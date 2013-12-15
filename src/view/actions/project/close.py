@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import os        
+import model.project
+import os
 
 """
 Class that represents the QAction object with icon and
@@ -25,4 +26,5 @@ class CloseProjectAction():
 
     @QtCore.pyqtSlot(bool)
     def closeProject(triggered):
-        pass # FIXME
+        print("closeProject")
+        model.project.Project().closeProject()

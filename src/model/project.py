@@ -36,6 +36,7 @@ class Project:
         
         proj = QtGui.QStandardItem(project_name)    
         self.projects.appendRow(proj)
+        self.projects.sort(0)
         self.projectcache[project_name] = proj
         # Select the project in the treeview is none is previously selected
         if self.projects.rowCount() == 1:
@@ -43,3 +44,12 @@ class Project:
             self.projecttree.setCurrentIndex(qmindex)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         return proj
+    
+    def closeProject(self):
+        selected = self.projecttree.currentIndex().row()
+        text = self.projects.item(selected).text()
+        if text in self.projectcache.keys():
+            del self.projectcache[text]
+        self.projects.removeRow(selected)
+        view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+            
