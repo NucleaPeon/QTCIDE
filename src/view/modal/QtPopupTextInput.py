@@ -38,4 +38,5 @@ def getTextPopup(parent, title, question, callback=None):
         question)
         
     if ok:
-        callback("{}".format(text))
+        return callback(text)
+    return None
