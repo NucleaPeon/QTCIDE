@@ -12,20 +12,13 @@ from PyQt4 import QtGui
 
 class Project:
     
-    def __init__(self, name, *args, **kwargs):
-        '''
-        :Description:
-            A project model; a representation of a project
-            in the QT-C-IDE framework.
-        '''
-        self.name = name
-        self.path = kwargs.get('path', None)
-        self.icon = kwargs.get('icon')
-        self.modified = False
-        
-    def __str__(self):
-        try:
-            import yaml
-            return yaml.dump(self)
-        except:
-            return self.name
+    _instance = None # Single instance of initialized class
+    
+    def __new__(self,  *args, **kwargs):
+        if not self._instance:
+            self._instance = super(Project, self).__new__(
+                self, *args, **kwargs)
+            self.projects = QtGui.QStandardItemModel() # Project data
+            self.projects.setHorizontalHeaderItem(0, 
+                                                  QtGui.QStandardItem("Project Name"))
+        return self._instance

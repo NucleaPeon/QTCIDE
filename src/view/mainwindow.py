@@ -18,9 +18,6 @@ class MainWindow(QtGui.QMainWindow):
         if not self._instance:
             self._instance = super(MainWindow, self).__new__(
                 self, *args, **kwargs)
-            # initialize triggers here
-            self.newProjectTrigger = QtCore.pyqtSignal()
-            self.closeProjectTrigger = QtCore.pyqtSignal()
         return self._instance
     
     def __init__(self):

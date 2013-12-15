@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import model.project
 import os
 
 class Project(QtGui.QDockWidget):
@@ -13,15 +14,9 @@ class Project(QtGui.QDockWidget):
         self.setWidget(self.widget)
         self.icon = QtGui.QIcon(os.path.join('res', 
                                              'folder-development.png'))
-        # Connect Custom Menu creation TODO
-        # Initialize Model which is saved here
-        self.projects = QtGui.QStandardItemModel()
-        
         # Initialize TreeView for model to sit in
         self.projecttree = QtGui.QTreeView()
-        self.projecttree.setModel(self.projects)
-        self.projects.setHorizontalHeaderItem(0, 
-                                              QtGui.QStandardItem("Project Name"))
+        self.projecttree.setModel(model.project.Project().projects)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
         self.layout.addWidget(self.projecttree)
