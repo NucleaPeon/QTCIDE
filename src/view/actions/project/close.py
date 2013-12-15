@@ -20,6 +20,7 @@ class CloseProjectAction():
             cls.qaction.setShortcut('Ctrl-C')
             cls.qaction.setStatusTip('Close Project')
             cls.qaction.triggered.connect(cls.closeProject)
+            cls.qaction.setEnabled(False)
         return cls._instance
 
     @QtCore.pyqtSlot(bool)

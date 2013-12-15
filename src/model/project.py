@@ -41,4 +41,5 @@ class Project:
         if self.projects.rowCount() == 1:
             qmindex = self.projects.index(0, 0)
             self.projecttree.setCurrentIndex(qmindex)
+        view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         return proj
