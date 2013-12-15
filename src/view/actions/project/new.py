@@ -2,7 +2,7 @@ from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.modal.QtPopupTextInput as qtinput
 import view.window
-import controller.project
+import model.project
 import os        
 
 """
@@ -30,5 +30,5 @@ class NewProjectAction():
     @QtCore.pyqtSlot(str)
     def promptNewProject(self, project_name):
         qtinput.getTextPopup(None, "QTCIDE", "Project Name:",
-                             callback=print)
+                             callback=model.project.Project().addNewProject)
         

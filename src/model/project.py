@@ -1,16 +1,15 @@
 '''
-:Description:
-    Module that contains the model of a Project:
-        - a collection of files, resources and configurations
-        
-:Depends:
-    - python yaml plugin (optional)
-    If yaml is not found, project str() returns the project name.
+TODO: 
+    - Validate that name is unique upon 
+        a) rename of project
+        b) new project
         
 '''
 from PyQt4 import QtGui, QtCore
 import view.menu.projectcontext
 import view.window
+
+
 class Project:
     
     _instance = None # Single instance of initialized class
@@ -24,7 +23,18 @@ class Project:
                                                   QtGui.QStandardItem("Project Name"))
             self.projecttree = QtGui.QTreeView()
             self.projectcontextmenu = view.menu.projectcontext.ProjectContextMenu()
+            self.projectcache = {}
         return self._instance
     
     def addNewProject(self, project_name):
-        print("Adding {}".format(project_name))
+        if not project_name:
+            return
+        
+        if not self.projectcache.get(project_name, None) is None:
+            print("TODO: Project already exists by that name")
+            return
+        
+        proj = QtGui.QStandardItem(project_name)    
+        self.projects.appendRow(proj)
+        self.projectcache[project_name] = proj
+        return proj
