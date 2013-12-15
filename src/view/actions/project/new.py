@@ -11,6 +11,7 @@ no parent in a singleton class
 """
 class NewProjectAction():
     
+    
     _instance = None
     def __new__(cls):
         if not cls._instance:
@@ -27,9 +28,9 @@ class NewProjectAction():
     def __init__(self):
         super(NewProjectAction, self).__init__()
         
-
     @QtCore.pyqtSlot(str)
     def promptNewProject(self):
         qtinput.getTextPopup(None, "QTCIDE", "Project Name:",
                              callback=model.project.Project().addNewProject)
+        model.project.Project().projects.sort(0)
         

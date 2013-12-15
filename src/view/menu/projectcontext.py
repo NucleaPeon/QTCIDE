@@ -26,4 +26,10 @@ class ProjectContextMenu(QtGui.QMenu):
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):
+        self.clear()
+        index = model.project.Project().projecttree.indexAt(point)
+        self.addAction(view.actions.project.new.NewProjectAction().qaction)
+        if index.isValid():
+            self.addAction(view.actions.project.close.CloseProjectAction().qaction)
         self.popup(QtGui.QCursor.pos())
+        
