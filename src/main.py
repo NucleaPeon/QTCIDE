@@ -22,7 +22,7 @@ import os
 import sys
 import argparse
 import importlib
-import view.mainwindow as mainwindow
+import view.window 
 
 def pyqt4_is_installed():
     

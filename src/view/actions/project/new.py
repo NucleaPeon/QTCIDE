@@ -1,7 +1,8 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.modal.QtPopupTextInput as qtinput
-import view.mainwindow
+import view.window
+import controller.project
 import os        
 
 """
@@ -20,14 +21,14 @@ class NewProjectAction():
                                         '&New Project', None)
             cls.qaction.setShortcut('Ctrl-N')
             cls.qaction.setStatusTip('New Project')
-            cls.qaction.triggered.connect(cls._instance.promptNewProject)
+            
         return cls._instance
 
     def __init__(self):
-        pass
+        self.qaction.triggered.connect(self.promptNewProject)
 
     @QtCore.pyqtSlot(str)
     def promptNewProject(self, project_name):
-        qtinput.getTextPopup(view.mainwindow.MainWindow(), "QTCIDE", "Project Name:",
+        qtinput.getTextPopup(None, "QTCIDE", "Project Name:",
                              callback=print)
         

@@ -2,8 +2,8 @@
 import os
 import view.base.window as window
 from PyQt4 import QtGui, QtCore
-import view.docks.project as project
-import view.docks.terminal as terminal
+import view.dock.project as project
+import view.dock.terminal as terminal
 import model.project 
 import controller.settings as s
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
