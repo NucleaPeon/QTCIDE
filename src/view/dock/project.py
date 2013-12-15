@@ -12,9 +12,6 @@ class Project(QtGui.QDockWidget):
         if not self._instance:
             self._instance = super(Project, self).__new__(
                 self, *args, **kwargs)
-            self.connect(model.project.Project().projecttree,
-                QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                model.project.Project().addNewProject)
             self.widget = QtGui.QWidget()
         return self._instance
     
@@ -30,6 +27,10 @@ class Project(QtGui.QDockWidget):
         # Initialize TreeView for model to sit in
         self.projecttree = model.project.Project().projecttree
         self.projecttree.setModel(model.project.Project().projects)
+        self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
         self.layout.addWidget(self.projecttree)
+        self.connect(self.projecttree,
+                QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
+                view.menu.projectcontext.ProjectContextMenu().displayProjectMenu)

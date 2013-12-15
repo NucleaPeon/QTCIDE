@@ -21,14 +21,15 @@ class NewProjectAction():
                                         '&New Project', None)
             cls.qaction.setShortcut('Ctrl-N')
             cls.qaction.setStatusTip('New Project')
-            
+            cls.qaction.triggered.connect(cls.promptNewProject)
         return cls._instance
 
     def __init__(self):
-        self.qaction.triggered.connect(self.promptNewProject)
+        super(NewProjectAction, self).__init__()
+        
 
     @QtCore.pyqtSlot(str)
-    def promptNewProject(self, project_name):
+    def promptNewProject(self):
         qtinput.getTextPopup(None, "QTCIDE", "Project Name:",
                              callback=model.project.Project().addNewProject)
         

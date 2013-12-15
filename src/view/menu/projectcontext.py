@@ -1,5 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.project
+import view.actions.project.new
+import view.actions.project.close
 
 '''
 Project Contextual Menu, Right-Click on Project TreeView
@@ -7,7 +9,7 @@ Project Contextual Menu, Right-Click on Project TreeView
 When instantiated it will connect with the model.project
 treeview component
 '''
-class ProjectContextMenu:
+class ProjectContextMenu(QtGui.QMenu):
     
     _instance = None # Single instance of initialized class
     
@@ -17,7 +19,11 @@ class ProjectContextMenu:
                 self, *args, **kwargs)
         return self._instance
     
+    def __init__(self):
+        super(ProjectContextMenu, self).__init__()
+        self.addAction(view.actions.project.new.NewProjectAction().qaction)
+        self.addAction(view.actions.project.close.CloseProjectAction().qaction)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):
-        print(index)
+        self.popup(QtGui.QCursor.pos())
