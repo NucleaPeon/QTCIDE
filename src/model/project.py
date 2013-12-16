@@ -54,7 +54,8 @@ class Project:
             qmindex = self.projects.index(0, 0)
             self.projecttree.setCurrentIndex(qmindex)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
-        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+        # FIXME
+        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projectcache[self._get_project_name()].save)
         return proj
     
     def closeProject(self):
@@ -76,9 +77,13 @@ class Project:
             - project_name: grabs the text from currently selected project
             
         '''
+        
         if project_name is None:
             project_name = self._get_project_name()
         controller.project.saveProject(self.projectcache[project_name].qsi_proj)
+        self.projectcache[project_name].save = False
+        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projectcache[project_name].save)
+        
         
     def _get_project_name(self):
         '''

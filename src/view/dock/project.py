@@ -40,4 +40,13 @@ class Project(QtGui.QDockWidget):
         
         
     def __project_context(self):
-        print("Called when different project is selected, run context validation")
+        print("Context")
+        # Check save boolean from model.data
+        proj = model.project.Project()
+        status = proj.projectcache[proj._get_project_name()].save
+        print(proj._get_project_name())
+        action = view.actions.project.save.SaveProjectAction().qaction
+        action.setEnabled(status)
+        print(status)
+        # set to boolean data
+        

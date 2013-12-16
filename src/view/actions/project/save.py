@@ -27,3 +27,5 @@ class SaveProjectAction():
     @QtCore.pyqtSlot(bool)
     def saveProject(triggered):
         model.project.Project().saveProject()
+        
+        
