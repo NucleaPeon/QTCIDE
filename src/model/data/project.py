@@ -3,7 +3,6 @@ Model that contains an array of components that make up the Project
 '''
 class ProjectData:
     
-    
     ''' Q Standard Item '''
     qsi_proj = None
     
