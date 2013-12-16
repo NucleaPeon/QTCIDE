@@ -8,6 +8,7 @@ TODO:
 from PyQt4 import QtGui, QtCore
 import view.menu.projectcontext
 import view.window
+import controller.project
 
 
 class Project:
@@ -26,7 +27,7 @@ class Project:
             self.projectcache = {}
         return self._instance
     
-    def addNewProject(self, project_name):
+    def addNewProject(self, project_name, project_icon=None):
         if not project_name:
             return
         
@@ -34,7 +35,10 @@ class Project:
             print("TODO: Project already exists by that name")
             return
         
-        proj = QtGui.QStandardItem(project_name)    
+        if not project_icon is None:
+            proj = QtGui.QStandardItem(project_icon, project_name)
+        else:
+            proj = QtGui.QStandardItem(project_name)    
         self.projects.appendRow(proj)
         self.projects.sort(0)
         self.projectcache[project_name] = proj
@@ -57,5 +61,5 @@ class Project:
         
     def saveProject(self):
         # talk to controller
-        print("asdf")
+        controller.project.saveProject("hello world")
             
