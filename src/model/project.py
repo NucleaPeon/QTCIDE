@@ -52,14 +52,35 @@ class Project:
     
     def closeProject(self):
         selected = self.projecttree.currentIndex().row()
-        text = self.projects.item(selected).text()
+        text = self._get_project_name()
         if text in self.projectcache.keys():
             del self.projectcache[text]
         self.projects.removeRow(selected)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         
-    def saveProject(self):
+    def saveProject(self, project_name=None):
+        '''
+        :Description:
+            Makes a request to the controller to persist the specified
+            project; project_name defaults to the current selected project.
+        
+        :Parameters:
+            - project_name: grabs the text from currently selected project
+            
+        '''
+        if project_name is None:
+            project_name = self._get_project_name()
         # talk to controller
-        controller.project.saveProject("hello world")
+        controller.project.saveProject(project_name)
+        
+    def _get_project_name(self):
+        '''
+        :Description:
+            Returns the text of the selected project from the model
+            
+        :Returns:
+            String of the selected project name
+        '''
+        return self.projects.item(self.projecttree.currentIndex().row()).text()
             
