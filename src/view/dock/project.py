@@ -33,4 +33,9 @@ class Project(QtGui.QDockWidget):
         self.layout.addWidget(self.projecttree)
         self.connect(self.projecttree,
                 QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                view.menu.projectcontext.ProjectContextMenu().displayProjectMenu)
+                self.__project_context)
+        
+        
+    def __project_context(self):
+        view.menu.projectcontext.ProjectContextMenu().displayProjectMenu()
+        print("Called when different project is selected, run context validation")

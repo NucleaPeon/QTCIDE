@@ -1,4 +1,11 @@
 '''
+Project Model
+
+:Description:
+    This project model is not a barebones model. It contains all the
+    functionality for handling projects and data is saved in the
+    cache
+
 TODO: 
     - Validate that name is unique upon 
         a) rename of project
@@ -9,7 +16,7 @@ from PyQt4 import QtGui, QtCore
 import view.menu.projectcontext
 import view.window
 import controller.project
-
+import model.data.project as data
 
 class Project:
     
@@ -41,7 +48,7 @@ class Project:
             proj = QtGui.QStandardItem(project_name)    
         self.projects.appendRow(proj)
         self.projects.sort(0)
-        self.projectcache[project_name] = proj
+        self.projectcache[project_name] = data.ProjectData(proj)
         # Select the project in the treeview is none is previously selected
         if self.projects.rowCount() == 1:
             qmindex = self.projects.index(0, 0)
@@ -71,8 +78,7 @@ class Project:
         '''
         if project_name is None:
             project_name = self._get_project_name()
-        # talk to controller
-        controller.project.saveProject(project_name)
+        controller.project.saveProject(self.projectcache[project_name].qsi_proj)
         
     def _get_project_name(self):
         '''
@@ -83,4 +89,3 @@ class Project:
             String of the selected project name
         '''
         return self.projects.item(self.projecttree.currentIndex().row()).text()
-            
