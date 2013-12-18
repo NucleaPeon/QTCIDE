@@ -63,9 +63,9 @@ class Project:
         text = self._get_project_name()
         if text in self.projectcache.keys():
             del self.projectcache[text]
-        self.projects.removeRow(selected)
         view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
         view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
+        self.projects.removeRow(selected)
         
     def saveProject(self, project_name=None):
         '''
@@ -91,6 +91,7 @@ class Project:
             Returns the text of the selected project from the model
             
         :Returns:
-            String of the selected project name
+            String of the selected project name or None if no rows exist
         '''
-        return self.projects.item(self.projecttree.currentIndex().row()).text()
+        if self.projecttree.currentIndex().row() >= 0:
+            return self.projects.item(self.projecttree.currentIndex().row()).text()

@@ -39,14 +39,18 @@ class Project(QtGui.QDockWidget):
                 self.__project_context)
         
         
-    def __project_context(self):
-        print("Context")
+    def __project_context(self, selected, deselected):
         # Check save boolean from model.data
         proj = model.project.Project()
-        status = proj.projectcache[proj._get_project_name()].save
-        print(proj._get_project_name())
-        action = view.actions.project.save.SaveProjectAction().qaction
-        action.setEnabled(status)
-        print(status)
-        # set to boolean data
+        
+        if not proj._get_project_name() is None:
+            status = proj.projectcache[proj._get_project_name()].save
+            action = view.actions.project.save.SaveProjectAction().qaction
+            action.setEnabled(status)
+        else:
+            # force everything to be disabled, no projects in treeview
+            view.actions.project.save.SaveProjectAction().qaction.setEnabled(False)
+            view.actions.project.close.CloseProjectAction().qaction.setEnabled(False)
+        
+        
         
