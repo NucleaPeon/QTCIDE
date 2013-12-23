@@ -1,4 +1,6 @@
 from PyQt4 import QtGui, QtCore
+import view.actions.project.build.build as build
+import os
 
 class Compiler:
     
@@ -12,9 +14,9 @@ class Compiler:
             self.compilers.setHorizontalHeaderItem(0, 
                                                   QtGui.QStandardItem("Compiler"))
             self.rootNode = self.compilers.invisibleRootItem()
-            test = QtGui.QStandardItem(1, 2)
+            test = QtGui.QStandardItem(build.BuildSystemBuildAction().qicon, "gcc")
             test.setEditable(False)
-            test.setText("gcc")
+            test.appendRow(QtGui.QStandardItem("Test Build Configuration"))
             self.rootNode.appendRow(test)
             self.compilertree = QtGui.QTreeView()
             self.compilertree.setModel(self.compilers)
