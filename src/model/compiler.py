@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
 import os
 
@@ -14,9 +15,10 @@ class Compiler:
             self.compilers.setHorizontalHeaderItem(0, 
                                                   QtGui.QStandardItem("Compiler"))
             self.rootNode = self.compilers.invisibleRootItem()
+            self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'configure.png'))
             test = QtGui.QStandardItem(build.BuildSystemBuildAction().qicon, "gcc")
             test.setEditable(False)
-            test.appendRow(QtGui.QStandardItem("Test Build Configuration"))
+            test.appendRow(QtGui.QStandardItem(self.qicon, "Test Build Configuration"))
             self.rootNode.appendRow(test)
             self.compilertree = QtGui.QTreeView()
             self.compilertree.setModel(self.compilers)
