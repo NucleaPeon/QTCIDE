@@ -1,5 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.build
+import view.actions.project.build.build as build
+import view.actions.project.build.configuration as config
 
 class Build(QtGui.QDockWidget):
     
@@ -25,8 +27,8 @@ class Build(QtGui.QDockWidget):
         
         self.group = QtGui.QGroupBox("Build Systems")
         self.buildbox = QtGui.QComboBox()
-        self.buildconfig = QtGui.QPushButton("Configure")
-        self.buildbutton = QtGui.QPushButton("Build")
+        self.buildconfig = QtGui.QPushButton(config.BuildSystemConfigurationAction().qicon, "&Configure")
+        self.buildbutton = QtGui.QPushButton(build.BuildSystemBuildAction().qicon, "&Build")
         self.buildbox.setModel(self.buildmodel.systems)
         
         self.group.setLayout(self.grouplayout)

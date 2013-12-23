@@ -16,7 +16,8 @@ class SaveProjectAction():
             # Initialize graphical elements, NOT callbacks as that is done
             # by the calling program through kwargs
             cls._instance = super(SaveProjectAction, cls).__new__(cls)
-            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'media-floppy.png')),
+            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'media-floppy.png'))
+            cls.qaction = QtGui.QAction(cls.qicon,
                                         '&Save Project', None)
             cls.qaction.setShortcut('Ctrl-S')
             cls.qaction.setStatusTip('Save Project')
