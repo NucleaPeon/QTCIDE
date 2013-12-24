@@ -42,7 +42,7 @@ class Terminal(QtGui.QDockWidget):
         if self.commandarea.text() == "":
             return
         if e.key() == QtCore.Qt.Key_Enter or e.key() == QtCore.Qt.Key_Return:
-            self.textedit.append(": {}".format(self.commandarea.text()))
+
             self.parseCommand(self.commandarea.text())
             self.commandarea.clear()
         elif e.key() == QtCore.Qt.Key_Escape:
@@ -55,6 +55,9 @@ class Terminal(QtGui.QDockWidget):
             Essentially a python code parser
             
             Contains one or two+ arguments, separated by a space.
+            See self.RECOGNIZED_COMMANDS for a map of what is accepted and
+            what that string calls when inputted into the terminal
+            
         :Usage:
             - 1 argument: you are inputting a command that is recognized
               by the IDE. This can be something as simple as "clear", 
@@ -69,6 +72,9 @@ class Terminal(QtGui.QDockWidget):
         length = len(string.split(" "))
         if length == 1:
             if string in self.RECOGNIZED_COMMANDS:
+                self.textedit.append(": [{}]".format(self.commandarea.text()))
                 self.RECOGNIZED_COMMANDS[string]()
+            else:
+                self.textedit.append("X [{}]".format(self.commandarea.text()))
         else:
             pass # import modules and stuff

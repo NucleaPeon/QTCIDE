@@ -27,10 +27,12 @@ class Compiler(QtGui.QDockWidget):
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'system-run.png'))
         self.compilertree = model.compiler.Compiler().compilertree
+        self.compilertree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
         self.layout.addWidget(self.compilertree)
         self.connect(self.compilertree,
                      QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"),
-                     print)
-        view.menu.compilercontext.CompilerContextMenu().displayCompilerMenu(QtGui.QCursor.pos())
+                     view.menu.compilercontext.CompilerContextMenu().displayCompilerMenu)
+        
+        print(self.compilertree)

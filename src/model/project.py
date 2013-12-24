@@ -30,6 +30,7 @@ class Project:
             self.projects.setHorizontalHeaderItem(0, 
                                                   QtGui.QStandardItem("Project Name"))
             self.projecttree = QtGui.QTreeView()
+            self.projecttree.setModel(self.projects)
             self.projectcontextmenu = view.menu.projectcontext.ProjectContextMenu()
             self.projectcache = {}
         return self._instance
