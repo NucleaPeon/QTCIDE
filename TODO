@@ -1,6 +1,5 @@
 TODO 
 
-* Add menus for project compiler actions
 * Add toolbars for above actions
 * Add contextual right click menu for compiler functions
 * Create Window for adding and configuring project actions (configure should reuse part of the add compiler widget/window)

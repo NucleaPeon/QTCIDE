@@ -11,10 +11,10 @@ class AddCompilerAction():
             # Initialize graphical elements, NOT callbacks as that is done
             # by the calling program through kwargs
             cls._instance = super(AddCompilerAction, cls).__new__(cls)
-            # FIXME: cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, ''))
-            #cls.qaction = QtGui.QAction(cls.qicon, '&Configuration', None)
-            #cls.qaction.setStatusTip('&Add Compiler')
-            #cls.qaction.triggered.connect(cls.add_compiler)
+            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-file.png'))
+            cls.qaction = QtGui.QAction(cls.qicon, '&Add Compiler', None)
+            cls.qaction.setStatusTip('&Add Compiler')
+            cls.qaction.triggered.connect(cls.add_compiler)
         return cls._instance
 
     @QtCore.pyqtSlot()

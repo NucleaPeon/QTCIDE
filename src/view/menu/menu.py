@@ -4,6 +4,8 @@ import view.actions.project.close
 import view.actions.project.save
 import view.actions.project.build.build
 import view.actions.project.build.configuration
+import view.actions.project.compiler.addcompiler
+import view.actions.project.compiler.configurecompiler
 
 class MenuBar:
     
@@ -27,6 +29,8 @@ class MenuBar:
         self.projSaveAction = view.actions.project.save.SaveProjectAction().qaction
         self.projBuild = view.actions.project.build.build.BuildSystemBuildAction().qaction
         self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction().qaction
+        self.projAddCompiler = view.actions.project.compiler.addcompiler.AddCompilerAction().qaction
+        self.projCompilerConfig = view.actions.project.compiler.configurecompiler.ConfigureCompilerAction().qaction
         
         # File Menu
         self.filemenu = self.menubar.addMenu('&File')
@@ -43,6 +47,9 @@ class MenuBar:
         self.projBuildMenu = self.projMenu.addMenu('&Build')
         self.projBuildMenu.addAction(self.projBuild)
         self.projBuildMenu.addAction(self.projBuildConfig)
+        self.projCompiler = self.projMenu.addMenu('&Compiler')
+        self.projCompiler.addAction(self.projAddCompiler)
+        self.projCompiler.addAction(self.projCompilerConfig)
         
         
         # Help Menu
@@ -58,4 +65,8 @@ class MenuBar:
         self.buildtb = self.mwin.addToolBar('Build')
         self.buildtb.addAction(self.projBuild)
         self.buildtb.addAction(self.projBuildConfig)
+        self.compiletb = self.mwin.addToolBar('Compile')
+        self.compiletb.addAction(self.projAddCompiler)
+        self.compiletb.addAction(self.projCompilerConfig)
+        
         
