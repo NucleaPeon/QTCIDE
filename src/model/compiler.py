@@ -24,5 +24,4 @@ class Compiler:
             self.compilertree = QtGui.QTreeView()
             self.compilercontextmenu = view.menu.compilercontext.CompilerContextMenu()
             self.compilertree.setModel(self.compilers)
-            print(self.compilertree)
         return self._instance
