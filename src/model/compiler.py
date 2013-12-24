@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
+import view.menu.compilercontext
 import os
 
 class Compiler:
@@ -21,7 +22,7 @@ class Compiler:
             test.appendRow(QtGui.QStandardItem(self.qicon, "Test Build Configuration"))
             self.rootNode.appendRow(test)
             self.compilertree = QtGui.QTreeView()
+            self.compilercontextmenu = view.menu.compilercontext.CompilerContextMenu()
             self.compilertree.setModel(self.compilers)
-            
             
         return self._instance

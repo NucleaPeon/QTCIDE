@@ -1,5 +1,6 @@
 from PyQt4 import QtGui, QtCore
 import model.project
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.menu.projectcontext
 import controller.project
 import os
@@ -22,7 +23,7 @@ class Project(QtGui.QDockWidget):
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Projects", None, QtGui.QApplication.UnicodeUTF8))
         self.setWidget(self.widget)
-        self.icon = QtGui.QIcon(os.path.join('res', 
+        self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # Initialize TreeView for model to sit in
         self.projecttree = model.project.Project().projecttree

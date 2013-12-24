@@ -1,5 +1,8 @@
 from PyQt4 import QtGui, QtCore
 import model.compiler
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
+import view.menu.compilercontext
+import controller.compiler
 import os
 
 class Compiler(QtGui.QDockWidget):
@@ -11,21 +14,23 @@ class Compiler(QtGui.QDockWidget):
             self._instance = super(Compiler, self).__new__(
                 self, *args, **kwargs)
             self.widget = QtGui.QWidget()
-            self.compilermodel = model.compiler.Compiler()
         return self._instance
     
     
     def __init__(self):
         super(Compiler, self).__init__()
-        self.widget = QtGui.QWidget()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Compiler", None, QtGui.QApplication.UnicodeUTF8))
-        self.dockCompilerContents = QtGui.QWidget() #FIXME: This can go into its own module?
+        self.dockCompilerContents = QtGui.QWidget()
         self.setWidget(self.widget)
-        self.icon = QtGui.QIcon(os.path.join('res', 
+        self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'system-run.png'))
         self.compilertree = model.compiler.Compiler().compilertree
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
         self.layout.addWidget(self.compilertree)
+        self.connect(self.compilertree,
+                     QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"),
+                     print)
+        view.menu.compilercontext.CompilerContextMenu().displayCompilerMenu(QtGui.QCursor.pos())

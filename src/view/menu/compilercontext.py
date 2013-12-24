@@ -1,4 +1,6 @@
 from PyQt4 import QtGui, QtCore
+import view.actions.project.compiler.addcompiler
+import view.actions.project.compiler.configurecompiler
 import model.compiler
 
 '''
@@ -19,9 +21,10 @@ class CompilerContextMenu(QtGui.QMenu):
     
     def __init__(self):
         super(CompilerContextMenu, self).__init__()
-        #self.addAction(view.actions.project.new.NewProjectAction().qaction)
-        #self.addAction(view.actions.project.close.CloseProjectAction().qaction)
+        self.addAction(view.actions.project.compiler.addcompiler.AddCompilerAction().qaction)
+        self.addAction(view.actions.project.compiler.configurecompiler.ConfigureCompilerAction().qaction)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
-    def displayCompilertMenu(self, point):
-        pass
+    def displayCompilerMenu(self, point):
+        index = model.compiler.Compiler().compilertree.indexAt(point)
+        self.popup(QtGui.QCursor.pos())
