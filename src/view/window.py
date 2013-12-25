@@ -2,7 +2,7 @@ from PyQt4 import QtGui, QtCore
 import model as m
 import view.dock.project
 import view.dock.build
-import view.dock.compiler
+import view.dock.run
 import view.dock.testing
 import view.dock.terminal
 import view.menu.menu as menu
@@ -47,7 +47,7 @@ class Window(QtGui.QMainWindow):
         self.build_dock = view.dock.build.Build()
         self.terminal_dock = view.dock.terminal.Terminal()
         self.testing_dock = view.dock.testing.Testing()
-        self.compiler_dock = view.dock.compiler.Compiler()
+        self.compiler_dock = view.dock.run.Run()
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.project_dock)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.build_dock)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.compiler_dock)

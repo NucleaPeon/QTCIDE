@@ -7,7 +7,7 @@ Compiler controller
 '''
 
 import os
-import model.compiler
+import model.run
 
 #def saveProject(project_model, dir_path=None, ext="qtc"):
     #'''
