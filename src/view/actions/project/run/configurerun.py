@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
+import model.run
 
 class ConfigureRunAction():
     
@@ -19,4 +20,4 @@ class ConfigureRunAction():
 
     @QtCore.pyqtSlot()
     def run_config():
-        print("TODO popup window to configure run")
+        model.run.Run().configure_run()

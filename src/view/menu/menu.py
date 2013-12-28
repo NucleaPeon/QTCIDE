@@ -5,6 +5,7 @@ import view.actions.project.save
 import view.actions.project.build.build
 import view.actions.project.build.configuration
 import view.actions.project.run.addrun
+import view.actions.project.run.removerun
 import view.actions.project.run.configurerun
 
 class MenuBar:
@@ -30,6 +31,7 @@ class MenuBar:
         self.projBuild = view.actions.project.build.build.BuildSystemBuildAction().qaction
         self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction().qaction
         self.projAddRun = view.actions.project.run.addrun.AddRunAction().qaction
+        self.projRemRun = view.actions.project.run.removerun.RemoveRunAction().qaction
         self.projRunConfig = view.actions.project.run.configurerun.ConfigureRunAction().qaction
         
         # File Menu
@@ -47,9 +49,10 @@ class MenuBar:
         self.projBuildMenu = self.projMenu.addMenu('&Build')
         self.projBuildMenu.addAction(self.projBuild)
         self.projBuildMenu.addAction(self.projBuildConfig)
-        self.projCompiler = self.projMenu.addMenu('&Run')
-        self.projCompiler.addAction(self.projAddRun)
-        self.projCompiler.addAction(self.projRunConfig)
+        self.projRun = self.projMenu.addMenu('&Run')
+        self.projRun.addAction(self.projAddRun)
+        self.projRun.addAction(self.projRemRun)
+        self.projRun.addAction(self.projRunConfig)
         
         
         # Help Menu
@@ -67,6 +70,7 @@ class MenuBar:
         self.buildtb.addAction(self.projBuildConfig)
         self.compiletb = self.mwin.addToolBar('Run')
         self.compiletb.addAction(self.projAddRun)
+        self.compiletb.addAction(self.projRemRun)
         self.compiletb.addAction(self.projRunConfig)
         
         

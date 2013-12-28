@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
+import model.run
 
 class AddRunAction():
     
@@ -14,9 +15,9 @@ class AddRunAction():
             cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-file.png'))
             cls.qaction = QtGui.QAction(cls.qicon, '&Add Run', None)
             cls.qaction.setStatusTip('&Add Run')
-            cls.qaction.triggered.connect(cls.add_run)
+            cls.qaction.triggered.connect(cls.add_run_config)
         return cls._instance
 
     @QtCore.pyqtSlot()
-    def add_run():
-        print("TODO popup window to add a run")
+    def add_run_config():
+        model.run.Run().add_run_config()

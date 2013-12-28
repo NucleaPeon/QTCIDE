@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import view.actions.project.run.addrun
 import view.actions.project.run.configurerun
+import view.actions.project.run.removerun
 import model.run
 
 '''
@@ -23,6 +24,7 @@ class RunContextMenu(QtGui.QMenu):
         super(RunContextMenu, self).__init__()
         self.addAction(view.actions.project.run.addrun.AddRunAction().qaction)
         self.addAction(view.actions.project.run.configurerun.ConfigureRunAction().qaction)
+        self.addAction(view.actions.project.run.removerun.RemoveRunAction().qaction)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayRunMenu(self, point):
