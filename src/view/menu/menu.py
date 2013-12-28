@@ -68,9 +68,9 @@ class MenuBar:
         self.buildtb = self.mwin.addToolBar('Build')
         self.buildtb.addAction(self.projBuild)
         self.buildtb.addAction(self.projBuildConfig)
-        self.compiletb = self.mwin.addToolBar('Run')
-        self.compiletb.addAction(self.projAddRun)
-        self.compiletb.addAction(self.projRemRun)
-        self.compiletb.addAction(self.projRunConfig)
+        self.runtb = self.mwin.addToolBar('Run')
+        self.runtb.addAction(self.projAddRun)
+        self.runtb.addAction(self.projRemRun)
+        self.runtb.addAction(self.projRunConfig)
         
         
