@@ -2,7 +2,10 @@ from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
 import view.menu.runcontext
+import view.modal.QtPopupTextInput as confirm
+import controller.run
 import os
+
 
 '''
 Run consists of a series of parameters that define how the
@@ -73,7 +76,11 @@ class Run:
         print("model.run.Run")
         
     def add_run_config(self):
-        print("model.run.Run")
+        confirm.getTextPopup(None, "Add New Run Configuration", "Run Name",
+                             success=controller.run.add_run_config, 
+                             failure=print)
     
     def remove_run_config(self):
-        print("Remove run config")
+        confirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
+                             success=controller.run.remove_run_config, 
+                             failure=print)

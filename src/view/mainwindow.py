@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+## FIXME: Deprecated, delete
+
+
 import os
 import view.base.window as window
 from PyQt4 import QtGui, QtCore

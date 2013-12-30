@@ -18,7 +18,8 @@
 import sys
 from PyQt4 import QtGui
 
-def getTextPopup(parent, title, question, callback=None):
+def getTextPopup(parent, title, question, success=None,
+                 failure=None):
     '''
     :Description:
         A popup that requests the user input text. Has an OK and Cancel
@@ -33,10 +34,18 @@ def getTextPopup(parent, title, question, callback=None):
         - question; string: What to ask the user
         - callback; callable object, method: On OK, send result to this 
           method
+          
+    :Returns:
+        - result of success() or failure() callable or None
     '''
     text, ok = QtGui.QInputDialog.getText(parent, title, 
         question)
         
+    ret = None
+        
     if ok:
-        return callback(text)
-    return None
+        ret = success(text)
+    elif isinstance(failure, callable):
+        ret = failure(text)
+        
+    return ret

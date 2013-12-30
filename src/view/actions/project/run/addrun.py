@@ -21,3 +21,4 @@ class AddRunAction():
     @QtCore.pyqtSlot()
     def add_run_config():
         model.run.Run().add_run_config()
+        
