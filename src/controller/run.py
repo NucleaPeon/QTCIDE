@@ -1,3 +1,9 @@
+from PyQt4 import QtGui, QtCore
+
+import os
+import model.run
+import view.actions.project.build.build as build
+import view.modal.QtPopupTextInput
 '''
 Run controller
 
@@ -7,11 +13,18 @@ Run controller
     other binary/project invocations on the operating system
 '''
 
-import os
-import model.run
-
-def add_run_config(*args):
-    print("add_run_config")
-
+def add_run_config(name, icon=None):
+    qtstd = QtGui.QStandardItem(name)
+    if not icon is None:
+        qtstd.setIcon(icon)
+    else:
+        qtstd.setIcon(build.BuildSystemBuildAction().qicon)
+    model.run.Run().runs.appendRow(qtstd)
+    subname = view.modal.QtPopupTextInput.getTextPopup(None,
+                                                       "Sub Configuration Name",
+                                                       success=None,
+                                                       failure=None)#TODO
+    
+        
 def remove_run_config(*args):
     print("remove_run_config")
