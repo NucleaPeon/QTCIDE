@@ -1,4 +1,8 @@
 '''
+TODO: This dialog should reflect QtPopupConfirm, both should be converted
+      to singletons and every call reassign parent/title/question/success/
+      and failure parameters.
+
 :Description:
     This class represents a Qt Window that requests a single line
     of text. 
@@ -45,7 +49,7 @@ def getTextPopup(parent, title, question, success=None,
         
     if ok:
         ret = success(text)
-    elif isinstance(failure, callable):
+    elif callable(failure):
         ret = failure(text)
         
     return ret

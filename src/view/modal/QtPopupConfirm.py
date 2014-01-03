@@ -10,7 +10,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 
-def getTextPopup(parent, title, question="Are you sure?", success=None,
+def getTextPopup(parent=None, title='Test', question="Are you sure?", success=None,
                  failure=None):
     '''
     :Description:
@@ -27,7 +27,27 @@ def getTextPopup(parent, title, question="Are you sure?", success=None,
         - callback; callable object, method: On OK, send result to this 
           method
     '''
-    pass # FIXME: QDialogButtonBox
+    qdialog = QtGui.QDialog(parent)
+    dialog_layout = QtGui.QVBoxLayout()
+    button_layout = QtGui.QHBoxLayout()
+    dialog_layout.addWidget(QtGui.QLabel(question))
+    
+    
+    buttonBox = QtGui.QDialogButtonBox(qdialog)
+    buttonBox.setOrientation(QtCore.Qt.Horizontal)
+    buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+    buttonBox.accepted.connect(qdialog.accept)
+    buttonBox.rejected.connect(qdialog.reject)
+    if not success is None:
+        buttonBox.accepted.connect(success)
+    if not failure is None:
+        buttonBox.rejected.connect(failure)
+    
+    dialog_layout.addWidget(buttonBox)
+    qdialog.setLayout(dialog_layout)
+    qdialog.setWindowTitle(title)
+    
+    qdialog.exec_()
     #
     #if ol:
     #    return callback(text)

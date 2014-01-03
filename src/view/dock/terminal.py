@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import view.modal.QtPopupConfirm
 
 class Terminal(QtGui.QDockWidget):
     
@@ -34,7 +35,8 @@ class Terminal(QtGui.QDockWidget):
                      self.keyPressEvent)
         """ RECOGNIZED_COMMANDS uses string : callable format """
         self.RECOGNIZED_COMMANDS = {
-            'clear': self.textedit.clear
+            'clear': self.textedit.clear,
+            'QtPopupConfirm': view.modal.QtPopupConfirm.getTextPopup
         }
         
     @QtCore.pyqtSlot(QtGui.QKeyEvent)    

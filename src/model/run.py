@@ -2,7 +2,8 @@ from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
 import view.menu.runcontext
-import view.modal.QtPopupTextInput as confirm
+import view.modal.QtPopupConfirm
+import view.modal.QtPopupTextInput
 import controller.run
 import os
 
@@ -76,11 +77,11 @@ class Run:
         print("model.run.Run")
         
     def add_run_config(self):
-        confirm.getTextPopup(None, "Add New Run Configuration", "Run Name",
+        view.modal.QtPopupTextInput.getTextPopup(None, "Add New Run Configuration", "Run Name",
                              success=controller.run.add_run_config, 
                              failure=print)
     
     def remove_run_config(self):
-        confirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
+        view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
                              success=controller.run.remove_run_config, 
                              failure=print)
