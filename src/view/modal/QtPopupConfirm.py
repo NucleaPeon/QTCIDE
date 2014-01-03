@@ -29,9 +29,7 @@ def getTextPopup(parent=None, title='Test', question="Are you sure?", success=No
     '''
     qdialog = QtGui.QDialog(parent)
     dialog_layout = QtGui.QVBoxLayout()
-    button_layout = QtGui.QHBoxLayout()
     dialog_layout.addWidget(QtGui.QLabel(question))
-    
     
     buttonBox = QtGui.QDialogButtonBox(qdialog)
     buttonBox.setOrientation(QtCore.Qt.Horizontal)

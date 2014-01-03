@@ -19,11 +19,11 @@ def add_run_config(name, icon=None):
         qtstd.setIcon(icon)
     else:
         qtstd.setIcon(build.BuildSystemBuildAction().qicon)
+    qtstd.appendRow(QtGui.QStandardItem(
+        model.run.Run().qicon,
+        "Default Run"))
     model.run.Run().runs.appendRow(qtstd)
-    subname = view.modal.QtPopupTextInput.getTextPopup(None,
-                                                       "Sub Configuration Name",
-                                                       success=None,
-                                                       failure=None)#TODO
+    
     
         
 def remove_run_config(*args):

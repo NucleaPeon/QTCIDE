@@ -77,11 +77,12 @@ class Run:
         print("model.run.Run")
         
     def add_run_config(self):
-        view.modal.QtPopupTextInput.getTextPopup(None, "Add New Run Configuration", "Run Name",
-                             success=controller.run.add_run_config, 
-                             failure=print)
+        view.modal.QtPopupTextInput.QTextInputPopup("Add New Run Type", "Run Type",
+                             success=lambda: controller.run.add_run_config("test"))
     
     def remove_run_config(self):
         view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
                              success=controller.run.remove_run_config, 
                              failure=print)
+        index = self.runtree.currentIndex()
+        print("{}, {}".format(index.row(), index.column()))

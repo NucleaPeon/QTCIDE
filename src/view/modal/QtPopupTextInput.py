@@ -20,36 +20,29 @@ TODO: This dialog should reflect QtPopupConfirm, both should be converted
     or similar.
 '''
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
-def getTextPopup(parent, title, question, success=None,
-                 failure=None):
-    '''
-    :Description:
-        A popup that requests the user input text. Has an OK and Cancel
-        button, when OK is clicked, input text is sent to the callback
-        as the first parameter.
+class QTextInputPopup(QtGui.QDialog):
+    
+    def __init__(self, title, label, success=None, failure=None):
+        super(QTextInputPopup, self).__init__()
+        self.layout = QtGui.QVBoxLayout()
+        self.textline = QtGui.QLineEdit()
+        self.layout.addWidget(QtGui.QLabel(label))
+        self.layout.addWidget(self.textline)
         
-    :Parameters:
-        - parent; QWidget: Because this method isn't in a class that is
-          a widget, it requires a Widget to display itself (in a qt exec loop)
-          so the calling QWidget should put "self" for that attribute.
-        - title; string: Title of popup window
-        - question; string: What to ask the user
-        - callback; callable object, method: On OK, send result to this 
-          method
-          
-    :Returns:
-        - result of success() or failure() callable or None
-    '''
-    text, ok = QtGui.QInputDialog.getText(parent, title, 
-        question)
-        
-    ret = None
-        
-    if ok:
-        ret = success(text)
-    elif callable(failure):
-        ret = failure(text)
-        
-    return ret
+        buttonBox = QtGui.QDialogButtonBox(self)
+        buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+        if not success is None and callable(success):
+            buttonBox.accepted.connect(success)
+            
+        if not failure is None and callable(failure):
+            buttonBox.rejected.connect(failure)
+            
+        self.layout.addWidget(buttonBox)
+        self.setLayout(self.layout)
+        self.setWindowTitle(title)
+        self.exec_()
