@@ -24,25 +24,49 @@ from PyQt4 import QtGui, QtCore
 
 class QTextInputPopup(QtGui.QDialog):
     
-    def __init__(self, title, label, success=None, failure=None):
+    _instance = None
+    def __new__(cls, title, label):
+        if not cls._instance:
+            cls._instance = super(QTextInputPopup, cls).__new__(cls)
+            cls.textline = QtGui.QLineEdit()
+            cls.textline.setFocus(True)
+            cls.buttonBox = QtGui.QDialogButtonBox()
+            cls.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+            cls.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+            cls.buttonBox.accepted.connect(cls.accept)
+            cls.buttonBox.rejected.connect(cls.reject)
+            
+        return cls._instance
+            
+    def __init__(self, title, label):
         super(QTextInputPopup, self).__init__()
+        self.textline.clear()
         self.layout = QtGui.QVBoxLayout()
-        self.textline = QtGui.QLineEdit()
         self.layout.addWidget(QtGui.QLabel(label))
         self.layout.addWidget(self.textline)
         
-        buttonBox = QtGui.QDialogButtonBox(self)
-        buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        buttonBox.accepted.connect(self.accept)
-        buttonBox.rejected.connect(self.reject)
-        if not success is None and callable(success):
-            buttonBox.accepted.connect(success)
+        self.buttonBox.accepted.disconnect()
+        self.buttonBox.rejected.disconnect()
+        
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
             
-        if not failure is None and callable(failure):
-            buttonBox.rejected.connect(failure)
-            
-        self.layout.addWidget(buttonBox)
+        self.layout.addWidget(self.buttonBox)
         self.setLayout(self.layout)
         self.setWindowTitle(title)
-        self.exec_()
+
+    def success(self, call):
+        '''
+        :Description:
+            Add a callable method when OK is clicked
+        '''
+        if not call is None and callable(call):
+            self.buttonBox.accepted.connect(call)
+    
+    def failure(self, call):
+        '''
+        :Description:
+            Add a callable method when Cancel is clicked
+        '''
+        if not call is None and callable(call):
+            self.buttonBox.rejected.connect(call)

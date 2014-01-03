@@ -60,14 +60,8 @@ class Run:
             self._instance = super(Run, self).__new__(
                 self, *args, **kwargs)
             self.runs = QtGui.QStandardItemModel() # Project data
-            self.runs.setHorizontalHeaderItem(0, 
-                                                  QtGui.QStandardItem("Configurations"))
-            self.rootNode = self.runs.invisibleRootItem()
+            self.runs.setHorizontalHeaderItem(0, QtGui.QStandardItem("Configurations"))
             self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'configure.png'))
-            test = QtGui.QStandardItem(build.BuildSystemBuildAction().qicon, "gcc")
-            test.setEditable(False)
-            test.appendRow(QtGui.QStandardItem(self.qicon, "Test Build Configuration"))
-            self.rootNode.appendRow(test)
             self.runtree = QtGui.QTreeView()
             self.runcontextmenu = view.menu.runcontext.RunContextMenu()
             self.runtree.setModel(self.runs)
@@ -77,8 +71,9 @@ class Run:
         print("model.run.Run")
         
     def add_run_config(self):
-        view.modal.QtPopupTextInput.QTextInputPopup("Add New Run Type", "Run Type",
-                             success=lambda: controller.run.add_run_config("test"))
+        modal = view.modal.QtPopupTextInput.QTextInputPopup("Add New Run Type", "Run Type")
+        modal.success(lambda: controller.run.add_run_config(modal.textline.text()))
+        modal.exec_()
     
     def remove_run_config(self):
         view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
