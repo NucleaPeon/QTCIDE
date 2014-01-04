@@ -38,7 +38,8 @@ class Terminal(QtGui.QDockWidget):
         self.RECOGNIZED_COMMANDS = {
             'clear': self.textedit.clear,
             'QtPopupConfirm': lambda: view.modal.QtPopupConfirm.QtPopupConfirm('test', 'this is a test').exec_(),
-            'QtPopupTextInput': lambda: view.modal.QtPopupTextInput.QtPopupTextInput('test', 'this is a test').exec_()
+            'QtPopupTextInput': lambda: view.modal.QtPopupTextInput.QtPopupTextInput('test', 'this is a test').exec_(),
+            'save': lambda: print("Save")
         }
         
     @QtCore.pyqtSlot(QtGui.QKeyEvent)    

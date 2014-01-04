@@ -5,10 +5,9 @@ import view.actions.project.build.configuration as buildconf
 import view.menu.runcontext
 import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
-import os
 import view.modal.QtRunConfiguration
 
-
+import os
 '''
 Run consists of a series of parameters that define how the
 program is used. 

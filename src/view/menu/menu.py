@@ -7,6 +7,9 @@ import view.actions.project.build.configuration
 import view.actions.project.run.addrun
 import view.actions.project.run.removerun
 import view.actions.project.run.configurerun
+import view.actions.project.testing.addsuite
+import view.actions.project.testing.removesuite
+import view.actions.project.testing.configuresuite
 
 class MenuBar:
     
@@ -33,6 +36,9 @@ class MenuBar:
         self.projAddRun = view.actions.project.run.addrun.AddRunAction().qaction
         self.projRemRun = view.actions.project.run.removerun.RemoveRunAction().qaction
         self.projRunConfig = view.actions.project.run.configurerun.ConfigureRunAction().qaction
+        self.projTestAdd = view.actions.project.testing.addsuite.AddTestSuiteAction().qaction
+        self.projTestRem = view.actions.project.testing.removesuite.RemoveTestSuiteAction().qaction
+        self.projTestConfig = view.actions.project.testing.configuresuite.ConfigureTestSuiteAction().qaction
         
         # File Menu
         self.filemenu = self.menubar.addMenu('&File')
@@ -53,6 +59,10 @@ class MenuBar:
         self.projRun.addAction(self.projAddRun)
         self.projRun.addAction(self.projRemRun)
         self.projRun.addAction(self.projRunConfig)
+        self.projTest = self.projMenu.addMenu('&Test')
+        self.projTest.addAction(self.projTestAdd)
+        self.projTest.addAction(self.projTestRem)
+        self.projTest.addAction(self.projTestConfig)
         
         
         # Help Menu
@@ -69,6 +79,10 @@ class MenuBar:
         self.buildtb.addAction(self.projBuild)
         self.buildtb.addAction(self.projBuildConfig)
         self.runtb = self.mwin.addToolBar('Run')
+        self.testtb = self.mwin.addToolBar('Test')
+        self.testtb.addAction(self.projTestAdd)
+        self.testtb.addAction(self.projTestConfig)
+        self.testtb.addAction(self.projTestRem)
         self.runtb.addAction(self.projAddRun)
         self.runtb.addAction(self.projRemRun)
         self.runtb.addAction(self.projRunConfig)

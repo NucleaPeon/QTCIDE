@@ -1,10 +1,7 @@
 TODO 
 
-* Test popup
 * Develop a contextual set of signals that track state of project
-* Remove and Add Run models
 * Create Window for adding and configuring project actions (configure should reuse part of the add compiler widget/window)
-* "Are you sure" Window for removing run files (and testing/build suites)
 * Add run settings to the project when saved
 * Create qtr files for Run configurations
 * Create qtb files for Build configurations

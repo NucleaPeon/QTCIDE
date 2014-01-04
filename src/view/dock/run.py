@@ -22,7 +22,6 @@ class Run(QtGui.QDockWidget):
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Run", None, QtGui.QApplication.UnicodeUTF8))
-        self.dockRunContents = QtGui.QWidget()
         self.setWidget(self.widget)
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'system-run.png'))
