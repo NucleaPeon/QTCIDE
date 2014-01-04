@@ -1,10 +1,10 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
+import view.actions.project.build.configuration as buildconf
 import view.menu.runcontext
 import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
-import controller.run
 import os
 import view.modal.QtRunConfiguration
 
@@ -72,15 +72,28 @@ class Run:
         print("Call view.modal.QtRunConfiguration")
         
     def add_run_config(self):
-        modal = view.modal.QtPopupTextInput.QTextInputPopup("Add New Run Type", "Run Type")
-        modal.success(lambda: controller.run.add_run_config(modal.textline.text()))
+        def add(name, icon=None):
+            qtstd = QtGui.QStandardItem(name)
+            if not icon is None:
+                qtstd.setIcon(icon)
+            else:
+                qtstd.setIcon(build.BuildSystemBuildAction().qicon)
+            qtstd.appendRow(QtGui.QStandardItem(
+                buildconf.BuildSystemConfigurationAction().qicon,
+                "Default Run"))
+            self.runs.appendRow(qtstd)
+        
+        modal = view.modal.QtPopupTextInput.QtPopupTextInput("Add New Run Type", "Run Type")
+        modal.success(lambda: add(modal.textline.text()))
         modal.exec_()
     
     def remove_run_config(self):
+        def rem():
+            selected = self.runtree.currentIndex().row()
+            self.runs.removeRow(selected)
+            
         qstd = self.runs.item(self.runtree.currentIndex().row())
-        modal = view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
-                             success=lambda: controller.run.remove_run_config(qstd), 
-                             failure=print)
-        # TODO: Fix popupconfirm into singleton and remove row
-        
+        modal = view.modal.QtPopupConfirm.QtPopupConfirm("Remove Run Configuration", "Confirm Removal?")
+        modal.success(lambda: rem())
+        modal.exec_()
         

@@ -16,8 +16,6 @@ class QtPopupConfirm(QtGui.QDialog):
     def __new__(cls, title, label):
         if not cls._instance:
             cls._instance = super(QtPopupConfirm, cls).__new__(cls)
-            cls.textline = QtGui.QLineEdit()
-            cls.textline.setFocus(True)
             cls.buttonBox = QtGui.QDialogButtonBox()
             cls.buttonBox.setOrientation(QtCore.Qt.Horizontal)
             cls.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
@@ -28,11 +26,9 @@ class QtPopupConfirm(QtGui.QDialog):
     
     def __init__(self, title, label):
         super(QtPopupConfirm, self).__init__()
-        self.textline.clear()
         self.layout = QtGui.QVBoxLayout()
-        self.lineedit = QtGui.QLineEdit()
-        self.layout.addWidget(self.lineedit)
-        self.layout.addWidget(self.textline)
+        self.label = QtGui.QLabel(label)
+        self.layout.addWidget(self.label)
         
         self.buttonBox.accepted.disconnect()
         self.buttonBox.rejected.disconnect()
