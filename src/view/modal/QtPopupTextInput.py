@@ -1,8 +1,4 @@
 '''
-TODO: This dialog should reflect QtPopupConfirm, both should be converted
-      to singletons and every call reassign parent/title/question/success/
-      and failure parameters.
-
 :Description:
     This class represents a Qt Window that requests a single line
     of text. 
@@ -22,12 +18,12 @@ TODO: This dialog should reflect QtPopupConfirm, both should be converted
 import sys
 from PyQt4 import QtGui, QtCore
 
-class QTextInputPopup(QtGui.QDialog):
+class QtPopupTextInput(QtGui.QDialog):
     
     _instance = None
     def __new__(cls, title, label):
         if not cls._instance:
-            cls._instance = super(QTextInputPopup, cls).__new__(cls)
+            cls._instance = super(QtPopupTextInput, cls).__new__(cls)
             cls.textline = QtGui.QLineEdit()
             cls.textline.setFocus(True)
             cls.buttonBox = QtGui.QDialogButtonBox()
@@ -39,7 +35,7 @@ class QTextInputPopup(QtGui.QDialog):
         return cls._instance
             
     def __init__(self, title, label):
-        super(QTextInputPopup, self).__init__()
+        super(QtPopupTextInput, self).__init__()
         self.textline.clear()
         self.layout = QtGui.QVBoxLayout()
         self.layout.addWidget(QtGui.QLabel(label))

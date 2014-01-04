@@ -24,5 +24,5 @@ def add_run_config(name, icon=None):
         "Default Run"))
     model.run.Run().runs.appendRow(qtstd)
     
-def remove_run_config(*args):
-    print("remove_run_config")
+def remove_run_config(qstditem):
+    print(qstditem)

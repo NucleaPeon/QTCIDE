@@ -6,6 +6,7 @@ import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
 import controller.run
 import os
+import view.modal.QtRunConfiguration
 
 
 '''
@@ -68,7 +69,7 @@ class Run:
         return self._instance
     
     def configure_run(self):
-        print("model.run.Run")
+        print("Call view.modal.QtRunConfiguration")
         
     def add_run_config(self):
         modal = view.modal.QtPopupTextInput.QTextInputPopup("Add New Run Type", "Run Type")
@@ -76,8 +77,10 @@ class Run:
         modal.exec_()
     
     def remove_run_config(self):
-        view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
-                             success=controller.run.remove_run_config, 
+        qstd = self.runs.item(self.runtree.currentIndex().row())
+        modal = view.modal.QtPopupConfirm.getTextPopup(None, "Remove Run Configuration", "Confirm Removal?",
+                             success=lambda: controller.run.remove_run_config(qstd), 
                              failure=print)
-        index = self.runtree.currentIndex()
-        print("{}, {}".format(index.row(), index.column()))
+        # TODO: Fix popupconfirm into singleton and remove row
+        
+        

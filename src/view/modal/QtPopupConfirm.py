@@ -10,43 +10,52 @@
 import sys
 from PyQt4 import QtGui, QtCore
 
-def getTextPopup(parent=None, title='Test', question="Are you sure?", success=None,
-                 failure=None):
-    '''
-    :Description:
-        A popup that requests the user input text. Has an OK and Cancel
-        button, when OK is clicked, input text is sent to the callback
-        as the first parameter.
+class QtPopupConfirm(QtGui.QDialog):
+    
+    _instance = None
+    def __new__(cls, title, label):
+        if not cls._instance:
+            cls._instance = super(QtPopupConfirm, cls).__new__(cls)
+            cls.textline = QtGui.QLineEdit()
+            cls.textline.setFocus(True)
+            cls.buttonBox = QtGui.QDialogButtonBox()
+            cls.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+            cls.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+            cls.buttonBox.accepted.connect(cls.accept)
+            cls.buttonBox.rejected.connect(cls.reject)
+            
+        return cls._instance
+    
+    def __init__(self, title, label):
+        super(QtPopupConfirm, self).__init__()
+        self.textline.clear()
+        self.layout = QtGui.QVBoxLayout()
+        self.lineedit = QtGui.QLineEdit()
+        self.layout.addWidget(self.lineedit)
+        self.layout.addWidget(self.textline)
         
-    :Parameters:
-        - parent; QWidget: Because this method isn't in a class that is
-          a widget, it requires a Widget to display itself (in a qt exec loop)
-          so the calling QWidget should put "self" for that attribute.
-        - title; string: Title of popup window
-        - question; string: What to ask the user
-        - callback; callable object, method: On OK, send result to this 
-          method
-    '''
-    qdialog = QtGui.QDialog(parent)
-    dialog_layout = QtGui.QVBoxLayout()
-    dialog_layout.addWidget(QtGui.QLabel(question))
+        self.buttonBox.accepted.disconnect()
+        self.buttonBox.rejected.disconnect()
+        
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+            
+        self.layout.addWidget(self.buttonBox)
+        self.setLayout(self.layout)
+        self.setWindowTitle(title)
+        
+    def success(self, call):
+        '''
+        :Description:
+            Add a callable method when OK is clicked
+        '''
+        if not call is None and callable(call):
+            self.buttonBox.accepted.connect(call)
     
-    buttonBox = QtGui.QDialogButtonBox(qdialog)
-    buttonBox.setOrientation(QtCore.Qt.Horizontal)
-    buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-    buttonBox.accepted.connect(qdialog.accept)
-    buttonBox.rejected.connect(qdialog.reject)
-    if not success is None:
-        buttonBox.accepted.connect(success)
-    if not failure is None:
-        buttonBox.rejected.connect(failure)
-    
-    dialog_layout.addWidget(buttonBox)
-    qdialog.setLayout(dialog_layout)
-    qdialog.setWindowTitle(title)
-    
-    qdialog.exec_()
-    #
-    #if ol:
-    #    return callback(text)
-    #return None
+    def failure(self, call):
+        '''
+        :Description:
+            Add a callable method when Cancel is clicked
+        '''
+        if not call is None and callable(call):
+            self.buttonBox.rejected.connect(call)
