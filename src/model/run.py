@@ -2,7 +2,7 @@ from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build as build
 import view.actions.project.build.configuration as buildconf
-import view.menu.runcontext
+import view.menu.context.run
 import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
 import view.modal.QtRunConfiguration
@@ -63,7 +63,7 @@ class Run:
             self.runs.setHorizontalHeaderItem(0, QtGui.QStandardItem("Configurations"))
             self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'configure.png'))
             self.runtree = QtGui.QTreeView()
-            self.runcontextmenu = view.menu.runcontext.RunContextMenu()
+            self.runcontextmenu = view.menu.context.run.RunContextMenu()
             self.runtree.setModel(self.runs)
         return self._instance
     

@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.run
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import view.menu.runcontext
+import view.menu.context.run
 import controller.run
 import os
 
@@ -32,5 +32,5 @@ class Run(QtGui.QDockWidget):
         self.layout.addWidget(self.runtree)
         self.connect(self.runtree,
                      QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"),
-                     view.menu.runcontext.RunContextMenu().displayRunMenu)
+                     view.menu.context.run.RunContextMenu().displayRunMenu)
         

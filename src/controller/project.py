@@ -5,8 +5,11 @@
 import os
 import model.project
 
-def saveProject(project_model, dir_path=None, ext="qtc"):
+def saveProject(name, dir_path=None, ext="qtc"):
     '''
+    :Description:
+        Saves the project by gathering project data and persisting it
+        in xml format to a file on the underlying (or cloud) filesystem.
     
     :Throws:
         - SaveException: Attempt to save did not succeed, therefore
@@ -23,3 +26,5 @@ def saveProject(project_model, dir_path=None, ext="qtc"):
     f.write("Hello World")
     f.close()
     
+def persist(fsys, proj_data):
+    print("TODO: Filesystem location persistance: local/cloud/remote")

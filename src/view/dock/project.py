@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.project
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import view.menu.projectcontext
+import view.menu.context.project
 import controller.project
 import os
 
@@ -33,7 +33,7 @@ class Project(QtGui.QDockWidget):
         self.layout.addWidget(self.projecttree)
         self.connect(self.projecttree,
                 QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                view.menu.projectcontext.ProjectContextMenu().displayProjectMenu)
+                view.menu.context.project.ProjectContextMenu().displayProjectMenu)
         self.projecttree.connect(self.projecttree.selectionModel(),
                 QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                 self.__project_context)

@@ -1,6 +1,10 @@
 TODO 
 
-* Develop a contextual set of signals that track state of project
+* Create Project COnfiguration modal window
+** Should have a list view on the left which changes qwidgets or panels or whatev
+   on the right, similar to eclipse/netbeans/kate configuration windows.
+* Develop a contextual set of signals that track state of project elements
+  (Whether project is saved, disable / enable things whether saved or not)
 * Create Window for adding and configuring project actions (configure should reuse part of the add compiler widget/window)
 * Add run settings to the project when saved
 * Create qtr files for Run configurations
