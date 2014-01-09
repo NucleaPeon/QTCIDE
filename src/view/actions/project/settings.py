@@ -25,4 +25,4 @@ class ProjectSettingsAction():
 
     @QtCore.pyqtSlot(bool)
     def projectSettings(triggered):
-        pass # FIXME: Show settings window
+        model.project.Project().configuration()

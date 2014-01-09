@@ -14,6 +14,7 @@ TODO:
 '''
 from PyQt4 import QtGui, QtCore
 import view.menu.context.project
+import view.modal.config.window
 import view.window
 import controller.project
 import model.data.project as data
@@ -87,6 +88,9 @@ class Project:
         controller.project.saveProject(self.projectcache[name].qsi_proj)
         self.projectcache[name].save = False
         view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projectcache[name].save)
+        
+    def configuration(self):
+        view.modal.config.window.ProjectConfiguration().exec_()
         
         
     def _get_name(self):
