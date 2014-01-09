@@ -2,6 +2,7 @@ import view.actions.exit
 import view.actions.project.new
 import view.actions.project.close
 import view.actions.project.save
+import view.actions.project.settings
 import view.actions.project.build.build
 import view.actions.project.build.configuration
 import view.actions.project.run.addrun
@@ -31,6 +32,7 @@ class MenuBar:
         self.projNewAction = view.actions.project.new.NewProjectAction().qaction
         self.projCloseAction = view.actions.project.close.CloseProjectAction().qaction
         self.projSaveAction = view.actions.project.save.SaveProjectAction().qaction
+        self.projSettings = view.actions.project.settings.ProjectSettingsAction().qaction
         self.projBuild = view.actions.project.build.build.BuildSystemBuildAction().qaction
         self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction().qaction
         self.projAddRun = view.actions.project.run.addrun.AddRunAction().qaction
@@ -51,6 +53,7 @@ class MenuBar:
         # Project Menu
         self.projMenu = self.menubar.addMenu('&Project')
         self.projMenu.addAction(self.projNewAction)
+        self.projMenu.addAction(self.projSaveAction)
         self.projMenu.addAction(self.projCloseAction)
         self.projBuildMenu = self.projMenu.addMenu('&Build')
         self.projBuildMenu.addAction(self.projBuild)
@@ -63,6 +66,7 @@ class MenuBar:
         self.projTest.addAction(self.projTestAdd)
         self.projTest.addAction(self.projTestRem)
         self.projTest.addAction(self.projTestConfig)
+        self.projMenu.addAction(self.projSettings)
         
         
         # Help Menu

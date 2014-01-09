@@ -16,8 +16,8 @@ class ProjectSettingsAction():
             # Initialize graphical elements, NOT callbacks as that is done
             # by the calling program through kwargs
             cls._instance = super(ProjectSettingsAction, cls).__new__(cls)
-            #cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
-            #                            '&Close Project', None)
+            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
+                                        'Project &Settings', None)
             #cls.qaction.setShortcut('Ctrl-C')
             #cls.qaction.setStatusTip('Close Project')
             #cls.qaction.triggered.connect(cls.closeProject)
