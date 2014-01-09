@@ -18,12 +18,11 @@ class ProjectSettingsAction():
             cls._instance = super(ProjectSettingsAction, cls).__new__(cls)
             cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
                                         'Project &Settings', None)
-            #cls.qaction.setShortcut('Ctrl-C')
-            #cls.qaction.setStatusTip('Close Project')
-            #cls.qaction.triggered.connect(cls.closeProject)
-            #cls.qaction.setEnabled(False)
+            cls.qaction.setShortcut('Ctrl-S')
+            cls.qaction.setStatusTip('Configure Project Settings')
+            cls.qaction.triggered.connect(cls.projectSettings)
         return cls._instance
 
-    #@QtCore.pyqtSlot(bool)
-    #def closeProject(triggered):
-    #    model.project.Project().closeProject()
+    @QtCore.pyqtSlot(bool)
+    def projectSettings(triggered):
+        pass # FIXME: Show settings window
