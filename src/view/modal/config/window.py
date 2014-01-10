@@ -16,7 +16,10 @@ class ProjectConfiguration(QtGui.QDialog):
             cls._instance = super(ProjectConfiguration, cls).__new__(cls)
             cls.buttonBox = QtGui.QDialogButtonBox()
             cls.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-            cls.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Apply|QtGui.QDialogButtonBox.Ok)
+            cls.buttonBox.setStandardButtons(
+                QtGui.QDialogButtonBox.Cancel |
+                QtGui.QDialogButtonBox.Apply | 
+                QtGui.QDialogButtonBox.Ok)
             cls.buttonBox.accepted.connect(cls.accept)
             cls.buttonBox.rejected.connect(cls.reject)
             
@@ -34,10 +37,6 @@ class ProjectConfiguration(QtGui.QDialog):
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
         self.listview = QtGui.QListView()
-        # Test code -->
-        
-        
-        # <-- End Test Code
         self.innerlayout.addWidget(self.listview)
         self.view = QtGui.QWidget()
         self.view.setMinimumSize(450, 400)
