@@ -79,6 +79,7 @@ class MenuBar:
         self.projtb.addAction(self.projNewAction)
         self.projtb.addAction(self.projCloseAction)
         self.projtb.addAction(self.projSaveAction)
+        self.projtb.addAction(self.projSettings)
         self.buildtb = self.mwin.addToolBar('Build')
         self.buildtb.addAction(self.projBuild)
         self.buildtb.addAction(self.projBuildConfig)
