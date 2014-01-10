@@ -43,8 +43,8 @@ class Project(QtGui.QDockWidget):
         # Check save boolean from model.data
         proj = model.project.Project()
         
-        if not proj._get_project_name() is None:
-            status = proj.projectcache[proj._get_project_name()].save
+        if not proj._get_name() is None:
+            status = proj.projectcache[proj._get_name()].save
             action = view.actions.project.save.SaveProjectAction().qaction
             action.setEnabled(status)
         else:
