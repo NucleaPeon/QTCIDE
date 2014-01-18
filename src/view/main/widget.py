@@ -1,4 +1,6 @@
 from PyQt4 import QtGui, QtCore
+import os
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 '''
 Integrated Shell is a widget that contains other widgets that act
@@ -19,8 +21,8 @@ class IntegratedShell(QtGui.QTabWidget):
         ###
         qw1 = QtGui.QWidget()
         qw2 = QtGui.QWidget()
-        self.addTab(qw1, "Drag 'N Drop") # QWidget
-        self.addTab(qw2, "Code") # QWidget
+        self.addTab(qw1, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop") # QWidget # 
+        self.addTab(qw2, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'view-calendar-journal.png', "Code") # QWidget
         
         
 class Selection(QtGui.QWidget):
