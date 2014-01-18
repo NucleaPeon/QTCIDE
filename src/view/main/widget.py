@@ -14,15 +14,18 @@ class IntegratedShell(QtGui.QTabWidget):
     def __init__(self):
         super(IntegratedShell, self).__init__()
         self.layout = QtGui.QHBoxLayout()
-        self.setLayout(self.layout)
         
         ### 
         ### Method to determine how to load individual tabs
         ###
-        qw1 = QtGui.QWidget()
-        qw2 = QtGui.QWidget()
-        self.addTab(qw1, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop")
-        self.addTab(qw2, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'view-calendar-journal.png')), "Code")
+        self.dnd = QtGui.QWidget()
+        self.dnd.setLayout(self.layout)
+        self.layout.addWidget(Selection())
+        self.layout.addWidget(DropCanvas())
+        
+        self.code = CodeView()
+        self.addTab(self.dnd, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop")
+        self.addTab(self.code, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'view-calendar-journal.png')), "Code")
         
         
 class Selection(QtGui.QWidget):
@@ -40,3 +43,6 @@ class CodeView(QtGui.QWidget):
     
     def __init__(self):
         super(CodeView, self).__init__()
+        self.layout = QtGui.QGridLayout()
+        self.layout.addWidget(QtGui.QLabel("Code View"))
+        self.setLayout(self.layout)
