@@ -6,6 +6,7 @@ import view.dock.run
 import view.dock.testing
 import view.dock.terminal
 import view.menu.menu as menu
+import view.main.widget
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 
@@ -30,9 +31,7 @@ class Window(QtGui.QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         # Setup window content - layout
-        widget = QtGui.QWidget()
-        layout = QtGui.QGridLayout()
-        widget.setLayout(layout)
+        widget = view.main.widget.IntegratedShell()
         self.setCentralWidget(widget)
         
         model = m.model(__name__)
