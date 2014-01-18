@@ -28,16 +28,41 @@ class IntegratedShell(QtGui.QTabWidget):
         self.addTab(self.code, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'view-calendar-journal.png')), "Code")
         
         
-class Selection(QtGui.QWidget):
+class Selection(QtGui.QGroupBox):
     
     def __init__(self):
         super(Selection, self).__init__()
+        self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
+        self.setLayout(self.layout)
+        self.namespace = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')), "Namespace")
+        self.namespace.setIconSize(QtCore.QSize(48, 48))
+        self.classes = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')), "Class")
+        self.classes.setIconSize(QtCore.QSize(48, 48))
+        self.function = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')), "Function")
+        self.function.setIconSize(QtCore.QSize(48, 48))
+        self.variable = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')), "Variable")
+        self.variable.setIconSize(QtCore.QSize(48, 48))
+        
+        self.layout.addWidget(self.namespace)
+        self.layout.addWidget(self.classes)
+        self.layout.addWidget(self.function)
+        self.layout.addWidget(self.variable)
+        
+        
         
         
 class DropCanvas(QtGui.QWidget):
     
     def __init__(self):
         super(DropCanvas, self).__init__()
+        self.layout = QtGui.QGridLayout()
+        self.setLayout(self.layout)
+        self.canvas = QtGui.QListView()
+        self.layout.addWidget(self.canvas)
         
 class CodeView(QtGui.QWidget):
     
