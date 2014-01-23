@@ -34,23 +34,25 @@ class Selection(QtGui.QGroupBox):
         super(Selection, self).__init__()
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.setLayout(self.layout)
-        self.namespace = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
-                                             'folder-development.png')), "Namespace")
-        self.namespace.setIconSize(QtCore.QSize(48, 48))
-        self.classes = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
-                                             'folder-development.png')), "Class")
-        self.classes.setIconSize(QtCore.QSize(48, 48))
-        self.function = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
-                                             'folder-development.png')), "Function")
-        self.function.setIconSize(QtCore.QSize(48, 48))
-        self.variable = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
-                                             'folder-development.png')), "Variable")
-        self.variable.setIconSize(QtCore.QSize(48, 48))
+        self.namespace = QtGui.QLabel()
+        self.namespace.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')))
+        #self.namespace.setIconSize(QtCore.QSize(48, 48))
+        self.classes = QtGui.QLabel()
+        self.classes.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')))
+        self.function = QtGui.QLabel()
+        self.function.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')))
+        self.variable = QtGui.QLabel()
+        self.variable.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
+                                             'folder-development.png')))
         
         self.layout.addWidget(self.namespace)
         self.layout.addWidget(self.classes)
         self.layout.addWidget(self.function)
         self.layout.addWidget(self.variable)
+        self.layout.insertStretch(-1)
         
         
         
