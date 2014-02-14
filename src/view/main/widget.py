@@ -36,16 +36,24 @@ class Selection(QtGui.QGroupBox):
         self.setLayout(self.layout)
         self.namespace = QtGui.QLabel()
         self.namedrag = QtGui.QDrag(self.namespace)
+        self.namemime = QtCore.QMimeData()
+        
         self.namespace.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png')))
         #self.namespace.setIconSize(QtCore.QSize(48, 48))
         self.classes = QtGui.QLabel()
+        self.classesdrag = QtGui.QDrag(self.classes)
+        self.classesmime = QtCore.QMimeData()
         self.classes.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png')))
         self.function = QtGui.QLabel()
+        self.functiondrag = QtGui.QDrag(self.function)
+        self.functionmime = QtCore.QMimeData()
         self.function.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png')))
         self.variable = QtGui.QLabel()
+        self.variabledrag = QtGui.QDrag(self.variable)
+        self.variablemime = QtCore.QMimeData()
         self.variable.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png')))
         

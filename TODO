@@ -11,6 +11,7 @@ TODO
 * Create qtb files for Build configurations
 * Create qtt files for Testing configurations
 
+* Create the specification of language packs so that dragable and droppable widgets get created automatically
 * Load language modules from project settings configuration window, list all installed and usable ones
 
 * Ensure a Hello World C++ program can be created in as many ways as the IDE allows by default
