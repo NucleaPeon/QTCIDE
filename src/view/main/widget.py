@@ -35,6 +35,7 @@ class Selection(QtGui.QGroupBox):
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.setLayout(self.layout)
         self.namespace = QtGui.QLabel()
+        self.namedrag = QtGui.QDrag(self.namespace)
         self.namespace.setPixmap(QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png')))
         #self.namespace.setIconSize(QtCore.QSize(48, 48))
@@ -65,6 +66,7 @@ class DropCanvas(QtGui.QWidget):
         self.setLayout(self.layout)
         self.canvas = QtGui.QListView()
         self.layout.addWidget(self.canvas)
+        self.setAcceptDrops(True)
         
 class CodeView(QtGui.QWidget):
     
