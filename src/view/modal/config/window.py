@@ -7,6 +7,7 @@ Configuration window displays other view.modal.config modules
 '''
 
 from PyQt4 import QtGui, QtCore
+import view.modal.config.ProjectSettingsPane
 import importlib
 import os
 
@@ -60,15 +61,17 @@ class ProjectConfiguration(QtGui.QDialog):
         self.listview.connect(self.listview.selectionModel(),
                               QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                               self.selectionChanged)
-        settingspane = QtGui.QStandardItem(project.Project()._Name_)
+        settingspane = view.modal.config.ProjectSettingsPane.ProjectSettingsPane(project.Project()._Name_)
         settingspane.setEditable(False)
         self.model.appendRow(settingspane)
         # Set Selection to the first model if found
         if self.model.rowCount() == 1:
             qmindex = self.model.index(0, 0)
             self.listview.setCurrentIndex(qmindex)
+        settingspane.__right__() # FIXME: Display, not test method
         
         
     def selectionChanged(self, selected, deselected):
-        print(self)
+        pass
+        # FIXME: May be required to cast before attempting to display gui
     
