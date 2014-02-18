@@ -20,3 +20,4 @@ TODO
 * Ensure a Hello World C++ program can be created in as many ways as the IDE allows by default
   (Build system must work, basic testing suite must work, makefile and gcc configuration must work (to some degree))
   (Installation must work, eventually a debian package must work)
+* Sphinx doc generation and viewer from the IDE (both FOR the IDE, and attach to projects)

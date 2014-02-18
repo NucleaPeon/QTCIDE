@@ -30,6 +30,10 @@ class NewProjectAction():
         
     @QtCore.pyqtSlot(str)
     def promptNewProject(self):
+        '''
+        :Description:
+            Create and run name prompt for new project
+        '''
         modal = view.modal.QtPopupTextInput.QtPopupTextInput("QTCIDE", "Project Name:")
         modal.success(lambda: model.project.Project().addNewProject(modal.textline.text()))
         modal.exec_()

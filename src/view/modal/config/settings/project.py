@@ -8,7 +8,7 @@ class Project(QtGui.QGroupBox):
     
     _instance = None # Single instance of initialized class
     
-    _Name_ = """Default"""
+    _Name_ = """Project"""
     
     def __new__(self,  *args, **kwargs):
         if not self._instance:
