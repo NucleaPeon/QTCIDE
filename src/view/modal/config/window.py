@@ -11,11 +11,6 @@ import view.modal.config.ProjectSettingsPane
 import importlib
 import os
 
-### Imports to Remove Later
-import view.modal.config.settings.project as project
-
-###
-
 class ProjectConfiguration(QtGui.QDialog):
     
     _instance = None
@@ -61,11 +56,11 @@ class ProjectConfiguration(QtGui.QDialog):
         self.listview.connect(self.listview.selectionModel(),
                               QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                               self.selectionChanged)
-        settingspane = view.modal.config.ProjectSettingsPane.ProjectSettingsPane(project.Project()._Name_)
+        settingspane = view.modal.config.ProjectSettingsPane.ProjectSettingsPane()
         settingspane.setEditable(False)
         self.model.appendRow(settingspane)
         # Set Selection to the first model if found
-        if self.model.rowCount() == 1:
+        if self.model.rowCount() >= 1:
             qmindex = self.model.index(0, 0)
             self.listview.setCurrentIndex(qmindex)
         settingspane.__right__() # FIXME: Display, not test method

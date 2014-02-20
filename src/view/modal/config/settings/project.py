@@ -20,4 +20,4 @@ class Project(QtGui.QGroupBox):
         super(Project, self).__init__()
         self.layout = QtGui.QVBoxLayout()
         self.setLayout(self.layout)
-        self.layout.addWidget(QtGui.QLabel("Settings"))
+        # Add __left__ components of objects

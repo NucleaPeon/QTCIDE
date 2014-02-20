@@ -22,8 +22,8 @@ on the User Interface components that it is associated with.
 
 class ProjectSettingsPane(QtGui.QStandardItem):
     
-    def __init__(self, name, *args, **kwargs):
-        super(ProjectSettingsPane, self).__init__(name)
+    def __init__(self, *args, **kwargs):
+        super(ProjectSettingsPane, self).__init__()
     
     
     def __left__(self):
