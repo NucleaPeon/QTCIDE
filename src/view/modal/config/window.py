@@ -64,17 +64,22 @@ class ProjectConfiguration(QtGui.QDialog):
             qmindex = self.model.index(0, 0)
             self.listview.setCurrentIndex(qmindex)
             # FIXME: Hardcoding what gets displayed, remove and go based on selected component
-            #self.display_widget(settingspane)
+            self.display_widget(settingspane)
       
     def display_widget(self, widget):
         '''
         :Description:
             Display Widget on right-hand side of pane, 
             clears and re-adds widget so panel is refreshed.
+            
+            TODO: Use show() and hide() to save memory in all
+            loaded module settings
         '''
         # FIXME FIXME FIXME
         self.innerlayout.removeWidget(self.view)
-        self.innerlayout.addWidget(widget.settings(), 1, 2)
+        self.view = widget.settings()
+        self.view.setMinimumSize(450, 400)
+        self.innerlayout.addWidget(self.view, 1, 2)
         # USE GRID LAYOUT AND REFRESH GRID ITEMS
         #TODO: Can this be more efficient? Different layout use?
         

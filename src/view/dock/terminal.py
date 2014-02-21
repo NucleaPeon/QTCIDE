@@ -41,7 +41,9 @@ class Terminal(QtGui.QDockWidget):
             'QtPopupConfirm': lambda: view.modal.QtPopupConfirm.QtPopupConfirm('test', 'this is a test').exec_(),
             'QtPopupTextInput': lambda: view.modal.QtPopupTextInput.QtPopupTextInput('test', 'this is a test').exec_(),
             'save': lambda: print("Save"),
-            'settings': lambda: view.modal.config.window.ProjectConfiguration().exec_()
+            'settings': lambda: view.modal.config.window.ProjectConfiguration().exec_(),
+            'settingswitch': lambda: view.modal.config.window.ProjectConfiguration().display_widget( \
+                view.modal.config.settings.project.Project())
         }
         
     @QtCore.pyqtSlot(QtGui.QKeyEvent)    

@@ -33,6 +33,7 @@ class ProjectSettingsPane(QtGui.QStandardItem):
         setting pane modules allows developers to add and remove
         setting options based on what python modules are detected.
         
+        
     :Parameters:
         - *args: Expects the exact same parameters you would submit in
                  order to initialize a QStandardItem
