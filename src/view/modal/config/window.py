@@ -74,6 +74,7 @@ class ProjectConfiguration(QtGui.QDialog):
         '''
         # FIXME FIXME FIXME
         self.innerlayout.removeWidget(self.view)
+        self.innerlayout.addWidget(widget.settings(), 1, 2)
         # USE GRID LAYOUT AND REFRESH GRID ITEMS
         #TODO: Can this be more efficient? Different layout use?
         
