@@ -8,6 +8,7 @@ Configuration window displays other view.modal.config modules
 
 from PyQt4 import QtGui, QtCore
 import view.modal.config.settings.project
+import view.modal.config.settings.build
 import importlib
 import os
 
@@ -25,6 +26,8 @@ class ProjectConfiguration(QtGui.QDialog):
                 QtGui.QDialogButtonBox.Ok)
             cls.buttonBox.accepted.connect(cls.accept)
             cls.buttonBox.rejected.connect(cls.reject)
+            cls.qidesettings = {'Project': view.modal.config.settings.project.Project(),
+                                'Build': view.modal.config.settings.build.Build()}
             
         return cls._instance
     
@@ -43,49 +46,48 @@ class ProjectConfiguration(QtGui.QDialog):
         self.listview = QtGui.QListView()
         self.listview.setModel(self.model)
         self.innerlayout.addWidget(self.listview, 1, 1)
-        self.view = QtGui.QWidget()
-        self.view.setMinimumSize(450, 400)
-        self.innerlayout.addWidget(self.view, 1, 2)
+        # --> Displays Setting panels
+        self.innerwidget = QtGui.QWidget()
+        self.settingspane = QtGui.QVBoxLayout()
+        self.innerwidget.setLayout(self.settingspane)
+        self.innerlayout.addWidget(self.innerwidget, 1, 2)
+        self.innerwidget.setMinimumSize(400, 450)
+        # <-- 
+        
+        
         self.layout.addWidget(self.objects)
         self.layout.addWidget(self.buttonBox)
         self.setLayout(self.layout)
         self.setWindowTitle(title)
-        
-        #FIXME: Dynamic importlib module generation
-        # Put in for loop
         self.listview.connect(self.listview.selectionModel(),
                               QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                               self.selectionChanged)
-        settingspane = view.modal.config.settings.project.Project()
-        settingspane.setEditable(False)
-        self.model.appendRow(settingspane)
-        # Set Selection to the first model if found
-        if self.model.rowCount() >= 1:
-            qmindex = self.model.index(0, 0)
-            self.listview.setCurrentIndex(qmindex)
-            # FIXME: Hardcoding what gets displayed, remove and go based on selected component
-            self.display_widget(settingspane)
-      
-    def display_widget(self, widget):
-        '''
-        :Description:
-            Display Widget on right-hand side of pane, 
-            clears and re-adds widget so panel is refreshed.
+        # Add the left-hand side bits: string and possibly icon for settings panel
+        for x in self.qidesettings: # Dictionary keys
+            # Adds all built in settings into model
+            projsettingpane = self.qidesettings.get(x)
+            projsettingpane.setEditable(False)
+            self.model.appendRow(projsettingpane)
+            widget = projsettingpane.settings()
+            self.settingspane.addWidget(widget)
+            widget.hide()
             
-            TODO: Use show() and hide() to save memory in all
-            loaded module settings
-        '''
-        # FIXME FIXME FIXME
-        self.innerlayout.removeWidget(self.view)
-        self.view = widget.settings()
-        self.view.setMinimumSize(450, 400)
-        self.innerlayout.addWidget(self.view, 1, 2)
-        # USE GRID LAYOUT AND REFRESH GRID ITEMS
-        #TODO: Can this be more efficient? Different layout use?
+
+        # Select the first settings model
+        mindex = self.model.index(0, 0)
+        self.listview.setCurrentIndex(mindex) # selects first model
         
         
+        # TODO: Select first item, display on 2nd pane, use selected
+        # widget from selectionChanged method to display new item
         
     def selectionChanged(self, selected, deselected):
-        pass
-        # FIXME: May be required to cast before attempting to display gui
-    
+        '''
+        Hide the widget that gets deselected and show widget that is selected
+        '''
+        if len(deselected.indexes()) > 0:
+            self.qidesettings.get(deselected.indexes()[0].data()).settings().hide()
+            
+        widget = self.qidesettings.get(selected.indexes()[0].data()).settings()
+        widget.show()
+        
