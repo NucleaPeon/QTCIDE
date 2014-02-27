@@ -84,6 +84,9 @@ class ProjectConfiguration(QtGui.QDialog):
         self.setLayout(self.layout)
         
         self.setWindowTitle(title)
+        self.listview.disconnect(self.listview.selectionModel(),
+                                 QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
+                                 self.selectionChanged)
         self.listview.connect(self.listview.selectionModel(),
                     QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                     self.selectionChanged)
