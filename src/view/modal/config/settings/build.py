@@ -1,5 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import view.modal.config.ProjectSettingsPane
+import os
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 class Build(view.modal.config.ProjectSettingsPane.ProjectSettingsPane):
     

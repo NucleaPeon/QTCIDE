@@ -7,8 +7,7 @@ Configuration window displays other view.modal.config modules
 '''
 
 from PyQt4 import QtGui, QtCore
-import view.modal.config.settings.project
-import view.modal.config.settings.build
+import conf.view.modal.config.settings
 import importlib
 import os
 
@@ -26,8 +25,22 @@ class ProjectConfiguration(QtGui.QDialog):
                 QtGui.QDialogButtonBox.Ok)
             cls.buttonBox.accepted.connect(cls.accept)
             cls.buttonBox.rejected.connect(cls.reject)
-            cls.qidesettings = {'Project': view.modal.config.settings.project.Project(),
-                                'Build': view.modal.config.settings.build.Build()}
+            '''
+            cls.qidesettings contains the instantiated copies of the references
+            defined in the configuration file; conf files cannot hold instantiated
+            references with PyQt4 because they are created outside the scope of
+            the application.
+            
+            Therefore we are basically caching the entire thing twice:
+                - configuration module determines what settings get loaded through references
+                - this module determines and caches the gui portions that are displayed 
+            '''
+            cls.qidesettings = conf.view.modal.config.settings.qidesettings
+            for x in conf.view.modal.config.settings.qidesettings:
+                # Set all keys with instantiated items of class references
+                cls.qidesettings[x] = conf.view.modal.config.settings.qidesettings.get(x)()
+                
+                
             
         return cls._instance
     
