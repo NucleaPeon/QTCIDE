@@ -17,8 +17,8 @@ class ProjectSettingsAction():
             # by the calling program through kwargs
             cls._instance = super(ProjectSettingsAction, cls).__new__(cls)
             cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'preferences-system-windows-actions.png')),
-                                        'Project &Settings', None)
-            cls.qaction.setShortcut('Ctrl-S')
+                                        'Project S&ettings', None)
+            cls.qaction.setShortcut('Ctrl-E')
             cls.qaction.setStatusTip('Configure Project Settings')
             cls.qaction.triggered.connect(cls.projectSettings)
         return cls._instance
