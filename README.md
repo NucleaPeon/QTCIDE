@@ -22,6 +22,3 @@ Installation
 Dependencies:
 
 	*   python3-pyqt4
-
-	*   python3-yaml
-
