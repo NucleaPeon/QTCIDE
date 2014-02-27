@@ -20,6 +20,8 @@ Project Setting Window Configuration
 
 import view.modal.config.settings.build
 import view.modal.config.settings.project
+import view.modal.config.settings.plugins
 
 qidesettings = {'Project': view.modal.config.settings.project.Project,
-                'Build': view.modal.config.settings.build.Build}
+                'Build': view.modal.config.settings.build.Build,
+                'Plugins': view.modal.config.settings.plugins.Plugins}
