@@ -85,7 +85,7 @@ class Droppable(QtGui.QLabel):
     def mousePressEvent(self, event):
         mime = QtCore.QMimeData()
         mime.setText(self.mime.text())
-        hotSpot = event.pos() - self.pos()
+        hotSpot = event.pos()
         mime.setData("application/x-hotspot", str(hotSpot.x()))
         
         # Create a pixmap of size of self
@@ -97,8 +97,8 @@ class Droppable(QtGui.QLabel):
         drag.setHotSpot(hotSpot)
         
         dropAction = drag.exec_(QtCore.Qt.CopyAction|QtCore.Qt.MoveAction, QtCore.Qt.CopyAction)
-        if dropAction == QtCore.Qt.MoveAction:
-            print("Do something")
+        #if dropAction == QtCore.Qt.MoveAction:
+            #print("Do something")
         
         
 class DropCanvas(QtGui.QWidget):
