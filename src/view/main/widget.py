@@ -37,6 +37,10 @@ class Selection(QtGui.QGroupBox):
         self.pixmap = QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # FIXME: Set text and image data for ALL mimetype objects
+        self.newfile = Droppable()
+        self.newfile.mime.setText("File")
+        self.newfile.mime.setImageData(self.pixmap)
+        self.newfile.setPixmap(self.pixmap)
         
         self.namespace = Droppable()
         self.namespace.mime.setText("Namespace")
@@ -58,6 +62,7 @@ class Selection(QtGui.QGroupBox):
         self.variable.mime.setImageData(self.pixmap)
         self.variable.setPixmap(self.pixmap)
         
+        self.layout.addWidget(self.newfile)
         self.layout.addWidget(self.namespace)
         self.layout.addWidget(self.classes)
         self.layout.addWidget(self.function)
