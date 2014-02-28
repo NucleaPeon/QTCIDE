@@ -18,4 +18,3 @@ TODO
   (Build system must work, basic testing suite must work, makefile and gcc configuration must work (to some degree))
   (Installation must work, eventually a debian package must work)
 * Sphinx doc generation and viewer from the IDE (both FOR the IDE, and attach to projects)
-* Merge dnd objects and display window into a tab that can be attached OR DETACHED from the main window (so multiple monitors)

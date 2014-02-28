@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import os, copy
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
+import model.scene
 
 '''
 Integrated Shell is a widget that contains other widgets that act
@@ -107,26 +108,31 @@ class Droppable(QtGui.QLabel):
             #print("Do something")
         
         
-class DropCanvas(QtGui.QWidget):
+class DropCanvas(QtGui.QGraphicsView):
     
     def __init__(self):
         super(DropCanvas, self).__init__()
-        self.layout = QtGui.QGridLayout()
-        self.setLayout(self.layout)
-        self.canvas = QtGui.QListView()
         self.setAcceptDrops(True)
-        self.layout.addWidget(self.canvas)
-        self.model = QtGui.QStandardItemModel()
-        self.canvas.setModel(self.model)
+        self.scene = model.scene.ProjectScene()
+        print(self.scene)
         
-        
+    #def mouseReleasedEvent(self, event):
+        #print("released on {}".format(event.mimeData().text()))
         
     def dropEvent(self, event):
-        self.model.appendRow(QtGui.QStandardItem(event.mimeData().text()))
+        print(CanvasItem(event.mimeData().text()))
+        #self.model.appendRow(stditem)
         
     def dragEnterEvent(self, event):
         event.accept()
-        print("Accepted")
+        
+        
+class CanvasItem(QtGui.QStandardItem):
+    
+    def __init__(self, *args, **kwargs):
+        super(CanvasItem, self).__init__(*args)
+        self.setEditable(False)
+        
         
 class CodeView(QtGui.QWidget):
     
