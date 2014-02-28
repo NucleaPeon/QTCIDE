@@ -33,4 +33,4 @@ class Run(QtGui.QDockWidget):
         self.connect(self.runtree,
                      QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"),
                      view.menu.context.run.RunContextMenu().displayRunMenu)
-        
+        self.hide() # Hide by default

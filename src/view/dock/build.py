@@ -12,6 +12,9 @@ class Build(QtGui.QDockWidget):
             self._instance = super(Build, self).__new__(
                 self, *args, **kwargs)
             self.widget = QtGui.QWidget()
+            self.filemap = QtGui.QListView()
+            self.filemodel = QtGui.QStandardItemModel()
+            self.filemap.setModel(self.filemodel)
             self.buildmodel = model.build.Build()
             self.buildmodel.findBuildSystems()
         return self._instance
@@ -35,7 +38,9 @@ class Build(QtGui.QDockWidget):
         self.grouplayout.addWidget(self.buildbox)
         self.grouplayout.addWidget(self.buildconfig)
         self.grouplayout.addWidget(self.buildbutton)
+        #self.grouplayout.addWidget(self.filemap)
         self.layout.addWidget(self.group)
+        self.layout.insertStretch(-1)
         
         self.widget.setLayout(self.layout)
         self.setWidget(self.widget)

@@ -45,6 +45,7 @@ class Terminal(QtGui.QDockWidget):
             'settingswitch': lambda: view.modal.config.window.ProjectConfiguration().display_widget( \
                 view.modal.config.settings.project.Project())
         }
+        self.hide() # Hide by default
         
     @QtCore.pyqtSlot(QtGui.QKeyEvent)    
     def keyPressEvent(self, e):

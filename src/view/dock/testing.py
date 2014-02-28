@@ -32,6 +32,7 @@ class Testing(QtGui.QDockWidget):
         self.testtree.connect(self.testtree.selectionModel(),
                 QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                 self.__test_context)
+        self.hide() # Hide by default
         
         
     def __test_context(self, selected, deselected):
