@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-import os
+import os, copy
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 '''
@@ -37,25 +37,24 @@ class Selection(QtGui.QGroupBox):
         self.pixmap = QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # FIXME: Set text and image data for ALL mimetype objects
-        self.namespace = QtGui.QLabel()
-        self.namedrag = QtGui.QDrag(self.namespace)
-        self.namemime = QtCore.QMimeData()
-        self.namemime.setText("Namespace")
-        self.namemime.setImageData(self.pixmap)
-        
+        self.namespace = Droppable()
+        self.namespace.mime.setText("Namespace")
+        self.namespace.mime.setImageData(self.pixmap)
         self.namespace.setPixmap(self.pixmap)
         #self.namespace.setIconSize(QtCore.QSize(48, 48))
-        self.classes = QtGui.QLabel()
-        self.classesdrag = QtGui.QDrag(self.classes)
-        self.classesmime = QtCore.QMimeData()
+        
+        self.classes = Droppable()
+        self.classes.mime.setText("Class")
+        self.classes.mime.setImageData(self.pixmap)
         self.classes.setPixmap(self.pixmap)
-        self.function = QtGui.QLabel()
-        self.functiondrag = QtGui.QDrag(self.function)
-        self.functionmime = QtCore.QMimeData()
+        
+        self.function = Droppable()
+        self.function.mime.setText("Function")
+        self.function.mime.setImageData(self.pixmap)
         self.function.setPixmap(self.pixmap)
-        self.variable = QtGui.QLabel()
-        self.variabledrag = QtGui.QDrag(self.variable)
-        self.variablemime = QtCore.QMimeData()
+        self.variable = Droppable()
+        self.variable.mime.setText("Variable")
+        self.variable.mime.setImageData(self.pixmap)
         self.variable.setPixmap(self.pixmap)
         
         self.layout.addWidget(self.namespace)
@@ -65,6 +64,41 @@ class Selection(QtGui.QGroupBox):
         self.layout.insertStretch(-1)
         
         
+class Droppable(QtGui.QLabel):
+    
+    def __init__(self):
+        super(Droppable, self).__init__()
+        self.mime = QtCore.QMimeData()
+        ''' FIXME
+        In order to prevent over abundance of copies and sets
+        that are useless, perhaps have each object (such as Class or Function)
+        in its own class that inherits this one and defines required information
+        that can be set.
+        
+        Example: Namespace(Droppable) 
+            - Contains variable self.text which is assigned to mimetype text()
+            - Contains image which is assigned via setImageData
+            
+        This should not be done outside of this ,or similar, classes
+        '''
+        
+    def mousePressEvent(self, event):
+        mime = QtCore.QMimeData()
+        mime.setText(self.mime.text())
+        hotSpot = event.pos() - self.pos()
+        mime.setData("application/x-hotspot", str(hotSpot.x()))
+        
+        # Create a pixmap of size of self
+        pixmap = QtGui.QPixmap(self.size())
+        self.render(pixmap)
+        drag = QtGui.QDrag(self)
+        drag.setMimeData(mime)
+        drag.setPixmap(pixmap)
+        drag.setHotSpot(hotSpot)
+        
+        dropAction = drag.exec_(QtCore.Qt.CopyAction|QtCore.Qt.MoveAction, QtCore.Qt.CopyAction)
+        if dropAction == QtCore.Qt.MoveAction:
+            print("Do something")
         
         
 class DropCanvas(QtGui.QWidget):
@@ -74,8 +108,16 @@ class DropCanvas(QtGui.QWidget):
         self.layout = QtGui.QGridLayout()
         self.setLayout(self.layout)
         self.canvas = QtGui.QListView()
-        self.layout.addWidget(self.canvas)
         self.setAcceptDrops(True)
+        self.layout.addWidget(self.canvas)
+        
+        
+    def dropEvent(self, event):
+        print("dropEvent")
+        
+    def dragEnterEvent(self, event):
+        event.accept()
+        print("Accepted")
         
 class CodeView(QtGui.QWidget):
     
