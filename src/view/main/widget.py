@@ -122,7 +122,7 @@ class DropCanvas(QtGui.QWidget):
         
         
     def dropEvent(self, event):
-        self.model.appendRow(QtGui.QStandardItem(str(event)))
+        self.model.appendRow(QtGui.QStandardItem(event.mimeData().text()))
         
     def dragEnterEvent(self, event):
         event.accept()
