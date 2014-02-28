@@ -37,6 +37,11 @@ class Selection(QtGui.QGroupBox):
         self.pixmap = QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # FIXME: Set text and image data for ALL mimetype objects
+        self.newfile = Droppable()
+        self.newfile.mime.setText("File")
+        self.newfile.mime.setImageData(self.pixmap)
+        self.newfile.setPixmap(self.pixmap)
+        
         self.namespace = Droppable()
         self.namespace.mime.setText("Namespace")
         self.namespace.mime.setImageData(self.pixmap)
@@ -57,6 +62,7 @@ class Selection(QtGui.QGroupBox):
         self.variable.mime.setImageData(self.pixmap)
         self.variable.setPixmap(self.pixmap)
         
+        self.layout.addWidget(self.newfile)
         self.layout.addWidget(self.namespace)
         self.layout.addWidget(self.classes)
         self.layout.addWidget(self.function)
@@ -110,10 +116,13 @@ class DropCanvas(QtGui.QWidget):
         self.canvas = QtGui.QListView()
         self.setAcceptDrops(True)
         self.layout.addWidget(self.canvas)
+        self.model = QtGui.QStandardItemModel()
+        self.canvas.setModel(self.model)
+        
         
         
     def dropEvent(self, event):
-        print("dropEvent")
+        self.model.appendRow(QtGui.QStandardItem(str(event)))
         
     def dragEnterEvent(self, event):
         event.accept()
