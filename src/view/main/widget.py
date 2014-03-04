@@ -2,7 +2,7 @@ from PyQt4 import QtGui, QtCore
 import os, copy
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import model.scene
-
+import model.project
 '''
 Integrated Shell is a widget that contains other widgets that act
 on the desired programming language for drag and drop functionality.
@@ -120,8 +120,12 @@ class DropCanvas(QtGui.QGraphicsView):
         #print("released on {}".format(event.mimeData().text()))
         
     def dropEvent(self, event):
-        print(CanvasItem(event.mimeData().text()))
-        #self.model.appendRow(stditem)
+        name = model.project.Project()._get_name()
+        if name is None:
+            model.project.Project().addNewProject("untitled")
+        # Check to see if a project has been created, otherwise default
+        # to an "untitled" project name
+        
         
     def dragEnterEvent(self, event):
         event.accept()
