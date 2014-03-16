@@ -27,6 +27,8 @@ class SaveProjectAction():
 
     @QtCore.pyqtSlot(bool)
     def saveProject(triggered):
-        model.project.Project().saveProject()
+        save = QtGui.QFileDialog.getSaveFileName(None, 'Save Project', os.environ.get("HOME"),
+                                                 model.project.PROJECT_FILTER)
+        model.project.Project().saveProject(name=save)
         
         

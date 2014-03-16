@@ -39,6 +39,7 @@ class Plugins(view.modal.config.ProjectSettingsPane.ProjectSettingsPane):
         
     def accept(self):
         print("Accept")
+        #FIXME: add searching through folders recursively for languages
     
     def reject(self):
         print("Reject")
