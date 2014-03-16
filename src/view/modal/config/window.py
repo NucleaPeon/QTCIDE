@@ -23,6 +23,7 @@ class ProjectConfiguration(QtGui.QDialog):
                 QtGui.QDialogButtonBox.Cancel |
                 QtGui.QDialogButtonBox.Apply | 
                 QtGui.QDialogButtonBox.Ok)
+            # FIXME: Disable Apply button unless change is made
             cls.buttonBox.accepted.connect(cls.accept)
             cls.buttonBox.rejected.connect(cls.reject)
             '''

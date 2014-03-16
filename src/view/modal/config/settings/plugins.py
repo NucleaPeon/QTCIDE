@@ -14,7 +14,34 @@ class Plugins(view.modal.config.ProjectSettingsPane.ProjectSettingsPane):
         self.widget = QtGui.QWidget()
         self.widgetlayout = QtGui.QVBoxLayout()
         self.widget.setLayout(self.widgetlayout)
-        self.widgetlayout.addWidget(QtGui.QLabel("Plugin Information:"))
+        # Set up custom UI
+        # Language Modules
+        self.langmodules = QtGui.QGroupBox("Language Plugins")
+        self.langlayout = QtGui.QVBoxLayout()
+        self.langmodules.setLayout(self.langlayout)
+        self.widgetlayout.addWidget(self.langmodules)
+        
+        self.langmodlist = QtGui.QListView()
+        self.languages = QtGui.QStandardItemModel(0, 2)
+        self.buttonBox = QtGui.QDialogButtonBox(self.widget)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        
+        addbutton = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'list-add.png')), '&Add Language')
+        self.buttonBox.accepted.connect(self.accept)
+        rembutton = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'list-remove.png')), '&Remove Language')
+        self.buttonBox.rejected.connect(self.reject)
+        self.buttonBox.addButton(addbutton, QtGui.QDialogButtonBox.YesRole)
+        self.buttonBox.addButton(rembutton, QtGui.QDialogButtonBox.NoRole)
+        
+        self.langlayout.addWidget(self.langmodlist)
+        self.langlayout.addWidget(self.buttonBox)
+        self.widgetlayout.insertStretch(-1)
+        
+    def accept(self):
+        print("Accept")
+    
+    def reject(self):
+        print("Reject")
     
     def settings(self):
         return self.widget
