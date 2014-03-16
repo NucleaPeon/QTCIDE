@@ -1,0 +1,39 @@
+<?xml verison="1.0" encoding="utf-8"?>
+
+<language name="C++" >
+    <metadata creator="Bjarn Stroustrup" date="1978" /> <!-- Optional tag -->
+    
+    <definition element="canvas" /> <!-- Always must be defined ? -->
+    <defgroup handle="all">
+        <definition element="namespace" />
+        <definition element="class" />
+        <definition element="method" />
+        <definition element="variable" />
+    </defgroup>
+    
+    <hierarchy>
+        <canvas>
+            <droppable element="all">
+        </canvas>
+        
+        <namespace>
+            <droppable element="all" />
+        </namespace>
+        
+        <class>
+            <droppable element="class" />
+            <droppable element="method" />
+            <droppable element="variable" />
+        </class>
+        
+        <method>
+            <droppable element="method" />
+            <droppable element="variable" />
+        </method>
+            
+        <variable>
+            <droppable element="method" /> <!-- lambda functions or method returns -->
+            <droppable element="variable" /> <!-- references -->
+        </variable>
+    </hierarchy>
+</language>
