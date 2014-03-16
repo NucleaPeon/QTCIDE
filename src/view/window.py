@@ -20,14 +20,6 @@ should use QDialogs.
 '''
 class Window(QtGui.QMainWindow):
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(Window, self).__new__(
-                self, *args, **kwargs)
-        return self._instance
-    
     def __init__(self):
         super(Window, self).__init__()
         # Setup window content - layout

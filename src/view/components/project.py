@@ -1,20 +1,17 @@
 from PyQt4 import QtGui, QtCore
 
+CACHE = ['Project']
+
 class Project(QtGui.QStandardItemModel):
+
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(Project, self).__new__(
-                self, *args, **kwargs) # Project data
-            cls.projecttree = QtGui.QTreeView()
-            cls.projecttree.setModel(cls.projects)
-        return self._instance
-    
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        super(Project, self).__init__(*args, **kwargs)
+        self.projecttree = QtGui.QTreeView()
+        self.projecttree.setModel(self)
         self.setHorizontalHeaderItem(0, 
                 QtGui.QStandardItem("Project Name"))
+        
         
     def addProject(self, project):
         '''
@@ -53,6 +50,18 @@ class Project(QtGui.QStandardItemModel):
         
     #FIXME: the selected or active project should be held in a cache
     #       so any toolbar / actions will be applied to THAT project
+    
+    def _get_name(self):
+        '''
+        :Description:
+            Returns the text of the selected project from the model
+            
+        :Returns:
+            String of the selected project name or None if no rows exist
+        '''
+        if self.projecttree.currentIndex().row() >= 0:
+            return self.projects.item(self.projecttree.currentIndex().row()).text()
+
         
     class ProjectItem(QtGui.QStandardItem):
         

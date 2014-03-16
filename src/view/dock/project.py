@@ -2,6 +2,7 @@ from PyQt4 import QtGui, QtCore
 import model.project
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.menu.context.project
+import view.components.project
 import controller.project
 import os
 
@@ -26,7 +27,7 @@ class Project(QtGui.QDockWidget):
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # Initialize TreeView for model to sit in
-        self.projecttree = model.project.Project().projecttree
+        self.projecttree = view.components.project.Project().projecttree
         self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
@@ -41,7 +42,7 @@ class Project(QtGui.QDockWidget):
         
     def __project_context(self, selected, deselected):
         # Check save boolean from model.data
-        proj = model.project.Project()
+        proj = view.components.project.Project()
         
         if not proj._get_name() is None:
             status = proj.projectcache[proj._get_name()].save

@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-import model.project
+import view.components.project
 import view.actions.project.new
 import view.actions.project.close
 
@@ -26,6 +26,6 @@ class ProjectContextMenu(QtGui.QMenu):
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):
-        index = model.project.Project().projecttree.indexAt(point)
+        index = view.components.project.Project().projecttree.indexAt(point)
         self.popup(QtGui.QCursor.pos())
         

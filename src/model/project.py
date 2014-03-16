@@ -12,14 +12,10 @@ TODO:
         b) new project
         
 '''
-from PyQt4 import QtGui, QtCore
-import view.menu.context.project
-import view.modal.config.window
-import view.window
-import controller.project
-import model.data.project as data
 
 PROJECT_FILTER = 'QTIDE Project (*.qtp)'
+
+import os
 
 class Project:
     
@@ -29,18 +25,3 @@ class Project:
     saved = False
     path = os.environ.get("HOME")
     
-        
-    def configuration(self):
-        view.modal.config.window.ProjectConfiguration().exec_()
-        
-        
-    def _get_name(self):
-        '''
-        :Description:
-            Returns the text of the selected project from the model
-            
-        :Returns:
-            String of the selected project name or None if no rows exist
-        '''
-        if self.projecttree.currentIndex().row() >= 0:
-            return self.projects.item(self.projecttree.currentIndex().row()).text()

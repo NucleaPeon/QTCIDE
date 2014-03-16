@@ -21,7 +21,7 @@
 import os
 import sys
 import argparse
-import importlib
+import cache
 import view.window 
 
 def pyqt4_is_installed():
@@ -53,6 +53,7 @@ def main():
     #mw.show()
     win = controller.window.Window.init()
     win.show()
+    cache.cache()
     import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
@@ -67,7 +68,7 @@ def shutdown():
 ###
 if __name__ == "__main__":
     # Argument Parsing
-    parser = argparse.ArgumentParser(description='QT-Based C/C++ Development IDE')
+    parser = argparse.ArgumentParser(description='QT-Based Drag and Drop IDE')
     args = parser.parse_args(sys.argv[1:])
     
     main()

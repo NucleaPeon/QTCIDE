@@ -1,5 +1,6 @@
 from PyQt4 import QtGui, QtCore
 import os
+import cache
 import view.modal.config.window
 import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
@@ -41,10 +42,11 @@ class Terminal(QtGui.QDockWidget):
             'clear': self.textedit.clear,
             'QtPopupConfirm': lambda: view.modal.QtPopupConfirm.QtPopupConfirm('test', 'this is a test').exec_(),
             'QtPopupTextInput': lambda: view.modal.QtPopupTextInput.QtPopupTextInput('test', 'this is a test').exec_(),
-            'save': print("save"),
+            'save': lambda: print("Save"),
             'settings': lambda: view.modal.config.window.ProjectConfiguration().exec_(),
             'settingswitch': lambda: view.modal.config.window.ProjectConfiguration().display_widget( \
-                view.modal.config.settings.project.Project())
+                view.modal.config.settings.project.Project()),
+            'cache': lambda: print(cache.CACHE)
         }
         self.hide() # Hide by default
         

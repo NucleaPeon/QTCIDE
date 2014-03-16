@@ -114,7 +114,7 @@ class DropCanvas(QtGui.QGraphicsView):
         super(DropCanvas, self).__init__()
         self.setAcceptDrops(True)
         self.scene = model.scene.ProjectScene()
-        print(self.scene)
+        
         
     #def mouseReleasedEvent(self, event):
         #print("released on {}".format(event.mimeData().text()))
