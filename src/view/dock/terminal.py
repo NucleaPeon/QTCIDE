@@ -38,6 +38,8 @@ class Terminal(QtGui.QDockWidget):
                      QtCore.SIGNAL("keyPressEvent(const QKeyEvent &)"),
                      self.keyPressEvent)
         """ RECOGNIZED_COMMANDS uses string : callable format """
+        def recache():
+            import cache
         self.RECOGNIZED_COMMANDS = {
             'clear': self.textedit.clear,
             'QtPopupConfirm': lambda: view.modal.QtPopupConfirm.QtPopupConfirm('test', 'this is a test').exec_(),
@@ -46,7 +48,8 @@ class Terminal(QtGui.QDockWidget):
             'settings': lambda: view.modal.config.window.ProjectConfiguration().exec_(),
             'settingswitch': lambda: view.modal.config.window.ProjectConfiguration().display_widget( \
                 view.modal.config.settings.project.Project()),
-            'cache': lambda: print(cache.CACHE)
+            'cache': lambda: print(cache.CACHE),
+            'recache': lambda: recache()
         }
         self.hide() # Hide by default
         

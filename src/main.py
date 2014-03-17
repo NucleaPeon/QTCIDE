@@ -51,9 +51,10 @@ def main():
     app.aboutToQuit.connect(shutdown) 
     #mw = mainwindow.MainWindow()
     #mw.show()
+    cache.cache()
     win = controller.window.Window.init()
     win.show()
-    cache.cache()
+    
     import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     

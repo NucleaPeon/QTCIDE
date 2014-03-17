@@ -4,6 +4,7 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.menu.context.project
 import view.components.project
 import controller.project
+import importlib
 import os
 
 class Project(QtGui.QDockWidget):
@@ -27,31 +28,10 @@ class Project(QtGui.QDockWidget):
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # Initialize TreeView for model to sit in
-        self.projecttree = view.components.project.Project().projecttree
-        self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        project = importlib.import_module('cache').load('view.components.project.Project')
+        project.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
-        self.layout.addWidget(self.projecttree)
-        self.connect(self.projecttree,
-                QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                view.menu.context.project.ProjectContextMenu().displayProjectMenu)
-        self.projecttree.connect(self.projecttree.selectionModel(),
-                QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
-                self.__project_context)
-        
-        
-    def __project_context(self, selected, deselected):
-        # Check save boolean from model.data
-        proj = view.components.project.Project()
-        
-        if not proj._get_name() is None:
-            status = proj.projectcache[proj._get_name()].save
-            action = view.actions.project.save.SaveProjectAction().qaction
-            action.setEnabled(status)
-        else:
-            # force everything to be disabled, no projects in treeview
-            view.actions.project.save.SaveProjectAction().qaction.setEnabled(False)
-            view.actions.project.close.CloseProjectAction().qaction.setEnabled(False)
-        
+        self.layout.addWidget(project.projecttree)
         
         

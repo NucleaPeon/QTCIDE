@@ -11,7 +11,16 @@ class Project(QtGui.QStandardItemModel):
         self.projecttree.setModel(self)
         self.setHorizontalHeaderItem(0, 
                 QtGui.QStandardItem("Project Name"))
+        self.connect(self.projecttree,
+                QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
+                print) #view.menu.context.project.ProjectContextMenu().displayProjectMenu) # retrieve from cache TODO
+        self.projecttree.connect(self.projecttree.selectionModel(),
+                QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
+                self.__project_context)
         
+    def __project_context(self):
+        print("TODO")
+        # FIXME: Create macros for context
         
     def addProject(self, project):
         '''
@@ -62,6 +71,8 @@ class Project(QtGui.QStandardItemModel):
         if self.projecttree.currentIndex().row() >= 0:
             return self.projects.item(self.projecttree.currentIndex().row()).text()
 
+    def configuration(self):
+        pass
         
     class ProjectItem(QtGui.QStandardItem):
         

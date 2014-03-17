@@ -27,6 +27,10 @@ The module string becomes part of the key:
 '''
 CACHE = {}
 
+def load(key):
+    return CACHE.get(key, None)
+#FIXME: None should be new object if not cached
+
 def cache(start = CACHE_DIR, key = 'view'):
     '''
     Cache all modules in a dynamic dictionary that associates
@@ -39,7 +43,6 @@ def cache(start = CACHE_DIR, key = 'view'):
         - start: Path to start searching modules from
         - path_prefix: This is what becomes the dictionary key
     '''
-    
     def search(path, key):
         for f in os.listdir(path):
             if f[0] == "." or f[0] == "_":
@@ -53,14 +56,9 @@ def cache(start = CACHE_DIR, key = 'view'):
                     m = importlib.import_module(key + "." + root)
                     if hasattr(m, "CACHE"):
                         for x in m.CACHE:
-                            try:
-                                cls = getattr(m, x)
-                                print(cls)
-                                CACHE["{}.{}.{}".format(key, root, x)] = cls()
-                            except:
-                                print("Failed to instantiate class from module")
-                                print(x)
-                                print(m)
+                            cls = getattr(m, x)
+                            CACHE["{}.{}.{}".format(key, root, x)] = cls()
             
     
     search(start, key)
+    print(CACHE)
