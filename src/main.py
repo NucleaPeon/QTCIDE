@@ -46,13 +46,12 @@ def main():
     ### Launch UI ###
     from PyQt4 import QtGui
     #from view.mainwindow import MainWindow
-    import controller.window
     app = QtGui.QApplication(sys.argv)
     app.aboutToQuit.connect(shutdown) 
     #mw = mainwindow.MainWindow()
     #mw.show()
     cache.cache()
-    win = controller.window.Window.init()
+    win = view.window.Window()
     win.show()
     
     import signal

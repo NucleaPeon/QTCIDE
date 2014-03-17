@@ -3,6 +3,8 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import model.project
 import os
 
+CACHE = ['CloseProjectAction']
+
 """
 Class that represents the QAction object with icon and
 no parent in a singleton class
