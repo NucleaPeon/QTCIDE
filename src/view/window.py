@@ -23,10 +23,8 @@ class Window(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__()
         # Setup window content - layout
-        kwargs['view.main.widget.IntegratedShell'] = view.main.widget.IntegratedShell()
-        self.setCentralWidget(kwargs['view.main.widget.IntegratedShell'])
-        kwargs['view.window.Window'] = self
-        
+        ishell = view.main.widget.IntegratedShell()
+        self.setCentralWidget(ishell)
         model = m.model(__name__)
         self.setWindowTitle(
             QtGui.QApplication.translate("QT-Based Drag and Drop IDE",
@@ -35,16 +33,16 @@ class Window(QtGui.QMainWindow):
         self.setDockOptions(QtGui.QMainWindow.AnimatedDocks)
         self.resize(model.width, model.height)
         self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
-        kwargs['view.dock.project.Project'] = view.dock.project.Project(**kwargs)
-        kwargs['view.dock.build.Build'] = view.dock.build.Build()
-        kwargs['view.dock.terminal.Terminal'] = view.dock.terminal.Terminal()
-        kwargs['view.dock.testing.Testing'] = view.dock.testing.Testing()
-        kwargs['view.dock.run.Run'] = view.dock.run.Run()
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), kwargs['view.dock.project.Project'])
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), kwargs['view.dock.build.Build'])
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), kwargs['view.dock.terminal.Terminal'])
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), kwargs['view.dock.testing.Testing'])
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), kwargs['view.dock.run.Run'])
+        dock_project = view.dock.project.Project()
+        dock_build = view.dock.build.Build()
+        dock_terminal = view.dock.terminal.Terminal()
+        dock_testing = view.dock.testing.Testing()
+        dock_run = view.dock.run.Run()
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_project)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_build)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_terminal)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_testing)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), dock_run)
         self.menubar = menu.MenuBar(self)
         
     def status(self, message):

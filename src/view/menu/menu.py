@@ -28,11 +28,11 @@ class MenuBar:
         self.mwin = mainwindow
         self.menubar = self.mwin.menuBar()
         # Instantiate all actions here
-        self.exit_action = view.actions.exit.ExitAction().qaction
+        self.exit_action = view.actions.exit.ExitAction()
         self.projNewAction = view.actions.project.new.NewProjectAction().qaction
         self.projCloseAction = view.actions.project.close.CloseProjectAction().qaction
         self.projSaveAction = view.actions.project.save.SaveProjectAction().qaction
-        self.projSettings = view.actions.project.settings.ProjectSettingsAction().qaction
+        self.projSettings = view.actions.project.settings.ProjectSettingsAction()
         self.projBuild = view.actions.project.build.build.BuildSystemBuildAction().qaction
         self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction().qaction
         self.projAddRun = view.actions.project.run.addrun.AddRunAction().qaction

@@ -4,19 +4,13 @@ import os
 import model.run
 
 class ConfigureRunAction():
-    
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(ConfigureRunAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-configure.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, 'Run &Configuration', None)
-            cls.qaction.setStatusTip('Run Configuration')
-            cls.qaction.triggered.connect(cls.run_config)
-        return cls._instance
+
+    def __init__(self):
+            super(ConfigureRunAction, self).__init__()
+            self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-configure.png'))
+            self.qaction = QtGui.QAction(self.qicon, 'Run &Configuration', None)
+            self.qaction.setStatusTip('Run Configuration')
+            self.qaction.triggered.connect(self.run_config)
 
     @QtCore.pyqtSlot()
     def run_config():

@@ -4,21 +4,14 @@ import os
 
 class RemoveTestSuiteAction():
     
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(RemoveTestSuiteAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'utilities-log-viewer.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, '&Remove Test Suite', None)
-            cls.qaction.setStatusTip('&Remove Test Suite')
-            cls.qaction.triggered.connect(cls.rem_test_suite)
-        return cls._instance
+    def __init__(self):
+        super(RemoveTestSuiteAction, self).__init__()
+        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'utilities-log-viewer.png'))
+        self.qaction = QtGui.QAction(self.qicon, '&Remove Test Suite', None)
+        self.qaction.setStatusTip('&Remove Test Suite')
+        self.qaction.triggered.connect(self.rem_test_suite)
 
     @QtCore.pyqtSlot()
     def rem_test_suite():
-        #model.test.Test().add_test_suite()
         print('rem_test_suite')
         # TODO: Add action to menu and toolbar

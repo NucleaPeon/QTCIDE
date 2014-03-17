@@ -7,24 +7,17 @@ import os
 Class that represents the QAction object with icon and
 no parent in a singleton class
 """
-class ProjectSettingsAction():
+class ProjectSettingsAction(QtGui.QAction):
     
     
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(ProjectSettingsAction, cls).__new__(cls)
-            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'preferences-system-windows-actions.png')),
-                                        'Project S&ettings', None)
-            cls.qaction.setShortcut('Ctrl-E')
-            cls.qaction.setStatusTip('Configure Project Settings')
-            cls.qaction.triggered.connect(cls.projectSettings)
-        return cls._instance
+    def __init__(self):
+        super(ProjectSettingsAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'preferences-system-windows-actions.png')),
+                                    'Project S&ettings', None)
+        self.setShortcut('Ctrl-E')
+        self.setStatusTip('Configure Project Settings')
+        self.triggered.connect(self.projectSettings)
 
     @QtCore.pyqtSlot(bool)
     def projectSettings(triggered):
-        #project = cache.load('view.components.project.Project')
         print("FIXME")
         #project.configuration()

@@ -5,17 +5,13 @@ import os
 class BuildSystemBuildAction():
     
     
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(BuildSystemBuildAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, '&Build', None)
-            cls.qaction.setStatusTip('Build Project')
-            cls.qaction.triggered.connect(cls.build)
-        return cls._instance
+    def __init__(self, *args, **kwargs):    
+        super(BuildSystemBuildAction, self).__init__()
+        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png'))
+        self.qaction = QtGui.QAction(self.qicon, '&Build', None)
+        self.qaction.setStatusTip('Build Project')
+        self.qaction.triggered.connect(self.build)
+    
 
     @QtCore.pyqtSlot(bool)
     def build(triggered):

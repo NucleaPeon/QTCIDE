@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.build
-import view.actions.project.build.build as build
-import view.actions.project.build.configuration as config
+import view.actions.project.build.build 
+import view.actions.project.build.configuration 
 
 class Build(QtGui.QDockWidget):
     
@@ -13,7 +13,7 @@ class Build(QtGui.QDockWidget):
         self.systems = QtGui.QStandardItemModel()
         self.filemap.setModel(self.filemodel)
         self.buildmodel = model.build.Build()
-        self.findBuildSystems()
+        self.populate()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Build Options", None, QtGui.QApplication.UnicodeUTF8))
@@ -23,10 +23,13 @@ class Build(QtGui.QDockWidget):
         
         self.group = QtGui.QGroupBox("Build Systems")
         self.buildbox = QtGui.QComboBox()
-        self.buildconfig = QtGui.QPushButton(config.BuildSystemConfigurationAction().qicon, "&Configure")
-        self.buildbutton = QtGui.QPushButton(build.BuildSystemBuildAction().qicon, "&Build")
+        # Add actions to kwargs
+        kwargs['view.actions.project.build.build'] = view.actions.project.build.build.BuildSystemBuildAction()
+        kwargs['view.actions.project.build.configuration'] = view.actions.project.build.configuration.BuildSystemConfigurationAction()
+        self.buildconfig = QtGui.QPushButton(kwargs['view.actions.project.build.configuration'].qicon, "&Configure")
+        self.buildbutton = QtGui.QPushButton(kwargs['view.actions.project.build.build'].qicon, "&Build")
         self.buildbox.setModel(self.systems)
-        
+        print(kwargs)
         self.group.setLayout(self.grouplayout)
         self.grouplayout.addWidget(self.buildbox)
         self.grouplayout.addWidget(self.buildconfig)
@@ -39,7 +42,7 @@ class Build(QtGui.QDockWidget):
         self.setWidget(self.widget)
         
     #FIXME: Move to view build component
-    def findBuildSystems(self):
+    def populate(self):
         '''
         :Description:
             Clears and adds all found build systems into the model

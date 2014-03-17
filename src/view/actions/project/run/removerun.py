@@ -5,18 +5,12 @@ import model.run
 
 class RemoveRunAction():
     
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(RemoveRunAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'dialog-close.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, '&Remove Run', None)
-            cls.qaction.setStatusTip('&Remove Run')
-            cls.qaction.triggered.connect(cls.rem_run_config)
-        return cls._instance
+    def __init__(self):
+        super(RemoveRunAction, self).__init__()
+        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'dialog-close.png'))
+        self.qaction = QtGui.QAction(self.qicon, '&Remove Run', None)
+        self.qaction.setStatusTip('&Remove Run')
+        self.qaction.triggered.connect(self.rem_run_config)
 
     @QtCore.pyqtSlot()
     def rem_run_config():

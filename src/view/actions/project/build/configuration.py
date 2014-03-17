@@ -5,18 +5,13 @@ import os
 class BuildSystemConfigurationAction():
     
     
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(BuildSystemConfigurationAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, '&Configuration', None)
-            cls.qaction.setStatusTip('Build Configuration')
-            cls.qaction.triggered.connect(cls.build)
-        return cls._instance
+    def __init__(self):
+        self._instance = super(BuildSystemConfigurationAction, self).__init__()
+        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build.png'))
+        self.qaction = QtGui.QAction(self.qicon, '&Configuration', None)
+        self.qaction.setStatusTip('Build Configuration')
+        self.qaction.triggered.connect(self.configure)
 
     @QtCore.pyqtSlot(bool)
-    def build(triggered):
+    def configure(triggered):
         print("TODO call model build module which can then call controller")

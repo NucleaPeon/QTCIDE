@@ -4,18 +4,12 @@ import os
 
 class ConfigureTestSuiteAction():
     
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(ConfigureTestSuiteAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'utilities-log-viewer.png'))
-            cls.qaction = QtGui.QAction(cls.qicon, '&Configure Test Suite', None)
-            cls.qaction.setStatusTip('&Configure Test Suite')
-            cls.qaction.triggered.connect(cls.conf_test_suite)
-        return cls._instance
+    def __init__(self):
+        super(ConfigureTestSuiteAction, self).__init__()
+        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'utilities-log-viewer.png'))
+        self.qaction = QtGui.QAction(self.qicon, '&Configure Test Suite', None)
+        self.qaction.setStatusTip('&Configure Test Suite')
+        self.qaction.triggered.connect(self.conf_test_suite)
 
     @QtCore.pyqtSlot()
     def conf_test_suite():
