@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-
+import view.modal.config.window
 CACHE = ['Project']
 
 class Project(QtGui.QStandardItemModel):
@@ -72,7 +72,7 @@ class Project(QtGui.QStandardItemModel):
             return self.projects.item(self.projecttree.currentIndex().row()).text()
 
     def configuration(self):
-        pass
+        view.modal.config.window.ProjectConfiguration().exec_()
         
     class ProjectItem(QtGui.QStandardItem):
         
