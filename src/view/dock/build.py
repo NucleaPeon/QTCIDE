@@ -5,22 +5,15 @@ import view.actions.project.build.configuration as config
 
 class Build(QtGui.QDockWidget):
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(Build, self).__new__(
-                self, *args, **kwargs)
-            self.widget = QtGui.QWidget()
-            self.filemap = QtGui.QListView()
-            self.filemodel = QtGui.QStandardItemModel()
-            self.filemap.setModel(self.filemodel)
-            self.buildmodel = model.build.Build()
-            self.buildmodel.findBuildSystems()
-        return self._instance
-    
-    def __init__(self):
-        super(Build, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Build, self).__init__(**kwargs)
+        self.widget = QtGui.QWidget()
+        self.filemap = QtGui.QListView()
+        self.filemodel = QtGui.QStandardItemModel()
+        self.systems = QtGui.QStandardItemModel()
+        self.filemap.setModel(self.filemodel)
+        self.buildmodel = model.build.Build()
+        self.findBuildSystems()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Build Options", None, QtGui.QApplication.UnicodeUTF8))
@@ -32,7 +25,7 @@ class Build(QtGui.QDockWidget):
         self.buildbox = QtGui.QComboBox()
         self.buildconfig = QtGui.QPushButton(config.BuildSystemConfigurationAction().qicon, "&Configure")
         self.buildbutton = QtGui.QPushButton(build.BuildSystemBuildAction().qicon, "&Build")
-        self.buildbox.setModel(self.buildmodel.systems)
+        self.buildbox.setModel(self.systems)
         
         self.group.setLayout(self.grouplayout)
         self.grouplayout.addWidget(self.buildbox)
@@ -44,3 +37,18 @@ class Build(QtGui.QDockWidget):
         
         self.widget.setLayout(self.layout)
         self.setWidget(self.widget)
+        
+    #FIXME: Move to view build component
+    def findBuildSystems(self):
+        '''
+        :Description:
+            Clears and adds all found build systems into the model
+            
+            Build systems are attached to the IDE by configuration
+            files. Project settings window will allow for users to 
+            find their own build system.
+            
+        '''
+        # FIXME: At Milestone 5
+        for sys in ['<none>', 'cmake', 'automake', 'make', 'qmake']:
+            self.systems.appendRow(QtGui.QStandardItem(sys))

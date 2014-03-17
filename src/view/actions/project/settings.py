@@ -1,7 +1,6 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.components.project
-import cache
 import os
 
 """
@@ -26,5 +25,6 @@ class ProjectSettingsAction():
 
     @QtCore.pyqtSlot(bool)
     def projectSettings(triggered):
-        project = cache.load('view.components.project.Project')
-        project.configuration()
+        #project = cache.load('view.components.project.Project')
+        print("FIXME")
+        #project.configuration()

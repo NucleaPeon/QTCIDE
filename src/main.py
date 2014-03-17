@@ -21,7 +21,6 @@
 import os
 import sys
 import argparse
-import cache
 import view.window 
 
 def pyqt4_is_installed():
@@ -47,10 +46,7 @@ def main():
     from PyQt4 import QtGui
     #from view.mainwindow import MainWindow
     app = QtGui.QApplication(sys.argv)
-    app.aboutToQuit.connect(shutdown) 
-    #mw = mainwindow.MainWindow()
-    #mw.show()
-    cache.cache()
+    app.aboutToQuit.connect(shutdown)
     win = view.window.Window()
     win.show()
     

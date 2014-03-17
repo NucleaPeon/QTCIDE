@@ -1,8 +1,5 @@
 from PyQt4 import QtGui, QtCore
 import view.modal.config.window
-import cache
-
-CACHE = ['Project']
 
 class Project(QtGui.QStandardItemModel):
 
@@ -14,7 +11,7 @@ class Project(QtGui.QStandardItemModel):
                 QtGui.QStandardItem("Project Name"))
         self.connect(self.projecttree,
                 QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                lambda x: cache.load('view.menu.context.project.ProjectContextMenu').displayProjectMenu(x)) #view.menu.context.project.ProjectContextMenu().displayProjectMenu) # retrieve from cache TODO
+                print) #view.menu.context.project.ProjectContextMenu().displayProjectMenu) # retrieve from cache TODO
         self.projecttree.connect(self.projecttree.selectionModel(),
                 QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                 self.__project_context)

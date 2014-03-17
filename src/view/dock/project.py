@@ -4,22 +4,13 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.menu.context.project
 import view.components.project
 import controller.project
-import cache
 import os
 
 class Project(QtGui.QDockWidget):
-    
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(Project, self).__new__(
-                self, *args, **kwargs)
-            self.widget = QtGui.QWidget()
-        return self._instance
-    
-    def __init__(self):
+
+    def __init__(self, *args, **kwargs):
         super(Project, self).__init__()
+        self.widget = QtGui.QWidget()
         # Set up dock
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
@@ -28,10 +19,12 @@ class Project(QtGui.QDockWidget):
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # Initialize TreeView for model to sit in
-        project = cache.load('view.components.project.Project')
-        project.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        kwargs['view.components.project.Project'] = view.components.project.Project()
+        
+        kwargs['view.components.project.Project'].projecttree.setContextMenuPolicy(
+            QtCore.Qt.CustomContextMenu)
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
-        self.layout.addWidget(project.projecttree)
+        self.layout.addWidget(kwargs['view.components.project.Project'].projecttree)
         
         
