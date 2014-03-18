@@ -16,9 +16,9 @@ class TestingContextMenu(QtGui.QMenu):
     
     def __init__(self):
         super(TestingContextMenu, self).__init__()
-        self.addAction(view.actions.project.testing.addsuite.AddTestSuiteAction().qaction)
-        self.addAction(view.actions.project.testing.configuresuite.ConfigureTestSuiteAction().qaction)
-        self.addAction(view.actions.project.testing.removesuite.RemoveTestSuiteAction().qaction)
+        self.addAction(view.actions.project.testing.addsuite.AddTestSuiteAction())
+        self.addAction(view.actions.project.testing.configuresuite.ConfigureTestSuiteAction())
+        self.addAction(view.actions.project.testing.removesuite.RemoveTestSuiteAction())
         
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayTestMenu(self, point):

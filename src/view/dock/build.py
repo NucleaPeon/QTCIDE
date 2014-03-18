@@ -1,5 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import model.build
+import os
+from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.actions.project.build.build 
 import view.actions.project.build.configuration 
 
@@ -24,12 +26,11 @@ class Build(QtGui.QDockWidget):
         self.group = QtGui.QGroupBox("Build Systems")
         self.buildbox = QtGui.QComboBox()
         # Add actions to kwargs
-        kwargs['view.actions.project.build.build'] = view.actions.project.build.build.BuildSystemBuildAction()
-        kwargs['view.actions.project.build.configuration'] = view.actions.project.build.configuration.BuildSystemConfigurationAction()
-        self.buildconfig = QtGui.QPushButton(kwargs['view.actions.project.build.configuration'].qicon, "&Configure")
-        self.buildbutton = QtGui.QPushButton(kwargs['view.actions.project.build.build'].qicon, "&Build")
+        build = view.actions.project.build.build.BuildSystemBuildAction()
+        config = view.actions.project.build.configuration.BuildSystemConfigurationAction()
+        self.buildconfig = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png')), "&Configure")
+        self.buildbutton = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build.png')), "&Build")
         self.buildbox.setModel(self.systems)
-        print(kwargs)
         self.group.setLayout(self.grouplayout)
         self.grouplayout.addWidget(self.buildbox)
         self.grouplayout.addWidget(self.buildconfig)

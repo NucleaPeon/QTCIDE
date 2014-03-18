@@ -3,15 +3,14 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
 import model.run
 
-class ConfigureRunAction():
+class ConfigureRunAction(QtGui.QAction):
 
     def __init__(self):
-            super(ConfigureRunAction, self).__init__()
-            self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-configure.png'))
-            self.qaction = QtGui.QAction(self.qicon, 'Run &Configuration', None)
-            self.qaction.setStatusTip('Run Configuration')
-            self.qaction.triggered.connect(self.run_config)
+            super(ConfigureRunAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build-configure.png')),
+                                                     'Run &Configuration', None)
+            self.setStatusTip('Run Configuration')
+            self.triggered.connect(self.run_config)
 
     @QtCore.pyqtSlot()
-    def run_config():
+    def run_config(self):
         model.run.Run().configure_run()

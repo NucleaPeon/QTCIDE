@@ -29,18 +29,18 @@ class MenuBar:
         self.menubar = self.mwin.menuBar()
         # Instantiate all actions here
         self.exit_action = view.actions.exit.ExitAction()
-        self.projNewAction = view.actions.project.new.NewProjectAction().qaction
-        self.projCloseAction = view.actions.project.close.CloseProjectAction().qaction
-        self.projSaveAction = view.actions.project.save.SaveProjectAction().qaction
+        self.projNewAction = view.actions.project.new.NewProjectAction()
+        self.projCloseAction = view.actions.project.close.CloseProjectAction()
+        self.projSaveAction = view.actions.project.save.SaveProjectAction()
         self.projSettings = view.actions.project.settings.ProjectSettingsAction()
-        self.projBuild = view.actions.project.build.build.BuildSystemBuildAction().qaction
-        self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction().qaction
-        self.projAddRun = view.actions.project.run.addrun.AddRunAction().qaction
-        self.projRemRun = view.actions.project.run.removerun.RemoveRunAction().qaction
-        self.projRunConfig = view.actions.project.run.configurerun.ConfigureRunAction().qaction
-        self.projTestAdd = view.actions.project.testing.addsuite.AddTestSuiteAction().qaction
-        self.projTestRem = view.actions.project.testing.removesuite.RemoveTestSuiteAction().qaction
-        self.projTestConfig = view.actions.project.testing.configuresuite.ConfigureTestSuiteAction().qaction
+        self.projBuild = view.actions.project.build.build.BuildSystemBuildAction()
+        self.projBuildConfig = view.actions.project.build.configuration.BuildSystemConfigurationAction()
+        self.projAddRun = view.actions.project.run.addrun.AddRunAction()
+        self.projRemRun = view.actions.project.run.removerun.RemoveRunAction()
+        self.projRunConfig = view.actions.project.run.configurerun.ConfigureRunAction()
+        self.projTestAdd = view.actions.project.testing.addsuite.AddTestSuiteAction()
+        self.projTestRem = view.actions.project.testing.removesuite.RemoveTestSuiteAction()
+        self.projTestConfig = view.actions.project.testing.configuresuite.ConfigureTestSuiteAction()
         
         # File Menu
         self.filemenu = self.menubar.addMenu('&File')

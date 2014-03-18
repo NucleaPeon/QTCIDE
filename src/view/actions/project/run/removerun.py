@@ -3,15 +3,14 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
 import model.run
 
-class RemoveRunAction():
+class RemoveRunAction(QtGui.QAction):
     
     def __init__(self):
-        super(RemoveRunAction, self).__init__()
-        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'dialog-close.png'))
-        self.qaction = QtGui.QAction(self.qicon, '&Remove Run', None)
-        self.qaction.setStatusTip('&Remove Run')
-        self.qaction.triggered.connect(self.rem_run_config)
+        super(RemoveRunAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'dialog-close.png')),
+                                              '&Remove Run', None)
+        self.setStatusTip('&Remove Run')
+        self.triggered.connect(self.rem_run_config)
 
     @QtCore.pyqtSlot()
-    def rem_run_config():
+    def rem_run_config(self):
         model.run.Run().remove_run_config()

@@ -12,19 +12,12 @@ treeview component
 '''
 class RunContextMenu(QtGui.QMenu):
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(RunContextMenu, self).__new__(
-                self, *args, **kwargs)
-        return self._instance
     
     def __init__(self):
         super(RunContextMenu, self).__init__()
-        self.addAction(view.actions.project.run.addrun.AddRunAction().qaction)
-        self.addAction(view.actions.project.run.configurerun.ConfigureRunAction().qaction)
-        self.addAction(view.actions.project.run.removerun.RemoveRunAction().qaction)
+        self.addAction(view.actions.project.run.addrun.AddRunAction())
+        self.addAction(view.actions.project.run.configurerun.ConfigureRunAction())
+        self.addAction(view.actions.project.run.removerun.RemoveRunAction())
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayRunMenu(self, point):

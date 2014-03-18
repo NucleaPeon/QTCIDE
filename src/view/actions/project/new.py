@@ -3,23 +3,20 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.modal.QtPopupTextInput
 import view.window
 import model.project
-import os       
-
-CACHE = ['NewProjectAction']
+import os
 
 """
 Class that represents the QAction object with icon and
 no parent in a singleton class
 """
-class NewProjectAction():
+class NewProjectAction(QtGui.QAction):
 
     def __init__(self):
-        super(NewProjectAction, self).__init__()
-        self.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-new.png')),
+        super(NewProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-new.png')),
                                     '&New Project', None)
-        self.qaction.setShortcut('Ctrl-N')
-        self.qaction.setStatusTip('New Project')
-        self.qaction.triggered.connect(self.promptNewProject)
+        self.setShortcut('Ctrl-N')
+        self.setStatusTip('New Project')
+        self.triggered.connect(self.promptNewProject)
             
     @QtCore.pyqtSlot(str)
     def promptNewProject(self):

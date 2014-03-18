@@ -3,28 +3,21 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import model.project
 import os
 
-CACHE = ['CloseProjectAction']
 
 """
 Class that represents the QAction object with icon and
 no parent in a singleton class
 """
-class CloseProjectAction():
+class CloseProjectAction(QtGui.QAction):
     
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(CloseProjectAction, cls).__new__(cls)
-            cls.qaction = QtGui.QAction(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
-                                        '&Close Project', None)
-            cls.qaction.setShortcut('Ctrl-C')
-            cls.qaction.setStatusTip('Close Project')
-            cls.qaction.triggered.connect(cls.closeProject)
-            cls.qaction.setEnabled(False)
-        return cls._instance
+    def __init__(self):
+        super(CloseProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
+                                    '&Close Project', None)
+        self.setShortcut('Ctrl-C')
+        self.setStatusTip('Close Project')
+        self.triggered.connect(self.closeProject)
+        self.setEnabled(False)
+        
 
     @QtCore.pyqtSlot(bool)
     def closeProject(triggered):

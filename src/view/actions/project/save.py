@@ -7,23 +7,15 @@ import os
 Class that represents the QAction object with icon and
 no parent in a singleton class
 """
-class SaveProjectAction():
+class SaveProjectAction(QtGui.QAction):
     
-    
-    _instance = None
-    def __new__(cls):
-        if not cls._instance:
-            # Initialize graphical elements, NOT callbacks as that is done
-            # by the calling program through kwargs
-            cls._instance = super(SaveProjectAction, cls).__new__(cls)
-            cls.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'media-floppy.png'))
-            cls.qaction = QtGui.QAction(cls.qicon,
-                                        '&Save Project', None)
-            cls.qaction.setShortcut('Ctrl-S')
-            cls.qaction.setStatusTip('Save Project')
-            cls.qaction.triggered.connect(cls.saveProject)
-            cls.qaction.setEnabled(False)
-        return cls._instance
+    def __init__(self):
+        super(SaveProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'media-floppy.png')),
+                                                                '&Save Project', None)
+        self.setShortcut('Ctrl-S')
+        self.setStatusTip('Save Project')
+        self.triggered.connect(self.saveProject)
+        self.setEnabled(False)
 
     @QtCore.pyqtSlot(bool)
     def saveProject(triggered):

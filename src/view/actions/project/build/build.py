@@ -2,15 +2,14 @@ from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import os
 
-class BuildSystemBuildAction():
+class BuildSystemBuildAction(QtGui.QAction):
     
     
-    def __init__(self, *args, **kwargs):    
-        super(BuildSystemBuildAction, self).__init__()
-        self.qicon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png'))
-        self.qaction = QtGui.QAction(self.qicon, '&Build', None)
-        self.qaction.setStatusTip('Build Project')
-        self.qaction.triggered.connect(self.build)
+    def __init__(self):    
+        super(BuildSystemBuildAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png')),
+                                                     '&Build', None)
+        self.setStatusTip('Build Project')
+        self.triggered.connect(self.build)
     
 
     @QtCore.pyqtSlot(bool)
