@@ -12,8 +12,8 @@ mutually exclusive and it allows for additional views.
 '''
 class IntegratedShell(QtGui.QTabWidget):
     
-    def __init__(self):
-        super(IntegratedShell, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(IntegratedShell, self).__init__(*args)
         self.layout = QtGui.QHBoxLayout()
         
         ### 
@@ -22,7 +22,7 @@ class IntegratedShell(QtGui.QTabWidget):
         self.dnd = QtGui.QWidget()
         self.dnd.setLayout(self.layout)
         self.layout.addWidget(Selection())
-        self.layout.addWidget(DropCanvas())
+        self.layout.addWidget(DropCanvas(project=kwargs.get('project')))
         
         self.code = CodeView()
         self.addTab(self.dnd, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop")
@@ -38,6 +38,7 @@ class Selection(QtGui.QGroupBox):
         self.pixmap = QtGui.QPixmap(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # FIXME: Set text and image data for ALL mimetype objects
+        # TODO: Objects need to be placed into a Scroll Pane
         self.newfile = Droppable()
         self.newfile.mime.setText("File")
         self.newfile.mime.setImageData(self.pixmap)
@@ -110,8 +111,17 @@ class Droppable(QtGui.QLabel):
         
 class DropCanvas(QtGui.QGraphicsView):
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        '''
+        :Description:
+            QGraphicsView that takes droppable components
+            
+        :Parameters:
+            - **kwargs: 
+                - 'parent': (optional)  
+        '''
         super(DropCanvas, self).__init__()
+        self.projects = kwargs.get('project')
         self.setAcceptDrops(True)
         self.scene = model.scene.ProjectScene()
         
@@ -120,11 +130,20 @@ class DropCanvas(QtGui.QGraphicsView):
         #print("released on {}".format(event.mimeData().text()))
         
     def dropEvent(self, event):
-        name = model.project.Project()._get_name()
-        if name is None:
-            model.project.Project().addNewProject("untitled")
-        # Check to see if a project has been created, otherwise default
-        # to an "untitled" project name
+        '''
+        :Description:
+            Add a new project if 
+        '''
+        # Check selection: if no items in project model, add new one
+        if not self.projects is None:
+            if self.projects.project.rowCount() < 1:
+                proj = model.project.Project()
+                proj.name = "Untitled"# FIXME: Get unused project name
+                self.projects.project.addProject(proj)
+                # leave as selected
+                qmindex = self.projects.project.index(0, 0)
+                self.projects.project.projecttree.setCurrentIndex(qmindex)
+                self.projects.project.sort(0)
         
         
     def dragEnterEvent(self, event):

@@ -36,14 +36,14 @@ class Project(QtGui.QStandardItemModel):
             - project: model.project object which is placed into a
                        ProjectItem class and added.
         '''
-        self.appendRow(ProjectItem(project))
-        self.sort(0)
-        if self.rowCount() == 1:
-            qmindex = self.index(0, 0)
-            
+        if project.icon is None:
+            self.appendRow(QtGui.QStandardItem(project.name))
+        else:
+            self.appendRow(QtGui.QStandardItem(project.icon, project.name))
+        
         # These actions should be governed by state change macro FIXME
-        view.actions.project.close.CloseProjectAction().qaction.setEnabled(self.projects.rowCount() > 0)
-        view.actions.project.save.SaveProjectAction().qaction.setEnabled(self.projectcache[self._get_name()].save)
+        #view.actions.project.close.CloseProjectAction().setEnabled(self.projects.rowCount() > 0)
+        #view.actions.project.save.SaveProjectAction().setEnabled(self.projectcache[self._get_name()].save)
         return project
         
         

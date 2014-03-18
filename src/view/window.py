@@ -23,8 +23,7 @@ class Window(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__()
         # Setup window content - layout
-        ishell = view.main.widget.IntegratedShell()
-        self.setCentralWidget(ishell)
+        
         model = m.model(__name__)
         self.setWindowTitle(
             QtGui.QApplication.translate("QT-Based Drag and Drop IDE",
@@ -44,6 +43,8 @@ class Window(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_testing)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(8), dock_run)
         self.menubar = menu.MenuBar(self)
+        self.ishell = view.main.widget.IntegratedShell(project=dock_project)
+        self.setCentralWidget(self.ishell)
         
     def status(self, message):
         self.statusBar().showMessage(message)
