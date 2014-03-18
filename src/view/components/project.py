@@ -7,14 +7,18 @@ class Project(QtGui.QStandardItemModel):
         super(Project, self).__init__(*args, **kwargs)
         self.projecttree = QtGui.QTreeView()
         self.projecttree.setModel(self)
+        self.menu = view.menu.context.project.ProjectContextMenu(
+            project = self)
+        self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.setHorizontalHeaderItem(0, 
                 QtGui.QStandardItem("Project Name"))
         self.connect(self.projecttree,
                 QtCore.SIGNAL("customContextMenuRequested(const QPoint &)"), 
-                print) #view.menu.context.project.ProjectContextMenu().displayProjectMenu) # retrieve from cache TODO
+                self.menu.displayProjectMenu) 
         self.projecttree.connect(self.projecttree.selectionModel(),
                 QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
                 self.__project_context)
+        
         
     def __project_context(self):
         print("TODO")

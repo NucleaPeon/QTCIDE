@@ -137,10 +137,11 @@ class DropCanvas(QtGui.QGraphicsView):
         # Check selection: if no items in project model, add new one
         if not self.projects is None:
             if self.projects.project.rowCount() < 1:
+                #TODO: Turn into a macro
                 proj = model.project.Project()
                 proj.name = "Untitled"# FIXME: Get unused project name
                 self.projects.project.addProject(proj)
-                # leave as selected
+                # leave as selected # Select and sort should be a macro TODO
                 qmindex = self.projects.project.index(0, 0)
                 self.projects.project.projecttree.setCurrentIndex(qmindex)
                 self.projects.project.sort(0)

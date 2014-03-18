@@ -10,22 +10,24 @@ When instantiated it will connect with the model.project
 treeview component
 '''
 class ProjectContextMenu(QtGui.QMenu):
+
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(ProjectContextMenu, self).__new__(
-                self, *args, **kwargs)
-        return self._instance
-    
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        '''
+        :Parameters:
+            - **kwargs:
+                - 'project': Project Dock instance
+        '''
         super(ProjectContextMenu, self).__init__()
-        self.addAction(view.actions.project.new.NewProjectAction().qaction)
-        self.addAction(view.actions.project.close.CloseProjectAction().qaction)
+        self.project = kwargs.get('project')
+        self.new_project = view.actions.project.new.NewProjectAction()
+        self.close_project = view.actions.project.close.CloseProjectAction()
+        self.addAction(self.new_project)
+        self.addAction(self.close_project)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):
-        index = view.components.project.Project().projecttree.indexAt(point)
+        print("point {}".format(point))
         self.popup(QtGui.QCursor.pos())
+        
         

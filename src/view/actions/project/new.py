@@ -11,11 +11,12 @@ no parent in a singleton class
 """
 class NewProjectAction(QtGui.QAction):
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(NewProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-new.png')),
                                     '&New Project', None)
         self.setShortcut('Ctrl-N')
         self.setStatusTip('New Project')
+        
         self.triggered.connect(self.promptNewProject)
             
     @QtCore.pyqtSlot(str)
