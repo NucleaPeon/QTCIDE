@@ -1,7 +1,5 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import view.actions.project.build.build as build
-import view.actions.project.build.configuration as buildconf
 import view.menu.context.run
 import view.modal.QtPopupConfirm
 import view.modal.QtPopupTextInput
@@ -75,12 +73,12 @@ class Run:
             qtstd = QtGui.QStandardItem(name)
             if not icon is None:
                 qtstd.setIcon(icon)
-            else:
-                qtstd.setIcon(build.BuildSystemBuildAction().qicon)
-            qtstd.appendRow(QtGui.QStandardItem(
-                buildconf.BuildSystemConfigurationAction().qicon,
-                "Default Run"))
-            self.runs.appendRow(qtstd)
+            #else:
+                #qtstd.setIcon(build.BuildSystemBuildAction().qicon)
+            #qtstd.appendRow(QtGui.QStandardItem(
+                #buildconf.BuildSystemConfigurationAction().qicon,
+                #"Default Run"))
+            #self.runs.appendRow(qtstd)
         
         modal = view.modal.QtPopupTextInput.QtPopupTextInput("Add New Run Type", "Run Type")
         modal.success(lambda: add(modal.textline.text()))

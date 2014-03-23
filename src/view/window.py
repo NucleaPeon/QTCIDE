@@ -7,6 +7,7 @@ import view.dock.testing
 import view.dock.terminal
 import view.menu.menu as menu
 import view.main.widget
+import view.main.action_manager
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 
 
@@ -23,7 +24,7 @@ class Window(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__()
         # Setup window content - layout
-        
+        self.action_mgr = view.main.action_manager.ActionManager()
         model = m.model(__name__)
         self.setWindowTitle(
             QtGui.QApplication.translate("QT-Based Drag and Drop IDE",
@@ -43,7 +44,6 @@ class Window(QtGui.QMainWindow):
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_terminal)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_testing)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(8), dock_run)
-        
         self.ishell = view.main.widget.IntegratedShell(project=dock_project)
         self.setCentralWidget(self.ishell)
         

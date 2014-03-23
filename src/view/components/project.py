@@ -9,8 +9,7 @@ class Project(QtGui.QStandardItemModel):
         self.projecttree.setModel(self)
         self.ui_menu_ref = kwargs.get('menu')
         self.menu = view.menu.context.project.ProjectContextMenu(
-            [self.ui_menu_ref.projNewAction,
-             self.ui_menu_ref.projCloseAction])
+            [])
         self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.setHorizontalHeaderItem(0, 
                 QtGui.QStandardItem("Project Name"))
