@@ -19,7 +19,8 @@ class Project(QtGui.QDockWidget):
         self.icon = QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 
                                              'folder-development.png'))
         # Initialize TreeView for model to sit in
-        self.project = view.components.project.Project()
+        
+        self.project = view.components.project.Project(menu = kwargs.get('menu'))
         
         self.project.projecttree.setContextMenuPolicy(
             QtCore.Qt.CustomContextMenu)

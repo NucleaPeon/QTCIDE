@@ -8,7 +8,7 @@ import view.actions.project.build.configuration
 class Build(QtGui.QDockWidget):
     
     def __init__(self, *args, **kwargs):
-        super(Build, self).__init__(**kwargs)
+        super(Build, self).__init__()
         self.widget = QtGui.QWidget()
         self.filemap = QtGui.QListView()
         self.filemodel = QtGui.QStandardItemModel()

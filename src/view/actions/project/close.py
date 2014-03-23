@@ -10,9 +10,10 @@ no parent in a singleton class
 """
 class CloseProjectAction(QtGui.QAction):
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(CloseProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-close.png')),
                                     '&Close Project', None)
+        # get selected project
         self.setShortcut('Ctrl-C')
         self.setStatusTip('Close Project')
         self.triggered.connect(self.closeProject)

@@ -23,13 +23,14 @@ class MenuBar:
     :Parameters:
         - mainwindow: PyQt4 QMainWindow object reference
     '''
-    def __init__(self, mainwindow):
+    def __init__(self, mainwindow, *args, **kwargs):
         # Instantiate Menu components here
         self.mwin = mainwindow
         self.menubar = self.mwin.menuBar()
         # Instantiate all actions here
         self.exit_action = view.actions.exit.ExitAction()
-        self.projNewAction = view.actions.project.new.NewProjectAction()
+        self.projNewAction = view.actions.project.new.NewProjectAction(kwargs.get('menu'),
+                                                                       project = kwargs.get('project'))
         self.projCloseAction = view.actions.project.close.CloseProjectAction()
         self.projSaveAction = view.actions.project.save.SaveProjectAction()
         self.projSettings = view.actions.project.settings.ProjectSettingsAction()

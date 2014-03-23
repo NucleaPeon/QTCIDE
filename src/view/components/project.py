@@ -4,11 +4,13 @@ import view.modal.config.window
 class Project(QtGui.QStandardItemModel):
 
     def __init__(self, *args, **kwargs):
-        super(Project, self).__init__(*args, **kwargs)
+        super(Project, self).__init__(*args)
         self.projecttree = QtGui.QTreeView()
         self.projecttree.setModel(self)
+        self.ui_menu_ref = kwargs.get('menu')
         self.menu = view.menu.context.project.ProjectContextMenu(
-            project = self)
+            [self.ui_menu_ref.projNewAction,
+             self.ui_menu_ref.projCloseAction])
         self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.setHorizontalHeaderItem(0, 
                 QtGui.QStandardItem("Project Name"))
@@ -21,7 +23,7 @@ class Project(QtGui.QStandardItemModel):
         
         
     def __project_context(self):
-        print("TODO")
+        print("__project_context TODO")
         # FIXME: Create macros for context
         
     def addProject(self, project):
@@ -40,6 +42,7 @@ class Project(QtGui.QStandardItemModel):
             - project: model.project object which is placed into a
                        ProjectItem class and added.
         '''
+        print(project)
         if project.icon is None:
             self.appendRow(QtGui.QStandardItem(project.name))
         else:
@@ -52,11 +55,11 @@ class Project(QtGui.QStandardItemModel):
         
         
     def closeProject(self, project):
-        pass
+        print("closeProject TODO")
         #FIXME: Search through qstandarditem names and remove match
         
     def saveProject(self, project):
-        pass
+        print("saveProject TODO")
         #FIXME: Search through qstandarditem names and saveProject
         
     #FIXME: the selected or active project should be held in a cache

@@ -6,7 +6,7 @@ import view.modal.QtPopupTextInput
 
 class Terminal(QtGui.QDockWidget):
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(Terminal, self).__init__()
         self.widget = QtGui.QWidget()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)

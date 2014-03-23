@@ -4,16 +4,7 @@ import view.menu.context.test
 
 class Testing(QtGui.QDockWidget):
     
-    _instance = None # Single instance of initialized class
-    
-    def __new__(cls,  *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Testing, cls).__new__(
-                cls, *args, **kwargs)
-            cls.widget = QtGui.QWidget()
-        return cls._instance
-    
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(Testing, self).__init__()
         self.widget = QtGui.QWidget()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
