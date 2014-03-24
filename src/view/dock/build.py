@@ -2,19 +2,19 @@ from PyQt4 import QtGui, QtCore
 import model.build
 import os
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import view.actions.project.build.build 
-import view.actions.project.build.configuration 
+import view.main.action_manager as actions
 
 class Build(QtGui.QDockWidget):
     
     def __init__(self, *args, **kwargs):
-        super(Build, self).__init__(**kwargs)
+        super(Build, self).__init__()
         self.widget = QtGui.QWidget()
         self.filemap = QtGui.QListView()
         self.filemodel = QtGui.QStandardItemModel()
         self.systems = QtGui.QStandardItemModel()
         self.filemap.setModel(self.filemodel)
         self.buildmodel = model.build.Build()
+        self.action_mgr = actions.ActionManager()
         self.populate()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
@@ -26,8 +26,6 @@ class Build(QtGui.QDockWidget):
         self.group = QtGui.QGroupBox("Build Systems")
         self.buildbox = QtGui.QComboBox()
         # Add actions to kwargs
-        build = view.actions.project.build.build.BuildSystemBuildAction()
-        config = view.actions.project.build.configuration.BuildSystemConfigurationAction()
         self.buildconfig = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'system-run.png')), "&Configure")
         self.buildbutton = QtGui.QPushButton(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'run-build.png')), "&Build")
         self.buildbox.setModel(self.systems)

@@ -1,8 +1,5 @@
 from PyQt4 import QtGui, QtCore
 import model.test
-import view.actions.project.testing.addsuite
-import view.actions.project.testing.configuresuite
-import view.actions.project.testing.removesuite
 
 class TestingContextMenu(QtGui.QMenu):
     
@@ -16,9 +13,9 @@ class TestingContextMenu(QtGui.QMenu):
     
     def __init__(self):
         super(TestingContextMenu, self).__init__()
-        self.addAction(view.actions.project.testing.addsuite.AddTestSuiteAction())
-        self.addAction(view.actions.project.testing.configuresuite.ConfigureTestSuiteAction())
-        self.addAction(view.actions.project.testing.removesuite.RemoveTestSuiteAction())
+        #self.addAction(view.actions.project.testing.addsuite.AddTestSuiteAction())
+        #self.addAction(view.actions.project.testing.configuresuite.ConfigureTestSuiteAction())
+        #self.addAction(view.actions.project.testing.removesuite.RemoveTestSuiteAction())
         
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayTestMenu(self, point):

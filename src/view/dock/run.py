@@ -7,18 +7,10 @@ import os
 
 class Run(QtGui.QDockWidget):
     
-    _instance = None # Single instance of initialized class
     
-    def __new__(self,  *args, **kwargs):
-        if not self._instance:
-            self._instance = super(Run, self).__new__(
-                self, *args, **kwargs)
-            self.widget = QtGui.QWidget()
-        return self._instance
-    
-    
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(Run, self).__init__()
+        self.widget = QtGui.QWidget()
         self.setFeatures(QtGui.QDockWidget.AllDockWidgetFeatures)
         self.setWindowTitle(QtGui.QApplication.translate(
             "self", "Run", None, QtGui.QApplication.UnicodeUTF8))

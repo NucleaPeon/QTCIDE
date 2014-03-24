@@ -34,7 +34,9 @@ class Project(view.modal.config.ProjectSettingsPane.ProjectSettingsPane):
         # Add model items to the view
         self.models = QtGui.QStandardItemModel(0, 1)
         for x in conf.view.modal.config.settings.qidesettings:
-            self.models.appendRow(QtGui.QStandardItem(x))
+            item = QtGui.QStandardItem(x)
+            item.setEditable(False)
+            self.models.appendRow(item)
         self.qidesettingmodlist.setModel(self.models)
         
         # Custom Module Widgets

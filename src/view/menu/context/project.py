@@ -1,5 +1,4 @@
 from PyQt4 import QtGui, QtCore
-import view.components.project
 import view.actions.project.new
 import view.actions.project.close
 
@@ -12,22 +11,20 @@ treeview component
 class ProjectContextMenu(QtGui.QMenu):
 
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, menu_items, *args, **kwargs):
         '''
         :Parameters:
+            - menu_items: array of QAction references to add to the menu
             - **kwargs:
                 - 'project': Project Dock instance
         '''
         super(ProjectContextMenu, self).__init__()
-        self.project = kwargs.get('project')
-        self.new_project = view.actions.project.new.NewProjectAction()
-        self.close_project = view.actions.project.close.CloseProjectAction()
-        self.addAction(self.new_project)
-        self.addAction(self.close_project)
+        for item in menu_items:
+            self.addAction(item)
+            print(item)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):
-        print("point {}".format(point))
         self.popup(QtGui.QCursor.pos())
         
         

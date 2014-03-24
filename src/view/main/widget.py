@@ -3,6 +3,7 @@ import os, copy
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import model.scene
 import model.project
+import view.main.dock_manager
 '''
 Integrated Shell is a widget that contains other widgets that act
 on the desired programming language for drag and drop functionality.
@@ -22,7 +23,7 @@ class IntegratedShell(QtGui.QTabWidget):
         self.dnd = QtGui.QWidget()
         self.dnd.setLayout(self.layout)
         self.layout.addWidget(Selection())
-        self.layout.addWidget(DropCanvas(project=kwargs.get('project')))
+        self.layout.addWidget(DropCanvas())
         
         self.code = CodeView()
         self.addTab(self.dnd, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop")
@@ -121,7 +122,7 @@ class DropCanvas(QtGui.QGraphicsView):
                 - 'parent': (optional)  
         '''
         super(DropCanvas, self).__init__()
-        self.projects = kwargs.get('project')
+        self.projects = view.main.dock_manager.DockManager().PROJECT_DOCK
         self.setAcceptDrops(True)
         self.scene = model.scene.ProjectScene()
         
@@ -140,12 +141,8 @@ class DropCanvas(QtGui.QGraphicsView):
                 #TODO: Turn into a macro
                 proj = model.project.Project()
                 proj.name = "Untitled"# FIXME: Get unused project name
-                self.projects.project.addProject(proj)
-                # leave as selected # Select and sort should be a macro TODO
-                qmindex = self.projects.project.index(0, 0)
-                self.projects.project.projecttree.setCurrentIndex(qmindex)
-                self.projects.project.sort(0)
-        
+                self.projects.add_project_to_view(proj)
+                self.projects.select_project()
         
     def dragEnterEvent(self, event):
         event.accept()
