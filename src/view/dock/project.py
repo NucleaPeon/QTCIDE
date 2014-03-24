@@ -51,6 +51,13 @@ class Project(QtGui.QDockWidget):
         self.project.projecttree.setCurrentIndex(qmindex)
         self.project.sort(0)
         
+    def show_settings(self):
+        '''
+        Display Project Settings window
+        '''
+        view.modal.config.window.ProjectConfiguration().exec_()
+        
+        
     class ProjectModel(QtGui.QStandardItemModel):
 
         def __init__(self, *args, **kwargs):
@@ -124,9 +131,6 @@ class Project(QtGui.QDockWidget):
             if self.projecttree.currentIndex().row() >= 0:
                 return self.projects.item(self.projecttree.currentIndex().row()).text()
 
-        def configuration(self):
-            view.modal.config.window.ProjectConfiguration().exec_()
-            
         class ProjectItem(QtGui.QStandardItem):
             
             def __init__(self, project):
