@@ -30,7 +30,7 @@ class MenuBar:
         self.projMenu.addAction(self.mgr_actions.PROJECT_NEW)
         self.projMenu.addAction(self.mgr_actions.PROJECT_SAVE)
         self.projMenu.addAction(self.mgr_actions.PROJECT_CLOSE)
-        self.projMenu.addAction(self.mgr_actions.PROJECT_SETTINGS)
+        
         self.projBuildMenu = self.projMenu.addMenu('&Build')
         self.projBuildMenu.addAction(self.mgr_actions.BUILD_NEW)
         self.projBuildMenu.addAction(self.mgr_actions.BUILD_CONFIG)
@@ -42,7 +42,7 @@ class MenuBar:
         self.projTest.addAction(self.mgr_actions.TEST_NEW)
         self.projTest.addAction(self.mgr_actions.TEST_CONFIG)
         self.projTest.addAction(self.mgr_actions.TEST_REMOVE)
-        
+        self.projMenu.addAction(self.mgr_actions.PROJECT_SETTINGS)
         
         # Help Menu
         self.helpMenu = self.menubar.addMenu('&Help')

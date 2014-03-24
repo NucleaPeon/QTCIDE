@@ -1,10 +1,6 @@
 from PyQt4 import QtGui, QtCore
 import model as m
-import view.dock.project
-import view.dock.build
-import view.dock.run
-import view.dock.testing
-import view.dock.terminal
+import view.main.dock_manager
 import view.menu.menu as menu
 import view.main.widget
 import view.main.action_manager
@@ -34,17 +30,13 @@ class Window(QtGui.QMainWindow):
         self.resize(model.width, model.height)
         self.setWindowIcon(QtGui.QIcon(SYS_APP_ICON))
         self.menubar = menu.MenuBar(self)
-        dock_project = view.dock.project.Project(menu = self.menubar)
-        dock_build = view.dock.build.Build(menu = self.menubar)
-        dock_terminal = view.dock.terminal.Terminal(menu = self.menubar)
-        dock_testing = view.dock.testing.Testing(menu = self.menubar)
-        dock_run = view.dock.run.Run(menu = self.menubar)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_project)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_build)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_terminal)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_testing)
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), dock_run)
-        self.ishell = view.main.widget.IntegratedShell(project=dock_project)
+        self.docks = view.main.dock_manager.DockManager()
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.docks.PROJECT_DOCK)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.docks.BUILD_DOCK)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.docks.TERMINAL_DOCK)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.docks.TESTING_DOCK)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.docks.RUN_DOCK)
+        self.ishell = view.main.widget.IntegratedShell()
         self.setCentralWidget(self.ishell)
         
     def status(self, message):

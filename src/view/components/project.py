@@ -7,7 +7,6 @@ class Project(QtGui.QStandardItemModel):
         super(Project, self).__init__(*args)
         self.projecttree = QtGui.QTreeView()
         self.projecttree.setModel(self)
-        self.ui_menu_ref = kwargs.get('menu')
         self.menu = view.menu.context.project.ProjectContextMenu(
             [])
         self.projecttree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
