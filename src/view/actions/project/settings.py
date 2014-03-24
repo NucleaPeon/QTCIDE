@@ -1,6 +1,5 @@
 from PyQt4 import QtGui, QtCore
 from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
-import view.components.project
 import os
 
 """
@@ -20,4 +19,3 @@ class ProjectSettingsAction(QtGui.QAction):
     @QtCore.pyqtSlot(bool)
     def projectSettings(triggered):
         print("FIXME")
-        #project.configuration()

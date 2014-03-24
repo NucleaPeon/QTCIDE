@@ -1,5 +1,4 @@
 from PyQt4 import QtGui, QtCore
-import view.components.project
 import view.actions.project.new
 import view.actions.project.close
 

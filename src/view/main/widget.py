@@ -141,12 +141,8 @@ class DropCanvas(QtGui.QGraphicsView):
                 #TODO: Turn into a macro
                 proj = model.project.Project()
                 proj.name = "Untitled"# FIXME: Get unused project name
-                self.projects.project.addProject(proj)
-                # leave as selected # Select and sort should be a macro TODO
-                qmindex = self.projects.project.index(0, 0)
-                self.projects.project.projecttree.setCurrentIndex(qmindex)
-                self.projects.project.sort(0)
-        
+                self.projects.add_project_to_view(proj)
+                self.projects.select_project()
         
     def dragEnterEvent(self, event):
         event.accept()
