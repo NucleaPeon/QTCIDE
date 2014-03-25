@@ -16,6 +16,7 @@ import view.dock.run
 import view.dock.testing
 import view.dock.terminal
 import view.dock.project
+import view.dock.language
 
 class DockManager():
     
@@ -29,7 +30,7 @@ class DockManager():
             cls.RUN_DOCK = view.dock.run.Run()
             cls.TERMINAL_DOCK = view.dock.terminal.Terminal()
             cls.TESTING_DOCK = view.dock.testing.Testing()
-            cls.LANGUAGE_DOCK = None # TODO: Create and enable docking in center widget
+            cls.LANGUAGE_DOCK = view.dock.language.Language() # TODO: Create and enable docking in center widget
             # May have to subclass dock and widget to allow only that widget to dock
             cls.DOCKS = {'build': cls.BUILD_DOCK,
                          'project': cls.PROJECT_DOCK,
