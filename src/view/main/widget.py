@@ -160,5 +160,12 @@ class CodeView(QtGui.QWidget):
     def __init__(self):
         super(CodeView, self).__init__()
         self.layout = QtGui.QGridLayout()
-        self.layout.addWidget(QtGui.QLabel("Code View"))
+        self.codeview = QtGui.QPlainTextEdit()
+        self.codefont = QtGui.QFont("Monospace", 10)
+        self.codefont.setStyleHint(QtGui.QFont.TypeWriter)
+        self.codeview.setFont(self.codefont)
+        self.codeview.setReadOnly(True)
+        self.codeview.setPlainText("Code View")
+        self.layout.addWidget(self.codeview)
         self.setLayout(self.layout)
+        
