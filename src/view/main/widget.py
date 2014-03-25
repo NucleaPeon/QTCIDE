@@ -22,53 +22,13 @@ class IntegratedShell(QtGui.QTabWidget):
         ###
         self.dnd = QtGui.QWidget()
         self.dnd.setLayout(self.layout)
-        self.layout.addWidget(view.main.dock_manager.DockManager().LANGUAGE_DOCK)
+        self.languagedock = view.main.dock_manager.DockManager().LANGUAGE_DOCK
+        self.languagedock.setMaximumWidth(320)
+        self.layout.addWidget(self.languagedock)
         self.layout.addWidget(DropCanvas())
-        
         self.code = CodeView()
         self.addTab(self.dnd, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'debug-step-out.png')), "Drag 'N Drop")
         self.addTab(self.code, QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'view-calendar-journal.png')), "Code")
-        
-        
-
-        
-        
-class Droppable(QtGui.QLabel):
-    
-    def __init__(self):
-        super(Droppable, self).__init__()
-        self.mime = QtCore.QMimeData()
-        ''' FIXME
-        In order to prevent over abundance of copies and sets
-        that are useless, perhaps have each object (such as Class or Function)
-        in its own class that inherits this one and defines required information
-        that can be set.
-        
-        Example: Namespace(Droppable) 
-            - Contains variable self.text which is assigned to mimetype text()
-            - Contains image which is assigned via setImageData
-            
-        This should not be done outside of this ,or similar, classes
-        '''
-        
-    def mousePressEvent(self, event):
-        mime = QtCore.QMimeData()
-        mime.setText(self.mime.text())
-        hotSpot = event.pos()
-        mime.setData("application/x-hotspot", str(hotSpot.x()))
-        
-        # Create a pixmap of size of self
-        pixmap = QtGui.QPixmap(self.size())
-        self.render(pixmap)
-        drag = QtGui.QDrag(self)
-        drag.setMimeData(mime)
-        drag.setPixmap(pixmap)
-        drag.setHotSpot(hotSpot)
-        
-        dropAction = drag.exec_(QtCore.Qt.CopyAction|QtCore.Qt.MoveAction, QtCore.Qt.CopyAction)
-        #if dropAction == QtCore.Qt.MoveAction:
-            #print("Do something")
-        
         
 class DropCanvas(QtGui.QGraphicsView):
     
