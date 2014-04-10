@@ -4,17 +4,12 @@ TODO
   (Whether project is saved, disable / enable things whether saved or not)
 * Create Window for adding and configuring project actions (configure should reuse part of the add compiler widget/window)
 * Add run settings to the project when saved
-* Create qtr files for Run configurations
-* Create qtb files for Build configurations
-* Create qtt files for Testing configurations
-
-* Create the specification of language packs so that dragable and droppable widgets get created automatically
-** Language pack needs to define:
-    - Structure (json or xml), what can exist under what objects
-    - drag identifier (namespace must be recognizable as a mimetype -- plaintext?)
-* Load language modules from project settings configuration window, list all installed and usable ones
 
 * Ensure a Hello World C++ program can be created in as many ways as the IDE allows by default
   (Build system must work, basic testing suite must work, makefile and gcc configuration must work (to some degree))
   (Installation must work, eventually a debian package must work)
 * Sphinx doc generation and viewer from the IDE (both FOR the IDE, and attach to projects)
+
+* Templates: Objects that can be draggable, such as a Class, but contain code and/or default objects to produce a complete work.
+  Example: Draggable "Factory" object for producing objects, "Logging" objects for writing.
+  These objects should be disctinctly different from built in ones.

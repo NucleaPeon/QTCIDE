@@ -18,6 +18,7 @@ Action Manager holds references to icons and their actions
 
 import view.actions.exit
 import view.actions.project.close
+import view.actions.project.open
 import view.actions.project.new
 import view.actions.project.save
 import view.actions.project.settings
@@ -39,6 +40,7 @@ class ActionManager():
             cls._instance = super(ActionManager, cls).__new__(cls)
             # Define easy access constant variables here:
             cls.PROGRAM_EXIT = view.actions.exit.ExitAction()
+            cls.PROJECT_OPEN = view.actions.project.open.OpenProjectAction()
             cls.PROJECT_NEW = view.actions.project.new.NewProjectAction()
             cls.PROJECT_CLOSE = view.actions.project.close.CloseProjectAction()
             cls.PROJECT_SAVE = view.actions.project.save.SaveProjectAction()
@@ -64,6 +66,7 @@ class ActionManager():
                            'project.new': cls.PROJECT_NEW,
                            'project.close': cls.PROJECT_CLOSE,
                            'project.save': cls.PROJECT_SAVE,
+                           'project.open': cls.PROJECT_OPEN,
                            'project.settings': cls.PROJECT_SETTINGS,
                            'build.new': cls.BUILD_NEW,
                            'build.config': cls.BUILD_CONFIG,

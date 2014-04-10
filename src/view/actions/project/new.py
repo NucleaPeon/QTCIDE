@@ -3,6 +3,7 @@ from view.img import SYS_IMG_FOLDER, SYS_APP_ICON
 import view.modal.QtPopupTextInput
 import view.window
 import model.project
+import view.main.dock_manager
 import os
 
 """
@@ -14,10 +15,10 @@ class NewProjectAction(QtGui.QAction):
     def __init__(self, *args, **kwargs):
         super(NewProjectAction, self).__init__(QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'document-new.png')),
                                     '&New Project', None)
-        self.project = kwargs.get('project')
         self.setShortcut('Ctrl-N')
         self.setStatusTip('New Project')
         self.triggered.connect(self.promptNewProject)
+        self.project = view.main.dock_manager.DockManager()
             
     @QtCore.pyqtSlot(str)
     def promptNewProject(self):
@@ -27,6 +28,5 @@ class NewProjectAction(QtGui.QAction):
         '''
         project = model.project.Project()
         modal = view.modal.QtPopupTextInput.QtPopupTextInput("QTCIDE", "Project Name:")
-        project.name = modal.textline.text()
-        modal.success(lambda: self.project.addProject(project))
+        modal.success(lambda: self.project.PROJECT_DOCK.project.addProject(modal.textline.text()))
         modal.exec_()

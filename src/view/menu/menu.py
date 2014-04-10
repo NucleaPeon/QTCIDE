@@ -28,6 +28,7 @@ class MenuBar:
         # Project Menu
         self.projMenu = self.menubar.addMenu('&Project')
         self.projMenu.addAction(self.mgr_actions.PROJECT_NEW)
+        self.projMenu.addAction(self.mgr_actions.PROJECT_OPEN)
         self.projMenu.addAction(self.mgr_actions.PROJECT_SAVE)
         self.projMenu.addAction(self.mgr_actions.PROJECT_CLOSE)
         
@@ -52,6 +53,7 @@ class MenuBar:
         self.filetb.addAction(self.mgr_actions.PROGRAM_EXIT)
         self.projtb = self.mwin.addToolBar('Project')
         self.projtb.addAction(self.mgr_actions.PROJECT_NEW)
+        self.projtb.addAction(self.mgr_actions.PROJECT_OPEN)
         self.projtb.addAction(self.mgr_actions.PROJECT_CLOSE)
         self.projtb.addAction(self.mgr_actions.PROJECT_SAVE)
         self.projtb.addAction(self.mgr_actions.PROJECT_SETTINGS)

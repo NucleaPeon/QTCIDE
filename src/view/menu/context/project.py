@@ -21,7 +21,6 @@ class ProjectContextMenu(QtGui.QMenu):
         super(ProjectContextMenu, self).__init__()
         for item in menu_items:
             self.addAction(item)
-            print(item)
     
     @QtCore.pyqtSlot(QtCore.QPoint)
     def displayProjectMenu(self, point):

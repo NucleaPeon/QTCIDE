@@ -15,7 +15,6 @@ class SaveProjectAction(QtGui.QAction):
         self.setShortcut('Ctrl-S')
         self.setStatusTip('Save Project')
         self.triggered.connect(self.saveProject)
-        self.setEnabled(False)
 
     @QtCore.pyqtSlot(bool)
     def saveProject(triggered):

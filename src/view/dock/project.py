@@ -7,6 +7,10 @@ import os
 
 class Project(QtGui.QDockWidget):
 
+    '''
+    :Description:
+        - Contains an index of the view that holds the object
+    '''
     SELECTED = None
 
     def __init__(self, *args, **kwargs):
@@ -28,17 +32,6 @@ class Project(QtGui.QDockWidget):
         self.layout = QtGui.QBoxLayout(QtGui.QBoxLayout.TopToBottom)
         self.widget.setLayout(self.layout)
         self.layout.addWidget(self.project.projecttree)
-        
-    def add_project_to_view(self, model):
-        '''
-        Convenience method to add projects
-        :Parameters:
-            - model: model.project.Project
-
-        :See:
-            view.components.project.Project
-        '''
-        self.project.addProject(model)
         
     def select_project(self, index=0):
         '''
@@ -74,14 +67,16 @@ class Project(QtGui.QDockWidget):
                     self.menu.displayProjectMenu) 
             self.projecttree.connect(self.projecttree.selectionModel(),
                     QtCore.SIGNAL("selectionChanged(const QItemSelection &, const QItemSelection &)"),
-                    self.__project_context)
+                    self.selectionChanged)
             
             
-        def __project_context(self):
-            print("__project_context TODO")
-            # FIXME: Create macros for context
+        def selectionChanged(self, selected, deselected):
+            if selected.count() == 1:
+                Project.SELECTED = selected.indexes()[0]
+            print(self.itemFromIndex(Project.SELECTED).project)
             
-        def addProject(self, project):
+            
+        def addProject(self, project_name):
             '''
             Adds a project to the graphical view based on the model
             
@@ -94,19 +89,12 @@ class Project(QtGui.QDockWidget):
                     - including icon in QStandardItem
             
             :Parameters:
-                - project: model.project object which is placed into a
-                        ProjectItem class and added.
+                - project_name: string name of project to add
             '''
-            print(project)
-            if project.icon is None:
-                self.appendRow(QtGui.QStandardItem(project.name))
-            else:
-                self.appendRow(QtGui.QStandardItem(project.icon, project.name))
-            
-            # These actions should be governed by state change macro FIXME
-            #view.actions.project.close.CloseProjectAction().setEnabled(self.projects.rowCount() > 0)
-            #view.actions.project.save.SaveProjectAction().setEnabled(self.projectcache[self._get_name()].save)
-            return project
+            stditem = Project.ProjectItem(project_name)
+            self.appendRow(stditem)
+            index = self.indexFromItem(stditem)
+            self.projecttree.setCurrentIndex(index)
             
             
         def closeProject(self, project):
@@ -116,28 +104,15 @@ class Project(QtGui.QDockWidget):
         def saveProject(self, project):
             print("saveProject TODO")
             #FIXME: Search through qstandarditem names and saveProject
-            
-        #FIXME: the selected or active project should be held in a cache
-        #       so any toolbar / actions will be applied to THAT project
-        
-        def _get_name(self):
-            '''
-            :Description:
-                Returns the text of the selected project from the model
-                
-            :Returns:
-                String of the selected project name or None if no rows exist
-            '''
-            if self.projecttree.currentIndex().row() >= 0:
-                return self.projects.item(self.projecttree.currentIndex().row()).text()
 
-        class ProjectItem(QtGui.QStandardItem):
-            
-            def __init__(self, project):
-                super(ProjectItem, self).__init__(
-                    project.name, project.icon)
-                self.project = project
-                
+    class ProjectItem(QtGui.QStandardItem):
+        
+        def __init__(self, project):
+            super(Project.ProjectItem, self).__init__(
+                QtGui.QIcon(os.path.join(SYS_IMG_FOLDER, 'media-floppy.png')),
+                                                                project)
+            self.project = project
+        
             
             
             

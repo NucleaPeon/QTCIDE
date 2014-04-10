@@ -24,4 +24,4 @@ class Project:
     languages_used = []
     saved = False
     path = os.environ.get("HOME")
-    
+    filename = '' # If empty, must request SaveAs as opposed to Save
