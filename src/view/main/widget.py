@@ -59,10 +59,7 @@ class DropCanvas(QtGui.QGraphicsView):
         if not self.projects is None:
             if self.projects.project.rowCount() < 1:
                 #TODO: Turn into a macro
-                proj = model.project.Project()
-                proj.name = "Untitled"# FIXME: Get unused project name
-                self.projects.add_project_to_view(proj)
-                self.projects.select_project()
+                self.projects.project.addProject("Untitled")
         
     def dragEnterEvent(self, event):
         event.accept()
